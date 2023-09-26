@@ -37,20 +37,26 @@ public class PlayerInputHandler : MonoBehaviour
         }
         if (context.action.name == controls.Player.Attack.name)
         {
-            OnAttack(context, hitPower);
+            OnAttack(context);
         }
-        if(context.action.name == controls.Player.Skill1.name)
+
+        if (context.action.name == controls.Player.CameraMovement.name)
         {
-            OnSkill(context, 0);
+            OnCameraMove(context);
         }
-        if(context.action.name == controls.Player.Skill2.name)
-        {
-            OnAttack(context, hitPower);
-        }
-        if(context.action.name == controls.Player.Skill3.name)
-        {
-            OnAttack(context, hitPower);
-        }
+
+        //if(context.action.name == controls.Player.Skill1.name)
+        //{
+        //    OnSkill(context, 0);
+        //}
+        //if(context.action.name == controls.Player.Skill2.name)
+        //{
+        //    OnAttack(context);
+        //}
+        //if(context.action.name == controls.Player.Skill3.name)
+        //{
+        //    OnAttack(context);
+        //}
     }
 
     //ˆÚ“®’†
@@ -61,12 +67,20 @@ public class PlayerInputHandler : MonoBehaviour
             mover.OnMove(context);
         }
     }
-    //Attack’†
-    public void OnAttack(CallbackContext context, float power)
+    //CameraˆÚ“®’†
+    public void OnCameraMove(CallbackContext context)
     {
         if (mover != null)
         {
-            mover.OnAttack(context, power);
+            //mover.OnCameraMove(context);
+        }
+    }
+    //Attack’†
+    public void OnAttack(CallbackContext context)
+    {
+        if (mover != null)
+        {
+            mover.OnAttack(context);
         }
     }
 
