@@ -14,15 +14,14 @@ public class Mover : MonoBehaviour
 
     //プレイヤー
     Quaternion targetRotation;
+    [SerializeField]
+    const float gravityScaleNum = 9.8f;
+    float gravityScale = 0.0f;
 
     //カメラ
     [SerializeField]
     Camera playerCamera;
-    [SerializeField]
-    CinemachineVirtualCamera vCam = null;
-    Cinemachine3rdPersonFollow follow = null;
-    Vector2 cameraRotationInput = Vector2.zero; // カメラ操作入力を記憶するプロパティ
-    public Vector2 rotationSpeed = new Vector2(180, 180); // 1秒間180度
+
 
     private bool groundedPlayer; //接地フラグ
     [SerializeField]
@@ -51,32 +50,11 @@ public class Mover : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
-        //vCam = GetComponent<CinemachineVirtualCamera>();
-        if (vCam != null)
-        {
-            follow = vCam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-        }
     }
 
     void FixedUpdate()
     {
-        if (vCam != null)
-        {
-            Transform target = vCam.Follow; // バーチャルカメラの追跡ターゲットを取得
-            if (target != null)
-            {
-                // ターゲットの回転をオイラー角度（x, y, z）で取得
-                Vector3 targetEulerAngles = target.rotation.eulerAngles;
 
-                // y軸の回転を変える
-                targetEulerAngles.x += cameraRotationInput.y * rotationSpeed.y * Time.fixedDeltaTime;
-                targetEulerAngles.y += cameraRotationInput.x * rotationSpeed.y * Time.fixedDeltaTime;
-
-                // オイラー角度をクオータニオンに変換して追跡ターゲットの回転を変える
-                //target.transform.rotation = Quaternion.Euler(targetEulerAngles);
-            }
-        }
     }
 
     public void SetInputVector(Vector2 direction)
@@ -102,20 +80,13 @@ public class Mover : MonoBehaviour
     //入力を感知してからのCamera移動処理
     public void OnCameraMove(InputAction.CallbackContext context)
     {
-        cameraRotationInput = context.ReadValue<Vector2>();
-        //attackTrigger.GetComponent<AttackTrigger>().UpdateInputVec(inputVector);
-        //もし移動ベクトルが0の場合戻す（入力していない）
-        if (cameraRotationInput == Vector2.zero)
-        {
-            return;
-        }
+
     }
 
 
     //入力を感知してからのAttack処理
     public void OnAttack(InputAction.CallbackContext context)
     {
-        //attackTrigger.GetComponent<AttackTrigger>().ChangeForce(power);
         attacked = context.action.triggered;
         //animator.SetBool("isAttack", attacked);
     }
@@ -138,9 +109,13 @@ public class Mover : MonoBehaviour
     {
         //プレイヤーが地面にいるかどうか
         groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && moveDirection.y < 0)
+        if (groundedPlayer)
         {
-            moveDirection.y = 0f;
+            gravityScale = 0.0f;
+        }
+        else
+        {
+            gravityScale = gravityScaleNum;
         }
 
         //入力方向を基にmoveベクトルを作る
@@ -153,34 +128,28 @@ public class Mover : MonoBehaviour
         }
 
         //デバッグのジャンプ処理
-        /*
         if (attacked && groundedPlayer)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            gravityScale = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
-        */
-
 
         // カメラの方向から、X-Z平面の単位ベクトルを取得
         Vector3 cameraForward = Vector3.Scale(playerCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 cameraRight = Vector3.Scale(playerCamera.transform.right, new Vector3(1, 0, 1)).normalized;
+        Vector3 gravity = (new Vector3(0, -1, 0) * gravityScale).normalized;
 
         // 方向キーの入力値とカメラの向きから、移動方向を決定
-        Vector3 moveForward = cameraForward * inputVector.y + playerCamera.transform.right * inputVector.x;
+        Vector3 lookForward = cameraForward * inputVector.y + cameraRight * inputVector.x;
 
-        // 移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
-        //rb.velocity = moveForward * moveSpeed + new Vector3(0, rb.velocity.y, 0);
-
-        controller.Move(moveForward * Time.deltaTime);
-
-        // キャラクターの向きを進行方向に
-        if (moveForward != Vector3.zero)
+        // キャラクターの向きをLook方向に
+        if (lookForward != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(moveForward);
+            transform.rotation = Quaternion.LookRotation(lookForward);
         }
-
+        //重力を付けて
+        Vector3 moveForward = lookForward + gravity;
         //移動する
-        //moveDirection.y += gravityValue * Time.deltaTime;
-        //controller.Move(moveDirection * Time.deltaTime);
+        controller.Move(moveForward * Time.deltaTime);
     }
 
     public static float Vector2ToAngle(Vector2 vector)
@@ -208,22 +177,6 @@ public class Mover : MonoBehaviour
     {
         
     }
-
-    //プレイヤー自身の衝突判定
-    /*
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        Rigidbody rigidbody = hit.collider.attachedRigidbody;
-        if(rigidbody != null)
-        {
-            Vector3 forceDirection = hit.gameObject.transform.position - transform.position;
-            forceDirection.y = 0f;
-            forceDirection.Normalize();
-
-            rigidbody.AddForceAtPosition(forceDirection * forceMagnitude, transform.position, ForceMode.Impulse);
-        }
-    }
-    */
 
     private void OnCollisionEnter(Collision collision)
     {
