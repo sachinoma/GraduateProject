@@ -8,6 +8,14 @@ using UnityEngine.Windows;
 [RequireComponent(typeof(CharacterController))]
 public class Mover : MonoBehaviour
 {
+    private enum State
+    {
+        Idle,
+        Run,
+        Drop,
+        Jump
+    }
+
     [SerializeField]
     private Animator animator;  
     private CharacterController controller;

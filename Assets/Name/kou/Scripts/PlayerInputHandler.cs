@@ -9,8 +9,6 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private Mover mover;
 
-    [SerializeField]
-    private SkinnedMeshRenderer playerMesh;
     private PlayerController controls;
 
     [SerializeField]
