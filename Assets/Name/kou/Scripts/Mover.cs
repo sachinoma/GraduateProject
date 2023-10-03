@@ -18,18 +18,19 @@ public class Mover : MonoBehaviour
     public State state;
 
     [SerializeField]
+    private bool isLobby;
+
+    [SerializeField]
     private Animator animator;  
     private CharacterController controller;
 
     //プレイヤー
     Quaternion targetRotation;
     //重力
-    [SerializeField]
     const float gravityScaleNum = -9.8f;
-    [SerializeField]
+
     float gravityScale = 0.0f;
 
-    [SerializeField]
     private bool isJump = false; //ジャンプフラグ
     [SerializeField]
     float jumpScale = 3.0f;     //ジャンプ力
@@ -40,7 +41,6 @@ public class Mover : MonoBehaviour
     [SerializeField]
     Camera playerCamera;
 
-    [SerializeField]
     private bool isGround; //接地フラグ
     [SerializeField]
     private float playerSpeed = 2.0f; //移動速度
@@ -48,10 +48,6 @@ public class Mover : MonoBehaviour
 
     private Vector3 moveDirection = Vector2.zero; //移動方向
     private Vector2 inputVector = Vector2.zero; //入力方向
-   
-
-    [SerializeField]
-    private float forceMagnitude = 10.0f; //攻撃の力加減
 
     AudioSource audioSource;
 
@@ -66,6 +62,10 @@ public class Mover : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         state = State.Idle;
+        if(isLobby)
+        {
+            playerCamera = Camera.main;
+        }
     }
 
     void FixedUpdate()
@@ -141,11 +141,7 @@ public class Mover : MonoBehaviour
         Rigidbody rigidbody = collision.collider.attachedRigidbody;
         if (rigidbody != null)
         {
-            Vector3 forceDirection = collision.gameObject.transform.position - transform.position;
-            forceDirection.y = 0f;
-            forceDirection.Normalize();
-
-            rigidbody.AddForceAtPosition(forceDirection * forceMagnitude, transform.position, ForceMode.Impulse);
+           
         }
     }
 
