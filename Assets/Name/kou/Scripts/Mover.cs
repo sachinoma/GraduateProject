@@ -103,6 +103,8 @@ public class Mover : MonoBehaviour
     {
         if(state == State.Idle || state == State.Run)
         {
+            if (!context.action.triggered)
+                return;
             if(!isJump)
             {
                 isJump = true;

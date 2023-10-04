@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5697825814266786179}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1025,26 +1025,6 @@ MonoBehaviour:
     m_ActionName: Player/Skill1
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: dc385432-236a-4cb1-8c9c-c67c6b5515e1
-    m_ActionName: Player/Skill2
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e083a108-0efc-4ed6-8a32-851c67b31730
-    m_ActionName: Player/Skill3
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 153914433217681097}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnCameraMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: de18a52f-ab0b-47e8-a604-f0c181c12c4a
     m_ActionName: Player/CameraMovement[/Mouse/delta,/XInputControllerWindows/rightStick,/XInputControllerWindows2/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
@@ -1125,14 +1105,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  isLobby: 0
   animator: {fileID: 3717361147612735732}
-  gravityScale: 0
-  isJump: 0
   jumpScale: 5
   playerCamera: {fileID: 4795005001282853574}
-  isGround: 0
   playerSpeed: 3
-  forceMagnitude: 10
 --- !u!82 &8079307201102025173
 AudioSource:
   m_ObjectHideFlags: 0

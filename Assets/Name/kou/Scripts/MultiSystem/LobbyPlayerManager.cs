@@ -17,24 +17,25 @@ public class LobbyPlayerManager : MonoBehaviour
 
 
 
-    void Start()
-    {
-        //playerConfigsを基にプレイヤーを配置
-        playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
-        for(int i = 0; i < playerConfigs.Length; i++)
-        {
-            Debug.Log(i);
-            int prefabNum = playerConfigs[i].PlayerPrefabNum;
-            var player = Instantiate(playerPrefab[prefabNum], playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);
-            player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);    
-        }
-    }
+    //void Start()
+    //{
+    //    //playerConfigsを基にプレイヤーを配置
+    //    playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+    //    for(int i = 0; i < playerConfigs.Length; i++)
+    //    {
+    //        Debug.Log(i);
+    //        int prefabNum = playerConfigs[i].PlayerPrefabNum;
+    //        var player = Instantiate(playerPrefab[prefabNum], playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);
+    //        //player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);    
+    //    }
+    //}
 
     public void SpawnPlayer(int playerNum)
     {
         playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
-        var player = Instantiate(playerPrefab[0], playerSpawns[playerNum].position, playerSpawns[playerNum].rotation, gameObject.transform);
-        player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[playerNum]);
+        GameObject player = Instantiate(playerPrefab[0], playerSpawns[playerNum].position, playerSpawns[playerNum].rotation, gameObject.transform);
+        player.GetComponent<InputReceiver>().SetTargetNum(playerNum);
+        //player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[playerNum]);
     }
 
 }

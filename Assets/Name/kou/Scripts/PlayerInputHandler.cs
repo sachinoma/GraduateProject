@@ -28,23 +28,23 @@ public class PlayerInputHandler : MonoBehaviour
 
 
     //InputƒCƒxƒ“ƒg
-    private void Input_onActionTriggered(CallbackContext context)
-    {
-        if(context.action.name == controls.Player.Movement.name)
-        {
-            OnMove(context);
-        }
+    //private void Input_onActionTriggered(CallbackContext context)
+    //{
+    //    if(context.action.name == controls.Player.Movement.name)
+    //    {
+    //        OnMove(context);
+    //    }
 
-        if (context.action.name == controls.Player.Jump.name)
-        {
-            OnJump(context);
-        }
+    //    if (context.action.name == controls.Player.Jump.name)
+    //    {
+    //        OnJump(context);
+    //    }
 
-        if (context.action.name == controls.Player.CameraMovement.name)
-        {
-            OnCameraMove(context);
-        }
-    }
+    //    if (context.action.name == controls.Player.CameraMovement.name)
+    //    {
+    //        OnCameraMove(context);
+    //    }
+    //}
 
     //ˆÚ“®’†
     public void OnMove(CallbackContext context)
@@ -73,7 +73,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void InitializePlayer(PlayerConfiguration pc)
     {
-        playerConfig = pc;
-        playerConfig.Input.onActionTriggered += Input_onActionTriggered;
+        //playerConfig = pc;
+        //playerConfig.Input.onActionTriggered += Input_onActionTriggered;
     }
 }

@@ -91,13 +91,13 @@ public class PlayerConfigurationManager : MonoBehaviour
     //プレイヤーがJoinした時呼び出せる、もしプレイヤーがの数がMaxPlayer以下ならplayerConfigsを作る。
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        Debug.Log("Player Joined " + pi.playerIndex);
+        //Debug.Log("Player Joined " + pi.playerIndex);
         if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex) && playerConfigs.Count < MaxPlayers)
         {
+            Debug.Log(pi.user.id - 1);
             pi.transform.SetParent(transform);
             playerConfigs.Add(new PlayerConfiguration(pi));
-            lobbyPlayerManager.SpawnPlayer(pi.playerIndex);
-            Debug.Log("SPAWN!");
+            lobbyPlayerManager.SpawnPlayer((int)pi.user.id - 1);          
         }
     }
 
