@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5027575077128611209}
   - component: {fileID: 1115148676223292786}
   - component: {fileID: 337539173188357773}
-  - component: {fileID: 3606142801623749862}
   - component: {fileID: 3883926582323436715}
   m_Layer: 0
   m_Name: SM_Prop_Plane_Ring_01 (1)
@@ -143,21 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bb1388ffcd91c4c90c4afd3cc4443a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!111 &3606142801623749862
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4982573463758651869}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 3eec9f0a1da04af43b1708010e0bd9d0, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &3883926582323436715
 Animator:
   serializedVersion: 5
