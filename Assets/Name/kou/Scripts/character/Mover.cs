@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.Windows;
+using Unity.VisualScripting;
 
-[RequireComponent(typeof(CharacterController))]
 public class Mover : MonoBehaviour
 {
     public enum State
@@ -13,65 +13,66 @@ public class Mover : MonoBehaviour
         Idle,
         Run,
         Drop,
-        Jump
     }
     public State state;
-
-    [SerializeField]
-    private Animator animator;  
-    private CharacterController controller;
-
-    //プレイヤー
-    Quaternion targetRotation;
-    //重力
-    [SerializeField]
-    const float gravityScaleNum = -9.8f;
-    [SerializeField]
-    float gravityScale = 0.0f;
-
-    [SerializeField]
-    private bool isJump = false; //ジャンプフラグ
-    [SerializeField]
-    float jumpScale = 3.0f;     //ジャンプ力
-
-    private bool isMove = false; //移動入力フラグ
 
     //カメラ
     [SerializeField]
     Camera playerCamera;
 
     [SerializeField]
-    private bool isGround; //接地フラグ
-    [SerializeField]
-    private float playerSpeed = 2.0f; //移動速度
+    private bool isLobby;
 
+    [SerializeField]
+    private Animator animator;  
+
+    //プレイヤー
+    Quaternion targetRotation;
+    Rigidbody rb;
+    [SerializeField]
+    Foot foot;
+
+    [SerializeField]
+    private bool isGround; //接地フラグ
+
+    [SerializeField] 
+    private Vector3 localGravity; //カスタム重力
+
+    private bool isJump = false; //ジャンプフラグ
+    [SerializeField]
+    float jumpScale = 3.0f;     //ジャンプ力
+
+    private bool isMove = false; //移動入力フラグ
+
+    
+    [SerializeField]
+    private float playerSpeed = 2.0f; //加速度
+    [SerializeField]
+    public float maxSpeed = 20f;//速度上限
 
     private Vector3 moveDirection = Vector2.zero; //移動方向
     private Vector2 inputVector = Vector2.zero; //入力方向
-   
-
-    [SerializeField]
-    private float forceMagnitude = 10.0f; //攻撃の力加減
 
     AudioSource audioSource;
 
 
     private void Awake()
     {
-        controller = gameObject.GetComponent<CharacterController>();
         targetRotation = transform.rotation;
     }
 
     private void Start()
     {
+        rb = this.GetComponent<Rigidbody>();  // rigidbodyを取得
+        rb.useGravity = false; //最初にrigidBodyの重力を使わなくする
         audioSource = GetComponent<AudioSource>();
         state = State.Idle;
+        if(isLobby)
+        {
+            playerCamera = Camera.main;
+        }
     }
-
-    void FixedUpdate()
-    {
-
-    }
+       
 
     public void SetInputVector(Vector2 direction)
     {
@@ -103,11 +104,13 @@ public class Mover : MonoBehaviour
     {
         if(state == State.Idle || state == State.Run)
         {
+            if (!context.action.triggered)
+                return;
             if(!isJump)
             {
                 isJump = true;
-                gravityScale = jumpScale;
-                //jumped = context.action.triggered;
+                Vector3 force = new Vector3(0.0f, jumpScale, 0.0f);  // 力を設定
+                rb.AddForce(force, ForceMode.Impulse);
             }
         }
     }
@@ -124,11 +127,20 @@ public class Mover : MonoBehaviour
 
     void Update()
     {
-        GravityControl();
+        DecideState();        
+    }
+
+    void FixedUpdate()
+    {
+        SetLocalGravity(); //重力をAddForceでかけるメソッドを呼ぶ
         ChangeIsJump();
         isGround = CheckIsGround();
-        DecideState();
         PlayState();
+    }
+
+    private void SetLocalGravity()
+    {
+        rb.AddForce(localGravity, ForceMode.Acceleration);
     }
 
     public static float Vector2ToAngle(Vector2 vector)
@@ -141,17 +153,13 @@ public class Mover : MonoBehaviour
         Rigidbody rigidbody = collision.collider.attachedRigidbody;
         if (rigidbody != null)
         {
-            Vector3 forceDirection = collision.gameObject.transform.position - transform.position;
-            forceDirection.y = 0f;
-            forceDirection.Normalize();
-
-            rigidbody.AddForceAtPosition(forceDirection * forceMagnitude, transform.position, ForceMode.Impulse);
+           
         }
     }
 
     private bool CheckIsGround()
     {
-        return controller.isGrounded;
+        return foot.GetIsGround();
     }
 
     private void MovePlayer()
@@ -167,7 +175,6 @@ public class Mover : MonoBehaviour
         // カメラの方向から、X-Z平面の単位ベクトルを取得
         Vector3 cameraForward = Vector3.Scale(playerCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 cameraRight = Vector3.Scale(playerCamera.transform.right, new Vector3(1, 0, 1)).normalized;
-        Vector3 gravity = (new Vector3(0, 1, 0) * gravityScale);
 
         // 方向キーの入力値とカメラの向きから、移動方向を決定
         Vector3 lookForward = cameraForward * inputVector.y + cameraRight * inputVector.x;
@@ -178,35 +185,32 @@ public class Mover : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(lookForward);
         }
-        //重力を付けて
-        Vector3 moveForward = lookForward + gravity;
+
+        Vector3 moveForward = lookForward;
+
+        //速度が上限になったら
+        if (moveForward.magnitude > maxSpeed)
+        {
+            moveForward = moveForward.normalized * maxSpeed;
+        }
+        Debug.Log(moveForward.magnitude);
+
         //移動する
-        controller.Move(moveForward * Time.deltaTime);
+        rb.AddForce(moveForward);            // 力を加える        
     }
 
     private void ChangeIsJump()
     {
         if(isJump)
         {
-            if (gravityScale <= 0)
+            if(rb.velocity.y <= 0)
             {
                 isJump = false;
             }
         }
     }
 
-    private void GravityControl()
-    {
-        if (gravityScale > gravityScaleNum)
-        {
-            gravityScale = gravityScale - 0.2f;
-        } 
 
-        if(gravityScale < gravityScaleNum)
-        {
-            gravityScale = gravityScaleNum;
-        }
-    }
 
     private void DecideState()
     {
@@ -215,26 +219,26 @@ public class Mover : MonoBehaviour
             if (isMove)
                 state = State.Run;
             if (isJump)
-                state = State.Jump;
+                state = State.Drop;
+            if (!isGround)
+                state = State.Drop;
+
         }
         else if (state == State.Run)
         {
             if (!isMove)
                 state = State.Idle;
             if (isJump)
-                state = State.Jump;
-        }
-        else if (state == State.Jump)
-        {
-            if (!isJump)
                 state = State.Drop;
-            if (isGround)
-                state = State.Idle;
+            if (!isGround)
+                state = State.Drop;
         }
         else if (state == State.Drop)
         {
-            if (isGround)
+            if (isGround && !isMove)
                 state = State.Idle;
+            if (isGround && isMove)
+                state = State.Run;
         }
     }
 
@@ -248,11 +252,6 @@ public class Mover : MonoBehaviour
         {
             MovePlayer();
             animator.SetBool("isRun", true);
-        }
-        else if (state == State.Jump)
-        {
-            MovePlayer();
-            animator.SetBool("isRun", false);
         }
         else if (state == State.Drop)
         {
