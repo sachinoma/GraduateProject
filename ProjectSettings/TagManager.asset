@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - PlayerConfiguration
-  - MapObject
-=======
-  - GameManager
->>>>>>> main
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -17,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - P0
-  - P1
-  - P2
-  - P3
-  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
