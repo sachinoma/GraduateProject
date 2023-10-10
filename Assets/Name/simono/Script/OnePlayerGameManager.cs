@@ -42,13 +42,20 @@ public class OnePlayerGameManager : MonoBehaviour
 
     private void ResultSceneLoaded(Scene next, LoadSceneMode mode)
     {
+        //マネージャーを取得
         var gameManager = GameObject.FindWithTag("GameManager").GetComponent<OnePlayerGameManager>();
 
-        gameManager.gameTimer = gameTimer;
-        gameManager.isDeath = isDeath;
+        //実態を知らなくても相手が実装してくれるからバグが減る
+        gameManager.SetData(gameTimer, isDeath);
 
-        //イベントを削除
+        //イベントを削除しないと、シーン遷移でずっと呼ばれてしまう
         SceneManager.sceneLoaded -= ResultSceneLoaded;
+    }
+
+    public void SetData(float _gameTimer, bool _isDeath)
+    {
+        this.gameTimer = _gameTimer;
+        this.isDeath = _isDeath;
     }
 
 }
