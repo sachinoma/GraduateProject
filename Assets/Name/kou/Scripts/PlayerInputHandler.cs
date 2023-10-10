@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    private PlayerConfiguration playerConfig;
     private Mover mover;
-
     private PlayerController controls;
 
     [SerializeField]
@@ -29,7 +30,7 @@ public class PlayerInputHandler : MonoBehaviour
     //InputƒCƒxƒ“ƒg
     private void Input_onActionTriggered(CallbackContext context)
     {
-        if(context.action.name == controls.Player.Movement.name)
+        if (context.action.name == controls.Player.Movement.name)
         {
             OnMove(context);
         }
@@ -68,5 +69,11 @@ public class PlayerInputHandler : MonoBehaviour
         {
             mover.OnJump(context);
         }
+    }
+
+    public void InitializePlayer(PlayerConfiguration pc)
+    {
+        playerConfig = pc;
+        playerConfig.Input.onActionTriggered += Input_onActionTriggered;
     }
 }
