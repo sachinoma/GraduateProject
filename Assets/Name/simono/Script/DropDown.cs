@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -7,9 +8,9 @@ public class DropDown : MonoBehaviour
 {
     [SerializeField] private OnePlayerGameManager gameManager;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collider.gameObject.tag == "Player")
         {
             //ïâÇØèàóù
             gameManager.GameOver();
