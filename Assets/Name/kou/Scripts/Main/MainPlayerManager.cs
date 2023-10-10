@@ -40,7 +40,7 @@ public class MainPlayerManager : MonoBehaviour
             //‰æ–Ê•ªŠ„
             player.GetComponent<PlayerCameraLayerUpdater>().SetPlayerNum(i);
             player.transform.Find("Camera").gameObject.GetComponent<Camera>().rect = cameraRect[playerConfigs.Length - 1][i];
-            player.transform.Find("Avatar").gameObject.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
+            //player.transform.Find("Avatar").gameObject.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
             player.transform.Find("Avatar").gameObject.GetComponent<InputReceiver>().SetTargetNum(i);            
         }
     }

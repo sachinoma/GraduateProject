@@ -27,24 +27,24 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    //Inputイベント
-    private void Input_onActionTriggered(CallbackContext context)
-    {
-        if (context.action.name == controls.Player.Movement.name)
-        {
-            OnMove(context);
-        }
+    ////Inputイベント
+    //private void Input_onActionTriggered(CallbackContext context)
+    //{
+    //    if (context.action.name == controls.Player.Movement.name)
+    //    {
+    //        OnMove(context);
+    //    }
 
-        if (context.action.name == controls.Player.Jump.name)
-        {
-            OnJump(context);
-        }
+    //    if (context.action.name == controls.Player.Jump.name)
+    //    {
+    //        OnJump(context);
+    //    }
 
-        if (context.action.name == controls.Player.CameraMovement.name)
-        {
-            OnCameraMove(context);
-        }
-    }
+    //    if (context.action.name == controls.Player.CameraMovement.name)
+    //    {
+    //        OnCameraMove(context);
+    //    }
+    //}
 
     //移動中
     public void OnMove(CallbackContext context)
@@ -71,9 +71,9 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    public void InitializePlayer(PlayerConfiguration pc)
-    {
-        playerConfig = pc;
-        playerConfig.Input.onActionTriggered += Input_onActionTriggered;
-    }
+    //public void InitializePlayer(PlayerConfiguration pc)
+    //{
+    //    playerConfig = pc;
+    //    playerConfig.Input.onActionTriggered += Input_onActionTriggered;
+    //}
 }
