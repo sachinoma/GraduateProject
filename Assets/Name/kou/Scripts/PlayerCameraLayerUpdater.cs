@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerCameraLayerUpdater : MonoBehaviour
 {
-    [SerializeField] private int playerNum;
+    [SerializeField] private int _playerNum;
 
     [SerializeField] private Camera _camera;
     [SerializeField] private CinemachineFreeLook _cinemachineCamera;
 
+    [SerializeField] private CinemachineInputProvider _provider;
     // プレイヤーインデックスとレイヤーの対応
     [Serializable]
     public struct PlayerLayer
@@ -25,7 +26,8 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
     private void Start()
     {
         // レイヤー更新
-        OnIndexUpdated(playerNum);
+        OnIndexUpdated(_playerNum);
+        _provider.PlayerIndex = _playerNum;
     }
 
     // 有効化
@@ -50,11 +52,11 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
     {
         // 他プレイヤーが退室した時はインデックスがずれる可能性があるので
         // レイヤーを更新する
-        if (playerInput.user.index >= playerNum)
+        if (playerInput.user.index >= _playerNum)
             return;
 
         // この時、まだインデックスは前のままなので-1する必要がある
-        OnIndexUpdated(playerNum - 1);
+        OnIndexUpdated(_playerNum - 1);
     }
 
     // プレイヤーインデックスが更新された時に呼ばれる
@@ -90,6 +92,6 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
 
     public void SetPlayerNum(int num)
     {
-        playerNum = num;
+        _playerNum = num;
     }
 }

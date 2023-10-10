@@ -82,6 +82,7 @@ MonoBehaviour:
   playerNum: 0
   _camera: {fileID: 4795005001282853574}
   _cinemachineCamera: {fileID: 5733126605291225035}
+  _provider: {fileID: 8983462966611616936}
   _playerLayers:
   - index: 0
     layer: 6
