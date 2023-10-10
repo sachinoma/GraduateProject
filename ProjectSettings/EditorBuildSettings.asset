@@ -5,12 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/Name/kou/Scene/Test_Lobby.unity
     guid: b1d311535e7cfba4c9a8db407b375581
   - enabled: 1
     path: Assets/Name/kou/Scene/Test_Main.unity
     guid: 2624be30912ced947b24f437853a9a41
+=======
+  - enabled: 0
+    path: Assets/Main/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Name/simono/Scene/OnePlayerGame.unity
+    guid: 48fa3a6f2b9f4e8448acaf636a93f0e4
+  - enabled: 1
+    path: Assets/Name/simono/Scene/Result.unity
+    guid: 384855b84af5b974b8fe7c4654f94254
+>>>>>>> main
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 5bcf6d51ea83a464e8d2e2f95b40fefe,
       type: 2}
