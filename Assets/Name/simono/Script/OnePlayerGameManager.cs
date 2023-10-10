@@ -7,20 +7,33 @@ using UnityEngine.InputSystem.Processors;
 public class OnePlayerGameManager : MonoBehaviour
 {
     [SerializeField] private float gameTimer;
+    private bool isStart;
     private bool isDeath;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        isStart = false;
         isDeath = false;
         gameTimer = 0.0f;
     }
 
+    private void Start()
+    {
+        //ŠJŽnUI‚Ì•\Ž¦
+    }
+
     private void FixedUpdate()
     {
+        if (!isStart) { return; }
         if (isDeath) { return; }
 
        gameTimer += Time.fixedDeltaTime;
+    }
+
+    public void GameStart()
+    {
+        isStart = true;
     }
 
     public void GameOver()
