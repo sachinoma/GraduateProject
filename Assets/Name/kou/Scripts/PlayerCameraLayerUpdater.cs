@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerCameraLayerUpdater : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
+
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private CinemachineFreeLook _cinemachineCamera;
 
@@ -87,5 +89,10 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
         _cinemachineCamera.gameObject.layer = _playerLayers[layerIndex].layer;
 
         _currentIndex = index;
+    }
+
+    public Camera GetCamera()
+    {
+        return _camera;
     }
 }
