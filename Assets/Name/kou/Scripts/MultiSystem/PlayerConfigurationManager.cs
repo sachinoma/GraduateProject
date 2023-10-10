@@ -14,6 +14,9 @@ public class PlayerConfigurationManager : MonoBehaviour
     //最大プレイヤー数
     [SerializeField]
     private int MaxPlayers = 4;
+    //現在プレイヤー数
+    [SerializeField]
+    private int nowPlayers = 0;
 
     [SerializeField]
     private int WinnerPlayers;
@@ -94,10 +97,11 @@ public class PlayerConfigurationManager : MonoBehaviour
         //Debug.Log("Player Joined " + pi.playerIndex);
         if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex) && playerConfigs.Count < MaxPlayers)
         {
-            Debug.Log(pi.user.id - 1);
+            Debug.Log("Player Joined " + (pi.user.id - 1));
             pi.transform.SetParent(transform);
             playerConfigs.Add(new PlayerConfiguration(pi));
-            lobbyPlayerManager.SpawnPlayer((int)pi.user.id - 1);          
+            lobbyPlayerManager.SpawnPlayer((int)pi.user.id - 1);
+            nowPlayers++;
         }
     }
 
@@ -121,6 +125,11 @@ public class PlayerConfigurationManager : MonoBehaviour
     public int GetWinnerPrefabNum()
     {
         return WinnerPrefabNum;
+    }
+
+    public int GetNowPlayers()
+    {
+        return nowPlayers;
     }
 }
 

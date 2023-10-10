@@ -57,7 +57,7 @@ public class InputReceiver : MonoBehaviour
         var allPlayerConInput = FindObjectsOfType<PlayerConfigurationInput>();
         foreach (PlayerConfigurationInput nowPlayerConInput in allPlayerConInput)
         {
-            Debug.Log("nowPlayerConInput = " + nowPlayerConInput.GetPlayerNo());
+            Debug.Log("searchPlayerConInput = " + nowPlayerConInput.GetPlayerNo());
             if (nowPlayerConInput.GetPlayerNo() == num)
             {
                 input = nowPlayerConInput;
