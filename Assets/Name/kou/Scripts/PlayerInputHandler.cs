@@ -9,8 +9,6 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private Mover mover;
 
-    [SerializeField]
-    private SkinnedMeshRenderer playerMesh;
     private PlayerController controls;
 
     [SerializeField]
@@ -35,28 +33,16 @@ public class PlayerInputHandler : MonoBehaviour
         {
             OnMove(context);
         }
-        if (context.action.name == controls.Player.Attack.name)
+
+        if (context.action.name == controls.Player.Jump.name)
         {
-            OnAttack(context);
+            OnJump(context);
         }
 
         if (context.action.name == controls.Player.CameraMovement.name)
         {
             OnCameraMove(context);
         }
-
-        //if(context.action.name == controls.Player.Skill1.name)
-        //{
-        //    OnSkill(context, 0);
-        //}
-        //if(context.action.name == controls.Player.Skill2.name)
-        //{
-        //    OnAttack(context);
-        //}
-        //if(context.action.name == controls.Player.Skill3.name)
-        //{
-        //    OnAttack(context);
-        //}
     }
 
     //ˆÚ“®’†
@@ -75,17 +61,12 @@ public class PlayerInputHandler : MonoBehaviour
             //mover.OnCameraMove(context);
         }
     }
-    //Attack’†
-    public void OnAttack(CallbackContext context)
+    //Jump’†
+    public void OnJump(CallbackContext context)
     {
         if (mover != null)
         {
-            mover.OnAttack(context);
+            mover.OnJump(context);
         }
-    }
-
-    private void OnSkill(CallbackContext context, int num)
-    {
-        mover.OnSkill(context, num);
     }
 }
