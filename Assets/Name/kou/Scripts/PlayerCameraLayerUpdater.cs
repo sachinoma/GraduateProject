@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerCameraLayerUpdater : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
+    [SerializeField] private int playerNum;
 
-    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField] private Camera _camera;
     [SerializeField] private CinemachineFreeLook _cinemachineCamera;
 
     // プレイヤーインデックスとレイヤーの対応
@@ -22,13 +22,10 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
 
     private int _currentIndex = -1;
 
-    // 初期化
-    private void Awake()
+    private void Start()
     {
-        if (_playerInput == null) return;
-
         // レイヤー更新
-        OnIndexUpdated(_playerInput.user.index);
+        OnIndexUpdated(playerNum);
     }
 
     // 有効化
@@ -53,11 +50,11 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
     {
         // 他プレイヤーが退室した時はインデックスがずれる可能性があるので
         // レイヤーを更新する
-        if (playerInput.user.index >= _playerInput.user.index)
+        if (playerInput.user.index >= playerNum)
             return;
 
         // この時、まだインデックスは前のままなので-1する必要がある
-        OnIndexUpdated(_playerInput.user.index - 1);
+        OnIndexUpdated(playerNum - 1);
     }
 
     // プレイヤーインデックスが更新された時に呼ばれる
@@ -70,7 +67,7 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
         if (layerIndex < 0) return;
 
         // プレイヤー用のカメラ取得
-        var playerCamera = _playerInput.camera;
+        var playerCamera = _camera;
         if (playerCamera == null) return;
 
         // カメラのCullingMaskを変更
@@ -91,8 +88,8 @@ public class PlayerCameraLayerUpdater : MonoBehaviour
         _currentIndex = index;
     }
 
-    public Camera GetCamera()
+    public void SetPlayerNum(int num)
     {
-        return _camera;
+        playerNum = num;
     }
 }

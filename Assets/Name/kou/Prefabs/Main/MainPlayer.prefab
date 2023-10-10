@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f8001e21ee4e646837a315df8bfdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 0
   _camera: {fileID: 4795005001282853574}
-  _playerInput: {fileID: 2772002866949664476}
   _cinemachineCamera: {fileID: 5733126605291225035}
   _playerLayers:
   - index: 0
@@ -933,7 +933,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3853329437606231823}
-  - component: {fileID: 2772002866949664476}
   - component: {fileID: 5571671406437697941}
   - component: {fileID: 3717361147612735732}
   - component: {fileID: 153914433217681097}
@@ -963,77 +962,6 @@ Transform:
   m_Father: {fileID: 2351780756666290865}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2772002866949664476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6748324511970877634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: abebcb1e206dd6c42af7cad6d51d5ecf,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 153914433217681097}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f0947acb-01d5-4943-ac7a-ba108bb05c5d
-    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8170851192592015478}
-        m_TargetAssemblyTypeName: Mover, Assembly-CSharp
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: edb84b3c-1d42-4c36-9382-e8fffe1970f7
-    m_ActionName: Player/Attack[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0617ee27-cb50-43c4-977b-0455be7d0b26
-    m_ActionName: Player/Skill1
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: de18a52f-ab0b-47e8-a604-f0c181c12c4a
-    m_ActionName: Player/CameraMovement[/Mouse/delta,/XInputControllerWindows/rightStick,/XInputControllerWindows2/rightStick]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Controller
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 4795005001282853574}
 --- !u!114 &5571671406437697941
 MonoBehaviour:
   m_ObjectHideFlags: 0

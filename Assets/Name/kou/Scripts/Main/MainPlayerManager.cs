@@ -36,10 +36,12 @@ public class MainPlayerManager : MonoBehaviour
         {
             Debug.Log(i);
             int prefabNum = playerConfigs[i].PlayerPrefabNum;
-            var player = Instantiate(playerPrefab[prefabNum], playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);
+            var player = Instantiate(playerPrefab[prefabNum], playerSpawns[i].position, playerSpawns[i].rotation);
             //‰æ–Ê•ªŠ„
-            player.GetComponent<PlayerCameraLayerUpdater>().GetCamera().rect = cameraRect[playerConfigs.Length - 1][i];
-            //player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);    
+            player.GetComponent<PlayerCameraLayerUpdater>().SetPlayerNum(i);
+            player.transform.Find("Camera").gameObject.GetComponent<Camera>().rect = cameraRect[playerConfigs.Length - 1][i];
+            player.transform.Find("Avatar").gameObject.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
+            player.transform.Find("Avatar").gameObject.GetComponent<InputReceiver>().SetTargetNum(i);            
         }
     }
 
