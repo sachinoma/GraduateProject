@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f8001e21ee4e646837a315df8bfdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
+  _playerNum: 0
   _camera: {fileID: 4795005001282853574}
   _cinemachineCamera: {fileID: 5733126605291225035}
   _provider: {fileID: 8983462966611616936}
@@ -942,7 +942,7 @@ GameObject:
   - component: {fileID: 8079307201102025173}
   m_Layer: 0
   m_Name: Avatar
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

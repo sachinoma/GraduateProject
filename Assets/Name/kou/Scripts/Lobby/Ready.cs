@@ -33,6 +33,7 @@ public class Ready : MonoBehaviour
 
         if(readyTime >= readyTimeMax)
         {
+            manager.SetPlayerInputManager(false);
             SceneManager.LoadScene("Test_Main");
         }
     }

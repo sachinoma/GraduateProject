@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4462ccd57af2546937ffd2a618d94d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInputManager: {fileID: 3511407887901568759}
   MaxPlayers: 4
   nowPlayers: 0
   WinnerPlayers: 0

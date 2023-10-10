@@ -9,6 +9,9 @@ public class PlayerConfigurationManager : MonoBehaviour
 {
     private List<PlayerConfiguration> playerConfigs;
 
+    [SerializeField]
+    private PlayerInputManager playerInputManager;
+
     private LobbyPlayerManager lobbyPlayerManager;
 
     //Å‘åƒvƒŒƒCƒ„[”
@@ -130,6 +133,11 @@ public class PlayerConfigurationManager : MonoBehaviour
     public int GetNowPlayers()
     {
         return nowPlayers;
+    }
+
+    public void SetPlayerInputManager(bool flag)
+    {
+        playerInputManager.enabled = flag;
     }
 }
 
