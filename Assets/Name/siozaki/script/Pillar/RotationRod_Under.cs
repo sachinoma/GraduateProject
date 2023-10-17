@@ -8,7 +8,7 @@ public class RotationRod_Under: MonoBehaviour
     [SerializeField]
     private float RotateSpeed;
     [SerializeField]
-    private int SpeedUp;
+    private float SpeedUp;
     
     private int TimeCnt = 0;
     void Update()
@@ -16,9 +16,9 @@ public class RotationRod_Under: MonoBehaviour
         //回転速度上昇カウンタ
         this.TimeCnt++;
         //回転速度上昇
-        if (this.TimeCnt > SpeedUp)
+        if (this.TimeCnt > 600)
         {
-            this.RotateSpeed += 0.01f;
+            this.RotateSpeed += SpeedUp;
             this.TimeCnt = 0;
         }
         //オブジェクトを回転
