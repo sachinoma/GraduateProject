@@ -202,6 +202,12 @@ public class Mover : MonoBehaviour
         rb.AddForce(moveForward);            // —Í‚ð‰Á‚¦‚é        
     }
 
+    public void BounceAction(Vector3 forceVec, float force)
+    {
+        rb.AddForce(forceVec * force, ForceMode.Impulse);
+    }
+
+
     private void ChangeIsJump()
     {
         if(isJump)
