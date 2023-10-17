@@ -93,14 +93,10 @@ MonoBehaviour:
     m_ActionName: Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/XInputControllerWindows2/buttonSouth]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 0617ee27-cb50-43c4-977b-0455be7d0b26
-    m_ActionName: Player/Skill1[/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest,/XInputControllerWindows2/buttonWest]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: de18a52f-ab0b-47e8-a604-f0c181c12c4a
     m_ActionName: Player/CameraMovement[/Mouse/delta,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick,/XInputControllerWindows2/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Controller
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

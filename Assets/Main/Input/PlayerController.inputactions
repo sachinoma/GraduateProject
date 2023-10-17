@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill1",
-                    "type": "Button",
-                    "id": "0617ee27-cb50-43c4-977b-0455be7d0b26",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "CameraMovement",
                     "type": "Value",
                     "id": "de18a52f-ab0b-47e8-a604-f0c181c12c4a",
@@ -133,22 +124,11 @@
                 },
                 {
                     "name": "",
-                    "id": "f229cd05-718c-4a22-8c21-3df235796dc7",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Skill1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "64294812-03e6-46f3-9dd2-c502292f2bf8",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "CameraMovement",
                     "isComposite": false,
                     "isPartOfComposite": false

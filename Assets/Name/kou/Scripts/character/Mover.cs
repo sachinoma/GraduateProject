@@ -58,12 +58,12 @@ public class Mover : MonoBehaviour
 
     private void Awake()
     {
+        rb = this.GetComponent<Rigidbody>();  // rigidbody‚ğæ“¾
         targetRotation = transform.rotation;
     }
 
     private void Start()
     {
-        rb = this.GetComponent<Rigidbody>();  // rigidbody‚ğæ“¾
         rb.useGravity = false; //Å‰‚ÉrigidBody‚Ìd—Í‚ğg‚í‚È‚­‚·‚é
         audioSource = GetComponent<AudioSource>();
         state = State.Idle;
@@ -102,6 +102,9 @@ public class Mover : MonoBehaviour
     //“ü—Í‚ğŠ´’m‚µ‚Ä‚©‚ç‚ÌJumpˆ—
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (context.action == null)
+            return;
+
         if(state == State.Idle || state == State.Run)
         {
             if (!context.action.triggered)
