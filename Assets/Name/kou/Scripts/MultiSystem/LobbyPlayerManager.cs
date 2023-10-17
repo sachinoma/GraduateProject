@@ -17,18 +17,21 @@ public class LobbyPlayerManager : MonoBehaviour
 
 
 
-    //void Start()
-    //{
-    //    //playerConfigsを基にプレイヤーを配置
-    //    playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
-    //    for(int i = 0; i < playerConfigs.Length; i++)
-    //    {
-    //        Debug.Log(i);
-    //        int prefabNum = playerConfigs[i].PlayerPrefabNum;
-    //        var player = Instantiate(playerPrefab[prefabNum], playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);
-    //        //player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);    
-    //    }
-    //}
+    void Start()
+    {
+        playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+        //playerConfigsを基にプレイヤーを配置
+        if (playerConfigs.Length != 0)
+        {
+            for (int i = 0; i < playerConfigs.Length; i++)
+            {
+                Debug.Log(i);
+                GameObject player = Instantiate(playerPrefab[0], playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);
+                player.GetComponent<InputReceiver>().SetTargetNum(i);
+                //player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);    
+            }
+        }
+    }
 
     public void SpawnPlayer(int playerNum)
     {

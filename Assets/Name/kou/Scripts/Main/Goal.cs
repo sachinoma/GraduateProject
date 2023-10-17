@@ -18,6 +18,7 @@ public class Goal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             manager.SetPlayerInputManager(true);
+            manager.SetPlayerInputManagerJoinSetting(true);
             SceneManager.LoadScene("Test_Lobby");
         }
     }
