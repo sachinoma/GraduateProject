@@ -28,7 +28,6 @@ public class LobbyPlayerManager : MonoBehaviour
                 Debug.Log(i);
                 GameObject player = Instantiate(playerPrefab[0], playerSpawns[i].position, playerSpawns[i].rotation, gameObject.transform);
                 player.GetComponent<InputReceiver>().SetTargetNum(i);
-                //player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);    
             }
         }
     }
@@ -38,7 +37,6 @@ public class LobbyPlayerManager : MonoBehaviour
         playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
         GameObject player = Instantiate(playerPrefab[0], playerSpawns[playerNum].position, playerSpawns[playerNum].rotation, gameObject.transform);
         player.GetComponent<InputReceiver>().SetTargetNum(playerNum);
-        //player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[playerNum]);
     }
 
 }
