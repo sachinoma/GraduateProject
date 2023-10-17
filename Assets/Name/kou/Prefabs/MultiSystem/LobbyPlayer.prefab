@@ -109,7 +109,7 @@ MonoBehaviour:
   localGravity: {x: 0, y: -21, z: 0}
   jumpScale: 8
   playerSpeed: 12
-  maxSpeed: 8.5
+  maxSpeed: 10
 --- !u!82 &2714607065611849485
 AudioSource:
   m_ObjectHideFlags: 0
