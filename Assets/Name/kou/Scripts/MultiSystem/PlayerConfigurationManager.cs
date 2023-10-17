@@ -170,7 +170,6 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         //if (!string.Equals(scene.path, this.scene.path)) return;
 
-
         Debug.Log(scene.name + " scene loaded");
         //ロビー再ロード
         SetLobbyPlayerManager(true);

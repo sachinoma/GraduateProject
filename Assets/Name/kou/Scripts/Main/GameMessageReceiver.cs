@@ -11,4 +11,9 @@ public class GameMessageReceiver : MonoBehaviour
     {
         mover.BounceAction(forceVec, force);
     }
+
+    public void ChangeOutfit()
+    {
+        mover.ChangeOutfit();
+    }
 }

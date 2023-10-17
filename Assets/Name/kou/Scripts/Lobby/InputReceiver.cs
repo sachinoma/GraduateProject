@@ -65,6 +65,11 @@ public class InputReceiver : MonoBehaviour
         }
     }
 
+    public PlayerConfigurationInput GetInput()
+    {
+        return input;
+    }
+
     public void SetTargetNum(int num)
     {
         targetNum = num;

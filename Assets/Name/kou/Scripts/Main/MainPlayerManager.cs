@@ -35,8 +35,8 @@ public class MainPlayerManager : MonoBehaviour
         for (int i = 0; i < playerConfigs.Length; i++)
         {
             Debug.Log(i);
-            int prefabNum = playerConfigs[i].PlayerPrefabNum;
-            var player = Instantiate(playerPrefab[prefabNum], playerSpawns[i].position, playerSpawns[i].rotation);
+            //int prefabNum = playerConfigs[i].PlayerPrefabNum;
+            var player = Instantiate(playerPrefab[0], playerSpawns[i].position, playerSpawns[i].rotation);
             //‰æ–Ê•ªŠ„
             player.GetComponent<PlayerCameraLayerUpdater>().SetPlayerNum(i);
             player.transform.Find("Camera").gameObject.GetComponent<Camera>().rect = cameraRect[playerConfigs.Length - 1][i];
