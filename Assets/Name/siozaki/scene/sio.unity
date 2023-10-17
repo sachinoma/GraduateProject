@@ -703,7 +703,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 2254587649467678209, guid: 977a9de6bd801d34b93e280ecbc496ad,
+  m_PlayerPrefab: {fileID: 2254587649467678209, guid: f24b5b8df6b91cd4281d3fa1ae5bbfed,
     type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
@@ -727,7 +727,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1873518450
 PrefabInstance:
@@ -737,6 +737,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839223479739763853, guid: 20387280f1cd3a74d935a4933010add1,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: fb0977053dcfdcd408cc21e501a98056,
+        type: 2}
     - target: {fileID: 3639302475327143398, guid: 20387280f1cd3a74d935a4933010add1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -833,7 +839,7 @@ PrefabInstance:
     - target: {fileID: 2041843082755946164, guid: 9360bfc99aee7e24a96edb213b765d8b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2041843082755946164, guid: 9360bfc99aee7e24a96edb213b765d8b,
         type: 3}
