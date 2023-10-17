@@ -11,7 +11,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     [SerializeField]
     private PlayerInputManager playerInputManager;
-
+    [SerializeField]
     private LobbyPlayerManager lobbyPlayerManager;
 
     //最大プレイヤー数
@@ -36,20 +36,17 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
         else
         {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
             Instance = this;
             DontDestroyOnLoad(Instance);
             playerConfigs = new List<PlayerConfiguration>();
         }
 
-        if(lobbyPlayerManager == null)
-        {
-            GameObject lobbyManager = GameObject.Find("LobbyPlayerManager");
-            if (lobbyManager != null)
-            {
-                lobbyPlayerManager = lobbyManager.GetComponent<LobbyPlayerManager>();
-            }       
-        }
+        SetLobbyPlayerManager(true);
     }
+
 
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
@@ -64,6 +61,22 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void SetPlayerPrefab(int index, int prefabNum)
     {
         playerConfigs[index].PlayerPrefabNum = prefabNum;
+    }
+
+    public void SetLobbyPlayerManager(bool flag)
+    {
+        if(flag)
+        {
+            GameObject lobbyManager = GameObject.Find("LobbyPlayerManager");
+            if (lobbyManager != null)
+            {
+                lobbyPlayerManager = lobbyManager.GetComponent<LobbyPlayerManager>();
+            }
+        }
+        else
+        {
+            lobbyPlayerManager = null;
+        }
     }
 
     public void ReadyPlayer(int index)
@@ -82,6 +95,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     private void GameStart()
     {
+        SetLobbyPlayerManager(false);
         LoadScene();
     }
     private void LoadScene()
@@ -97,7 +111,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     //プレイヤーがJoinした時呼び出せる、もしプレイヤーがの数がMaxPlayer以下ならplayerConfigsを作る。
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        //Debug.Log("Player Joined " + pi.playerIndex);
+        Debug.Log("Player Joined " + pi.playerIndex);
         if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex) && playerConfigs.Count < MaxPlayers)
         {
             Debug.Log("Player Joined " + (pi.user.id - 1));
@@ -138,6 +152,28 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void SetPlayerInputManager(bool flag)
     {
         playerInputManager.enabled = flag;
+    }
+
+    public void SetPlayerInputManagerJoinSetting(bool flag)
+    {
+        playerInputManager.EnableJoining();
+    }
+
+
+    private void OnDestroy()
+    {
+       SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // Listener for sceneLoaded
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //if (!string.Equals(scene.path, this.scene.path)) return;
+
+
+        Debug.Log(scene.name + " scene loaded");
+        //ロビー再ロード
+        SetLobbyPlayerManager(true);
     }
 }
 

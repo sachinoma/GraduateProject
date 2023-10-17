@@ -196,7 +196,7 @@ public class Mover : MonoBehaviour
         {
             moveForward = moveForward.normalized * maxSpeed;
         }
-        Debug.Log(moveForward.magnitude);
+        //Debug.Log(moveForward.magnitude);
 
         //ˆÚ“®‚·‚é
         rb.AddForce(moveForward);            // —Í‚ð‰Á‚¦‚é        
