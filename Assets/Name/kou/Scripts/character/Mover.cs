@@ -24,9 +24,12 @@ public class Mover : MonoBehaviour
     private bool isLobby;
 
     [SerializeField]
-    private Animator animator;  
+    private Animator animator;
 
     //ƒvƒŒƒCƒ„[
+    [SerializeField]
+    PlayerStatus playerStatus;
+
     Quaternion targetRotation;
     Rigidbody rb;
     [SerializeField]
@@ -207,6 +210,17 @@ public class Mover : MonoBehaviour
         rb.AddForce(forceVec * force, ForceMode.Impulse);
     }
 
+    public void ChangeOutfit()
+    {
+        int newOutfitNum = playerStatus.GetOutfitNum() + 1;
+        if(newOutfitNum >= playerStatus.GetOutfitMax())
+        {
+            newOutfitNum = 0;
+        }
+        PlayerConfigurationManager.Instance.SetPlayerPrefab(playerStatus.GetPlayerNum(), newOutfitNum);
+        playerStatus.ChangeOutfit(newOutfitNum);
+    }
+
 
     private void ChangeIsJump()
     {
@@ -219,6 +233,11 @@ public class Mover : MonoBehaviour
         }
     }
 
+    public void MoveClear()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
 
 
     private void DecideState()

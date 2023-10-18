@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5571307239472618154}
   - component: {fileID: 839223479739763853}
   - component: {fileID: 2124053535159569389}
+  - component: {fileID: 5321978854805823120}
   m_Layer: 0
   m_Name: Under_Rod
   m_TagString: Untagged
@@ -135,6 +136,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 2
+--- !u!114 &5321978854805823120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705309244538710821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70eb4ffb1a605f459fbffcbee68148f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 3
 --- !u!1 &2326427053121154445
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +468,7 @@ GameObject:
   - component: {fileID: 3251998735818268664}
   - component: {fileID: 3826354837013461439}
   - component: {fileID: 4118663618990124236}
+  - component: {fileID: 3149236875566403408}
   m_Layer: 0
   m_Name: Up_Rod
   m_TagString: Untagged
@@ -549,6 +564,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3149236875566403408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5917650753155128117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70eb4ffb1a605f459fbffcbee68148f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 3
 --- !u!1 &7707788989566345293
 GameObject:
   m_ObjectHideFlags: 0
