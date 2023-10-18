@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Ready : MonoBehaviour
 {
     private PlayerConfigurationManager manager;
+
+    [SerializeField]
+    Animator readyAnimator;
+
+    private bool readyFinished = false;
 
     [SerializeField]
     private int readyNum = 0;
@@ -15,6 +21,7 @@ public class Ready : MonoBehaviour
     [SerializeField]
     private float readyTime = 0;
 
+
     private void Start()
     {
         manager = GameObject.Find("PlayerInputManager").GetComponent<PlayerConfigurationManager>();
@@ -22,20 +29,31 @@ public class Ready : MonoBehaviour
 
     private void Update()
     {
-        if (IsAllReady())
+        if(!readyFinished)
         {
-            readyTime = readyTime + Time.deltaTime;
-        }
-        else
-        {
-            readyTime = 0.0f;
-        }
+            if (IsAllReady())
+            {
+                readyTime = readyTime + Time.deltaTime;
+                readyAnimator.SetBool("CountFlag", true);
+            }
+            else
+            {
+                readyTime = 0.0f;
+                readyAnimator.SetBool("CountFlag", false);
+            }
 
-        if(readyTime >= readyTimeMax)
-        {
-            manager.SetPlayerInputManager(false);
-            SceneManager.LoadScene("Test_Main");
-        }
+            if (readyTime >= readyTimeMax)
+            {
+                readyFinished = true;
+                Invoke(nameof(StartGame), 1.0f);
+            }
+        }      
+    }
+
+    private void StartGame()
+    {
+        manager.SetPlayerInputManager(false);
+        SceneManager.LoadScene("Test_Main");
     }
 
     private bool IsAllReady()
