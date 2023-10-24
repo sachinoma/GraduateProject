@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    private PlayerConfiguration playerConfig;
     private Mover mover;
-
     private PlayerController controls;
 
     [SerializeField]
@@ -26,24 +27,24 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
 
-    //Inputイベント
-    private void Input_onActionTriggered(CallbackContext context)
-    {
-        if(context.action.name == controls.Player.Movement.name)
-        {
-            OnMove(context);
-        }
+    ////Inputイベント
+    //private void Input_onActionTriggered(CallbackContext context)
+    //{
+    //    if (context.action.name == controls.Player.Movement.name)
+    //    {
+    //        OnMove(context);
+    //    }
 
-        if (context.action.name == controls.Player.Jump.name)
-        {
-            OnJump(context);
-        }
+    //    if (context.action.name == controls.Player.Jump.name)
+    //    {
+    //        OnJump(context);
+    //    }
 
-        if (context.action.name == controls.Player.CameraMovement.name)
-        {
-            OnCameraMove(context);
-        }
-    }
+    //    if (context.action.name == controls.Player.CameraMovement.name)
+    //    {
+    //        OnCameraMove(context);
+    //    }
+    //}
 
     //移動中
     public void OnMove(CallbackContext context)
@@ -69,4 +70,10 @@ public class PlayerInputHandler : MonoBehaviour
             mover.OnJump(context);
         }
     }
+
+    //public void InitializePlayer(PlayerConfiguration pc)
+    //{
+    //    playerConfig = pc;
+    //    playerConfig.Input.onActionTriggered += Input_onActionTriggered;
+    //}
 }

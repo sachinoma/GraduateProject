@@ -24,33 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill1",
-                    "type": "Button",
-                    "id": "0617ee27-cb50-43c4-977b-0455be7d0b26",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Skill2",
-                    "type": "Button",
-                    "id": "dc385432-236a-4cb1-8c9c-c67c6b5515e1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Skill3",
-                    "type": "Button",
-                    "id": "e083a108-0efc-4ed6-8a32-851c67b31730",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "CameraMovement",
                     "type": "Value",
                     "id": "de18a52f-ab0b-47e8-a604-f0c181c12c4a",
@@ -151,44 +124,11 @@
                 },
                 {
                     "name": "",
-                    "id": "f229cd05-718c-4a22-8c21-3df235796dc7",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Skill1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1feedd29-d7e0-432c-b0a3-0ceff81b7fbb",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Skill2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0149cb04-9492-413f-a6d3-9f1068a051bc",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Skill3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "64294812-03e6-46f3-9dd2-c502292f2bf8",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard",
                     "action": "CameraMovement",
                     "isComposite": false,
                     "isPartOfComposite": false

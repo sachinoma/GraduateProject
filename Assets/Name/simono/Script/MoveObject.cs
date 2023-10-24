@@ -8,6 +8,7 @@ public class MoveObject : MonoBehaviour
 {
     [SerializeField] private Vector3[] movePosition = new Vector3[2];
     [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float startUpTime = 2.5f;
     [SerializeField] private float totalTime = 3.0f;
     [SerializeField] private float boundLength = 5.0f;
     private bool isUp;
@@ -17,7 +18,7 @@ public class MoveObject : MonoBehaviour
     void Start()
     {
         isUp = true;
-        time = totalTime / 2f;
+        time = startUpTime;
     }
 
     // Update is called once per frame
