@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < resultData.Count; i++)
         {
             Debug.Log(resultData[i].GetScoreTime().ToString());
+            Debug.Log(resultData[i].GetFallNum().ToString());
         }
         SceneManager.LoadScene("Test_Lobby");
     }
