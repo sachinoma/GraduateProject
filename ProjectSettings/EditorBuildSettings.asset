@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Name/kou/Scene/Test_Result.unity
     guid: 5e41c586029020e4c8c651a91aeb81d0
+  - enabled: 1
+    path: Assets/Name/ishizuka/Title.unity
+    guid: 87bdfca17f0f86d4898939c2789dd8ba
   m_configObjects: {}
