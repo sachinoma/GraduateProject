@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Ready : MonoBehaviour
 {
-    private PlayerConfigurationManager manager;
+    private GameManager gameManager;
+    private PlayerConfigurationManager playerConfigurationManager;
 
     [SerializeField]
     Animator readyAnimator;
@@ -24,7 +26,9 @@ public class Ready : MonoBehaviour
 
     private void Start()
     {
-        manager = GameObject.Find("PlayerInputManager").GetComponent<PlayerConfigurationManager>();
+        playerConfigurationManager = GameObject.Find("PlayerInputManager").GetComponent<PlayerConfigurationManager>();
+        GameObject playerInputManager = GameObject.Find("PlayerInputManager");
+        gameManager = playerInputManager.GetComponent<GameManager>();
     }
 
     private void Update()
@@ -52,13 +56,12 @@ public class Ready : MonoBehaviour
 
     private void StartGame()
     {
-        manager.SetPlayerInputManager(false);
-        SceneManager.LoadScene("Test_Main");
+        gameManager.LoadToMain();
     }
 
     private bool IsAllReady()
     {
-        return manager.GetNowPlayers() == readyNum && manager.GetNowPlayers() != 0;
+        return playerConfigurationManager.GetNowPlayers() == readyNum && playerConfigurationManager.GetNowPlayers() != 0;
     }
 
 

@@ -18,16 +18,24 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         resultData = new List<ResultData>();
-        Instance = this;
+        if (Instance != null)
+        {
+            Debug.Log("trying to creat another singleton resultData!");
+        }
+        else
+        {
+            Instance = this;
+        }
     }
     public List<ResultData> GetResultData()
     {
+        Debug.Log("ResultData.Count:" + resultData.Count);
         return resultData;
     }
 
     void Start()
     {
-        playerConfigurationManager =this.GetComponent<PlayerConfigurationManager>();
+        playerConfigurationManager = this.GetComponent<PlayerConfigurationManager>();
     }
 
     void Update()
@@ -50,8 +58,6 @@ public class GameManager : MonoBehaviour
         resultData.Add(new ResultData(num));
     }
 
-  
-
 
     public void LoadToLobby()
     {
@@ -63,6 +69,28 @@ public class GameManager : MonoBehaviour
             Debug.Log(resultData[i].GetFallNum().ToString());
         }
         SceneManager.LoadScene("Test_Lobby");
+    }
+
+    public void LoadToMain()
+    {
+        playerConfigurationManager.SetPlayerInputManager(false);
+        for (int i = 0; i < resultData.Count; i++)
+        {
+            resultData[i].UpdateScore(0);
+            resultData[i].ResetFallNum();
+        }
+        SceneManager.LoadScene("Test_Main");
+    }
+
+    public void LoadToResult()
+    {
+        SceneManager.LoadScene("Test_Result");
+    }
+
+    public void LoadToTitle()
+    {
+        Destroy(gameObject);
+        SceneManager.LoadScene("Test_Title");
     }
 }
 

@@ -38,17 +38,9 @@ public class Goal : MonoBehaviour
 
             if (CheckCanLoad(allNum))
             {
-                LoadToLobby();
+                //LoadToLobby();
+                LoadToResult();
             }
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        //接触したオブジェクトのタグが"Player"のとき
-        if (other.CompareTag("Player"))
-        {
-            
         }
     }
 
@@ -58,13 +50,18 @@ public class Goal : MonoBehaviour
         {
             if (resultData[i].GetScoreTime() == 0) { return false; }
         }
-
         return true;
     }
+
 
     private void LoadToLobby()
     {
         gameManager.LoadToLobby();
+    }
+
+    private void LoadToResult()
+    {
+        gameManager.LoadToResult();
     }
 
 }

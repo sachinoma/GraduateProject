@@ -34,7 +34,7 @@ public class PlayerStatus : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(StartMethod), 0.1f);
+        Invoke(nameof(StartMethod), 0.05f);
     }
 
     private void StartMethod()
@@ -45,10 +45,6 @@ public class PlayerStatus : MonoBehaviour
         ChangeOutfit(GetOutfitNum());
         SetSavePoint(this.transform);
         resultData = GameManager.Instance.GetResultData().ToArray();
-        foreach (ResultData data in resultData)
-        {
-            data.ResetFallNum();
-        }
     }
 
     private void FixedUpdate()
