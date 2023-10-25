@@ -21,7 +21,8 @@ public class PlayerConfigurationInput : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerController();
-        SetPlayerNo((int)playerInput.user.id - 1);
+        Debug.Log("playerInput.user.index:" + (int)playerInput.user.index);
+        SetPlayerNo((int)playerInput.user.index);
     }
     private void Start()
     {
