@@ -5,11 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
-    private PlayerConfigurationManager manager;
+    private GameManager gameManager;
+    private float time;
+
+    [SerializeField]
+    private ResultData[] resultData;
+
+    private bool[] clearFlag = {false, false, false, false};
 
     private void Start()
     {
-        manager = GameObject.Find("PlayerInputManager").GetComponent<PlayerConfigurationManager>();
+        GameObject playerInputManager = GameObject.Find("PlayerInputManager");
+        gameManager = playerInputManager.GetComponent<GameManager>();
+        resultData = GameManager.Instance.GetResultData().ToArray();
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other)
@@ -17,18 +30,38 @@ public class Goal : MonoBehaviour
         //接触したオブジェクトのタグが"Player"のとき
         if (other.CompareTag("Player"))
         {
-            manager.SetPlayerInputManager(true);
-            manager.SetPlayerInputManagerJoinSetting(true);
-            SceneManager.LoadScene("Test_Lobby");
+            PlayerStatus playerStatus = other.gameObject.GetComponent<PlayerStatus>();
+            int allNum = gameManager.GetAllMenber();
+            int playerNum = playerStatus.GetPlayerNum();
+                        
+            resultData[playerNum].UpdateScore(time);
+
+            if (CheckCanLoad(allNum))
+            {
+                //LoadToLobby();
+                LoadToResult();
+            }
         }
     }
 
-    void OnTriggerExit(Collider other)
+    private bool CheckCanLoad(int allNum)
     {
-        //接触したオブジェクトのタグが"Player"のとき
-        if (other.CompareTag("Player"))
+        for (int i = 0; i < allNum; ++i)
         {
-            
+            if (resultData[i].GetScoreTime() == 0) { return false; }
         }
+        return true;
     }
+
+
+    private void LoadToLobby()
+    {
+        gameManager.LoadToLobby();
+    }
+
+    private void LoadToResult()
+    {
+        gameManager.LoadToResult();
+    }
+
 }
