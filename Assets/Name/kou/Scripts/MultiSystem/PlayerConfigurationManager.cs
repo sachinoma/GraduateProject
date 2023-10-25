@@ -128,10 +128,10 @@ public class PlayerConfigurationManager : MonoBehaviour
         Debug.Log("Player Joined " + pi.playerIndex);
         if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex) && playerConfigs.Count < MaxPlayers)
         {
-            Debug.Log("Player Joined " + (pi.user.id - 1));
+            //Debug.Log("Player Joined " + (pi.user.index));
             pi.transform.SetParent(transform);
             playerConfigs.Add(new PlayerConfiguration(pi));
-            lobbyPlayerManager.SpawnPlayer((int)pi.user.id - 1);
+            lobbyPlayerManager.SpawnPlayer((int)pi.user.index);
             nowPlayers++;
             gameManager.UpdateAllMenber(nowPlayers);
             gameManager.AddResultData(nowPlayers);
