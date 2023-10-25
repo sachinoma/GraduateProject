@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
     public void LoadToTitle()
     {
         Destroy(gameObject);
-        SceneManager.LoadScene("Test_Title");
+        SceneManager.LoadScene("Title");
     }
 }
 
