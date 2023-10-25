@@ -29,19 +29,29 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]
     private PlayerConfiguration[] playerConfigs;
 
+    [SerializeField]
+    private ResultData[] resultData;
+
     private void Start()
+    {
+        Invoke(nameof(StartMethod), 0.05f);
+    }
+
+    private void StartMethod()
     {
         if (inputReceiver.GetInput() != null)
             playerNum = inputReceiver.GetInput().GetPlayerNo();
         DiableAllOutfit();
         ChangeOutfit(GetOutfitNum());
         SetSavePoint(this.transform);
+        resultData = GameManager.Instance.GetResultData().ToArray();
     }
 
     private void FixedUpdate()
     {
         if (transform.position.y < -10.0f)
         {
+            resultData[playerNum].PlusFallNum();
             ReSpawn();
         }
     }

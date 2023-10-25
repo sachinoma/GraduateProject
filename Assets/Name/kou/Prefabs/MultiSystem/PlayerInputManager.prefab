@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1445867083720809809}
   - component: {fileID: 3511407887901568759}
   - component: {fileID: 711267078862373724}
+  - component: {fileID: 1436871524566315114}
   m_Layer: 0
   m_Name: PlayerInputManager
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3511407887901568759
 MonoBehaviour:
@@ -103,6 +104,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputManager: {fileID: 3511407887901568759}
+  lobbyPlayerManager: {fileID: 0}
+  gameManager: {fileID: 0}
   MaxPlayers: 4
   nowPlayers: 0
   WinnerPlayers: 0
+--- !u!114 &1436871524566315114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229997408506017915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06b4c12dd283e9458fe07e9baa21435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowMenber: 0
+  scoreTime:
+  - 0
+  - 0
+  - 0
+  - 0
