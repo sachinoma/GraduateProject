@@ -119,7 +119,13 @@ public class ResultData
 
     public void UpdateScore(float time)
     {
+        Debug.Log(time);
         scoreTime = time;
+    }
+
+    public bool CheckScoreIsZero()
+    {
+        return scoreTime == 0;
     }
 
     public int GetFallNum()

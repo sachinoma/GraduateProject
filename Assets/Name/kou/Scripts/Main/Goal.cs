@@ -34,12 +34,14 @@ public class Goal : MonoBehaviour
             int allNum = gameManager.GetAllMenber();
             int playerNum = playerStatus.GetPlayerNum();
                         
-            resultData[playerNum].UpdateScore(time);
-
-            if (CheckCanLoad(allNum))
+            if(resultData[playerNum].CheckScoreIsZero())
             {
-                //LoadToLobby();
-                LoadToResult();
+                resultData[playerNum].UpdateScore(time);
+
+                if (CheckCanLoad(allNum))
+                {
+                    LoadToResult();
+                }
             }
         }
     }

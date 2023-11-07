@@ -13,13 +13,21 @@ public class MultiResultManager : MonoBehaviour
 
     [SerializeField]
     private int[] rank;
-
+    //[SerializeField]
+    //private int[] player;
+    [SerializeField]
     private float[] time;
+    //[SerializeField]
+    //private int[] fallNum;
 
     private int allMenber;
 
     [SerializeField]
-    Text[] rankText;
+    Text[] rankPlayerText;
+    [SerializeField]
+    Text[] rankTimeText;
+    [SerializeField]
+    Text[] rankFallText;
 
     void Start()
     {
@@ -39,26 +47,33 @@ public class MultiResultManager : MonoBehaviour
     {
         allMenber = gameManager.GetAllMenber();
         rank = new int[allMenber];
+        //player = new int[allMenber];
         time = new float[allMenber];
+        //fallNum = new int[allMenber];
 
-        for (int i = 0; i < allMenber; i++) 
+        for (int i = 0; i < allMenber; ++i) 
         {
             time[i] = resultData[i].scoreTime;
         }
 
         Array.Sort(time);
 
-        for (int i = 0; i < allMenber; i++)
+        for (int i = 0; i < allMenber; ++i)
         {
-            if (time[i] == resultData[i].scoreTime)
+            for(int j = 0; j < allMenber; ++j)
             {
-                rank[i] = resultData[i].GetPlayerNum();
+                if (resultData[j].scoreTime == time[i])
+                {
+                    rank[i] = j;
+                }
             }
         }
 
-        for (int i = 0; i < allMenber; i++)
+        for (int i = 0; i < allMenber; ++i)
         {
-            rankText[i].text = "Player" + rank[i].ToString();
+            rankPlayerText[i].text = "Player" + resultData[rank[i]].GetPlayerNum().ToString();
+            rankTimeText[i].text = resultData[rank[i]].GetScoreTime().ToString();
+            rankFallText[i].text = resultData[rank[i]].GetFallNum().ToString();
         }
     }
 
