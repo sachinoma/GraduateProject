@@ -11,6 +11,11 @@ public class Ready : MonoBehaviour
     private PlayerConfigurationManager playerConfigurationManager;
 
     [SerializeField]
+    bool isForSolo = false;
+    [SerializeField]
+    bool isReady = false;
+
+    [SerializeField]
     Animator readyAnimator;
 
     private bool readyFinished = false;
@@ -35,22 +40,67 @@ public class Ready : MonoBehaviour
     {
         if(!readyFinished)
         {
-            if (IsAllReady())
+            if(!isForSolo)
             {
-                readyTime = readyTime + Time.deltaTime;
-                readyAnimator.SetBool("CountFlag", true);
+                if (IsAllReady())
+                {
+                    if(!isReady)
+                    {
+                        isReady = true;
+                        readyAnimator.SetBool("CountFlag", true);
+                    }
+                    else
+                    {
+                        readyTime = readyTime + Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    if(isReady)
+                    {
+                        isReady = false;
+                        readyTime = 0.0f;
+                        readyAnimator.SetBool("CountFlag", false);
+                    }                    
+                }
+
+                if (readyTime >= readyTimeMax)
+                {
+                    readyFinished = true;
+                    Invoke(nameof(StartGame), 1.0f);
+                }
             }
             else
             {
-                readyTime = 0.0f;
-                readyAnimator.SetBool("CountFlag", false);
+                if (IsSoloReady())
+                {
+                    if (!isReady)
+                    {
+                        isReady = true;
+                        readyAnimator.SetBool("CountFlag", true);
+                    }
+                    else
+                    {
+                        readyTime = readyTime + Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    if (isReady)
+                    {
+                        isReady = false;
+                        readyTime = 0.0f;
+                        readyAnimator.SetBool("CountFlag", false);
+                    }                        
+                }
+
+                if (readyTime >= readyTimeMax)
+                {
+                    readyFinished = true;
+                    Invoke(nameof(StartSoloGame), 1.0f);
+                }
             }
 
-            if (readyTime >= readyTimeMax)
-            {
-                readyFinished = true;
-                Invoke(nameof(StartGame), 1.0f);
-            }
         }      
     }
 
@@ -59,9 +109,19 @@ public class Ready : MonoBehaviour
         gameManager.LoadToMain();
     }
 
+    private void StartSoloGame()
+    {
+        gameManager.LoadToSoloMain();
+    }
+
     private bool IsAllReady()
     {
         return playerConfigurationManager.GetNowPlayers() == readyNum && playerConfigurationManager.GetNowPlayers() != 0;
+    }
+
+    private bool IsSoloReady()
+    {
+        return readyNum == 1;
     }
 
 
