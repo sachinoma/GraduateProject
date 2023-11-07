@@ -82,9 +82,25 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Test_Main");
     }
 
+    public void LoadToSoloMain()
+    {
+        playerConfigurationManager.SetPlayerInputManager(false);
+        for (int i = 0; i < resultData.Count; i++)
+        {
+            resultData[i].UpdateScore(0);
+            resultData[i].ResetFallNum();
+        }
+        SceneManager.LoadScene("OnePlayerGame");
+    }
+
     public void LoadToResult()
     {
         SceneManager.LoadScene("Test_Result");
+    }
+
+    public void LoadToSoloResult()
+    {
+        SceneManager.LoadScene("Test_SoloResult");
     }
 
     public void LoadToTitle()
@@ -119,7 +135,13 @@ public class ResultData
 
     public void UpdateScore(float time)
     {
+        Debug.Log(time);
         scoreTime = time;
+    }
+
+    public bool CheckScoreIsZero()
+    {
+        return scoreTime == 0;
     }
 
     public int GetFallNum()
