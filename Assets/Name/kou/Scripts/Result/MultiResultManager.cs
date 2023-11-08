@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,14 +14,11 @@ public class MultiResultManager : MonoBehaviour
 
     [SerializeField]
     private int[] rank;
-    //[SerializeField]
-    //private int[] player;
     [SerializeField]
     private float[] time;
-    //[SerializeField]
-    //private int[] fallNum;
 
     private int allMenber;
+    private int maxMenber = 4;
 
     [SerializeField]
     Text[] rankPlayerText;
@@ -29,12 +27,18 @@ public class MultiResultManager : MonoBehaviour
     [SerializeField]
     Text[] rankFallText;
 
+    [SerializeField]
+    Animator winAnimator;
+
+    [SerializeField]
+    RotationRod_UP pillar;
+
     void Start()
     {
         GameObject playerInputManager = GameObject.Find("PlayerInputManager");
         gameManager = playerInputManager.GetComponent<GameManager>();
         resultData = GameManager.Instance.GetResultData().ToArray();
-
+        pillar.enabled = false;
         RankProcess();
     }
 
@@ -47,9 +51,7 @@ public class MultiResultManager : MonoBehaviour
     {
         allMenber = gameManager.GetAllMenber();
         rank = new int[allMenber];
-        //player = new int[allMenber];
         time = new float[allMenber];
-        //fallNum = new int[allMenber];
 
         for (int i = 0; i < allMenber; ++i) 
         {
@@ -75,6 +77,24 @@ public class MultiResultManager : MonoBehaviour
             rankTimeText[i].text = resultData[rank[i]].GetScoreTime().ToString();
             rankFallText[i].text = resultData[rank[i]].GetFallNum().ToString();
         }
+
+        for(int i = allMenber; i < maxMenber; ++i)
+        {
+            rankPlayerText[i].text = "";
+            rankTimeText[i].text = "";
+            rankFallText[i].text = "";
+        }
+    }
+
+    public void IntroFinish()
+    {
+        winAnimator.SetBool("Spinning", true);
+        pillar.enabled = true;
+    }
+
+    public void ShowText()
+    {
+        
     }
 
     public void LoadToLobby()
