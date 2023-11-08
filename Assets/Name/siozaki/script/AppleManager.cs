@@ -23,7 +23,7 @@ public class CreateRangeRandomPosition : MonoBehaviour
         // 前フレームからの時間を加算していく
         time = time + Time.deltaTime;
 
-        // 約1秒置きにランダムに生成されるようにする。
+        // 約2秒置きにランダムに生成されるようにする。
         if (time > 2.0f)
         {
             // rangeAとrangeBのx座標の範囲内でランダムな数値を作成
