@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Ready : MonoBehaviour
 {
-    private PlayerConfigurationManager manager;
+    private GameManager gameManager;
+    private PlayerConfigurationManager playerConfigurationManager;
+
+    [SerializeField]
+    bool isForSolo = false;
+    [SerializeField]
+    bool isReady = false;
 
     [SerializeField]
     Animator readyAnimator;
@@ -24,41 +31,97 @@ public class Ready : MonoBehaviour
 
     private void Start()
     {
-        manager = GameObject.Find("PlayerInputManager").GetComponent<PlayerConfigurationManager>();
+        playerConfigurationManager = GameObject.Find("PlayerInputManager").GetComponent<PlayerConfigurationManager>();
+        GameObject playerInputManager = GameObject.Find("PlayerInputManager");
+        gameManager = playerInputManager.GetComponent<GameManager>();
     }
 
     private void Update()
     {
         if(!readyFinished)
         {
-            if (IsAllReady())
+            if(!isForSolo)
             {
-                readyTime = readyTime + Time.deltaTime;
-                readyAnimator.SetBool("CountFlag", true);
+                if (IsAllReady())
+                {
+                    if(!isReady)
+                    {
+                        isReady = true;
+                        readyAnimator.SetBool("CountFlag", true);
+                    }
+                    else
+                    {
+                        readyTime = readyTime + Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    if(isReady)
+                    {
+                        isReady = false;
+                        readyTime = 0.0f;
+                        readyAnimator.SetBool("CountFlag", false);
+                    }                    
+                }
+
+                if (readyTime >= readyTimeMax)
+                {
+                    readyFinished = true;
+                    Invoke(nameof(StartGame), 1.0f);
+                }
             }
             else
             {
-                readyTime = 0.0f;
-                readyAnimator.SetBool("CountFlag", false);
+                if (IsSoloReady())
+                {
+                    if (!isReady)
+                    {
+                        isReady = true;
+                        readyAnimator.SetBool("CountFlag", true);
+                    }
+                    else
+                    {
+                        readyTime = readyTime + Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    if (isReady)
+                    {
+                        isReady = false;
+                        readyTime = 0.0f;
+                        readyAnimator.SetBool("CountFlag", false);
+                    }                        
+                }
+
+                if (readyTime >= readyTimeMax)
+                {
+                    readyFinished = true;
+                    Invoke(nameof(StartSoloGame), 1.0f);
+                }
             }
 
-            if (readyTime >= readyTimeMax)
-            {
-                readyFinished = true;
-                Invoke(nameof(StartGame), 1.0f);
-            }
         }      
     }
 
     private void StartGame()
     {
-        manager.SetPlayerInputManager(false);
-        SceneManager.LoadScene("Test_Main");
+        gameManager.LoadToMain();
+    }
+
+    private void StartSoloGame()
+    {
+        gameManager.LoadToSoloMain();
     }
 
     private bool IsAllReady()
     {
-        return manager.GetNowPlayers() == readyNum && manager.GetNowPlayers() != 0;
+        return playerConfigurationManager.GetNowPlayers() == readyNum && playerConfigurationManager.GetNowPlayers() != 0;
+    }
+
+    private bool IsSoloReady()
+    {
+        return readyNum == 1;
     }
 
 

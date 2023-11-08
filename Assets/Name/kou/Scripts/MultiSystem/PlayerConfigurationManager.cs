@@ -13,6 +13,8 @@ public class PlayerConfigurationManager : MonoBehaviour
     private PlayerInputManager playerInputManager;
     [SerializeField]
     private LobbyPlayerManager lobbyPlayerManager;
+    [SerializeField]
+    private GameManager gameManager;
 
     //Å‘åƒvƒŒƒCƒ„[”
     [SerializeField]
@@ -45,8 +47,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
 
         SetLobbyPlayerManager(true);
+        SetGameManager(true);
     }
-
 
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
@@ -76,6 +78,18 @@ public class PlayerConfigurationManager : MonoBehaviour
         else
         {
             lobbyPlayerManager = null;
+        }
+    }
+
+    public void SetGameManager(bool flag)
+    {
+        if (flag)
+        {
+            gameManager = this.GetComponent<GameManager>();
+        }
+        else
+        {
+            gameManager = null;
         }
     }
 
@@ -114,11 +128,13 @@ public class PlayerConfigurationManager : MonoBehaviour
         Debug.Log("Player Joined " + pi.playerIndex);
         if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex) && playerConfigs.Count < MaxPlayers)
         {
-            Debug.Log("Player Joined " + (pi.user.id - 1));
+            //Debug.Log("Player Joined " + (pi.user.index));
             pi.transform.SetParent(transform);
             playerConfigs.Add(new PlayerConfiguration(pi));
-            lobbyPlayerManager.SpawnPlayer((int)pi.user.id - 1);
+            lobbyPlayerManager.SpawnPlayer((int)pi.user.index);
             nowPlayers++;
+            gameManager.UpdateAllMenber(nowPlayers);
+            gameManager.AddResultData(nowPlayers);
         }
     }
 
