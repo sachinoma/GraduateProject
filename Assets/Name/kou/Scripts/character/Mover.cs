@@ -50,8 +50,6 @@ public class Mover : MonoBehaviour
     
     [SerializeField]
     private float playerSpeed = 2.0f; //加速度
-    [SerializeField]
-    public float maxSpeed = 20f;//速度上限
 
     private Vector3 moveDirection = Vector2.zero; //移動方向
     private Vector2 inputVector = Vector2.zero; //入力方向
@@ -184,7 +182,6 @@ public class Mover : MonoBehaviour
 
         // 方向キーの入力値とカメラの向きから、移動方向を決定
         Vector3 lookForward = cameraForward * inputVector.y + cameraRight * inputVector.x;
-        lookForward *= playerSpeed;
 
         // キャラクターの向きをLook方向に
         if (lookForward != Vector3.zero)
@@ -194,15 +191,8 @@ public class Mover : MonoBehaviour
 
         Vector3 moveForward = lookForward;
 
-        //速度が上限になったら
-        if (moveForward.magnitude > maxSpeed)
-        {
-            moveForward = moveForward.normalized * maxSpeed;
-        }
-        //Debug.Log(moveForward.magnitude);
-
         //移動する
-        rb.AddForce(moveForward);            // 力を加える        
+        rb.AddForce(moveForward.normalized * playerSpeed , ForceMode.Acceleration);            // 力を加える(RigidBodyにDragが設定したから、ずっと加速の状態にはならない)        
     }
 
     public void BounceAction(Vector3 forceVec, float force)
