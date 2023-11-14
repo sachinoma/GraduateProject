@@ -20,18 +20,17 @@ public class MultiResultManager : MonoBehaviour
     private int allMenber;
     private int maxMenber = 4;
 
-    [SerializeField]
-    Text[] rankPlayerText;
-    [SerializeField]
-    Text[] rankTimeText;
-    [SerializeField]
-    Text[] rankFallText;
+    [SerializeField] Text[] rankPlayerText;
+    [SerializeField] Text[] rankTimeText;
+    [SerializeField] Text[] rankFallText;
+    [SerializeField] GameObject UiMain;
 
-    [SerializeField]
-    Animator winAnimator;
-
-    [SerializeField]
-    RotationRod_UP pillar;
+    [SerializeField] Animator winAnimator;
+    [SerializeField] RotationRod_UP pillar;
+    [SerializeField] GameObject winnerPrefab;
+    [SerializeField] GameObject loserPrefab;
+    [SerializeField] Transform winnerSpawnPos;
+    [SerializeField] Transform[] loserSpawnPos;
 
     void Start()
     {
@@ -39,7 +38,9 @@ public class MultiResultManager : MonoBehaviour
         gameManager = playerInputManager.GetComponent<GameManager>();
         resultData = GameManager.Instance.GetResultData().ToArray();
         pillar.enabled = false;
+        UiMain.SetActive(false);
         RankProcess();
+        SpawnWinner();
     }
 
     void Update()
@@ -88,13 +89,15 @@ public class MultiResultManager : MonoBehaviour
 
     public void IntroFinish()
     {
+        SpawnLoser();
+
         winAnimator.SetBool("Spinning", true);
         pillar.enabled = true;
     }
 
     public void ShowText()
     {
-        
+        UiMain.SetActive(true);
     }
 
     public void LoadToLobby()
@@ -111,4 +114,25 @@ public class MultiResultManager : MonoBehaviour
     {
         gameManager.LoadToTitle();
     }
+
+    private void SpawnWinner()
+    {
+        GameObject winner = Instantiate(winnerPrefab, winnerSpawnPos.position, winnerSpawnPos.rotation);
+        ResultCharacter resultCharacter = winner.GetComponent<ResultCharacter>();
+        resultCharacter.SetPlayerNum(rank[0]);
+        resultCharacter.ChangeOutfit();
+        winAnimator = winner.GetComponent<Animator>();
+    }
+
+    private void SpawnLoser()
+    {
+        for(int i = 0; i < allMenber - 1; ++i) //winnerを引いてマイナス1
+        {
+            GameObject loser = Instantiate(loserPrefab, loserSpawnPos[i].position, loserSpawnPos[i].rotation);
+            ResultCharacter resultCharacter = loser.GetComponent<ResultCharacter>();
+            resultCharacter.SetPlayerNum(rank[i + 1]); //二位からなので+1
+            resultCharacter.ChangeOutfit();
+        }        
+    }
+
 }
