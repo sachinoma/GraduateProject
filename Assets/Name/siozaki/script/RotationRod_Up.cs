@@ -10,6 +10,6 @@ public class RotationRod_UP : MonoBehaviour
     void Update()
     {
         //オブジェクトを回転
-        transform.Rotate(new Vector3(0, RotateSpeed, 0));
+        transform.Rotate(new Vector3(0, RotateSpeed* Time.deltaTime, 0));
     }
 }
