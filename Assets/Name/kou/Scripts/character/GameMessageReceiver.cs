@@ -24,4 +24,9 @@ public class GameMessageReceiver : MonoBehaviour
     {
         status.SetSavePoint(savePos.transform);
     }
+
+    public void GetItem(ItemState _state)
+    {
+        if(_state == ItemState.SpeedUp) { }
+    }
 }

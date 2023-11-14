@@ -17,9 +17,17 @@ public class BounceObject : MonoBehaviour
                 Vector3 forceDir = other.gameObject.transform.position - hitPos;
                 forceDir.y += 1.0f;
                 forceDir = forceDir.normalized;
-                //Debug.Log(forceDir);
 
                 other.gameObject.GetComponent<GameMessageReceiver>().BounceAction(forceDir, power);
+            }
+            else if(other.gameObject.GetComponent<ResultCharacter>() != null)
+            {
+                Vector3 hitPos = other.contacts[0].point;
+                Vector3 forceDir = other.gameObject.transform.position - hitPos;
+                forceDir.y += 1.0f;
+                forceDir = forceDir.normalized;
+
+                other.gameObject.GetComponent<ResultCharacter>().BounceAction(forceDir, power);
             }
         }
     }
