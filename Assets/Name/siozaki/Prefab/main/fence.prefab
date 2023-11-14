@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2745199779833731732}
   - component: {fileID: 6456855017395559365}
   m_Layer: 0
-  m_Name: fence_A_02 (1)
+  m_Name: fence
   m_TagString: MapObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
