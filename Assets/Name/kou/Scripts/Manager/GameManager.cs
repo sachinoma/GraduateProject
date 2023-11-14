@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
             resultData[i].UpdateScore(0);
             resultData[i].ResetFallNum();
         }
+        //SceneManager.LoadScene("athletic");
         SceneManager.LoadScene("Test_Main");
     }
 

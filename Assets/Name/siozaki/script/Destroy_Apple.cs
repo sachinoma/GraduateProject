@@ -12,6 +12,6 @@ public class Destroy_Apple : MonoBehaviour
         {
             Destroy(gameObject);
             this.timeCnt = 0;
-        } 
+        }
     }
 }

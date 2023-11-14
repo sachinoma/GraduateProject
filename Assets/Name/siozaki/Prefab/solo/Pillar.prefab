@@ -241,8 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343e76982ce2708478359f75d414968e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: 0.5
-  SpeedUp: 0.1
+  RotateSpeed: 25
+  SpeedUp: 5
+  SpeedUpCnt: 10
 --- !u!1 &2431151114029762350
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea491d831b09d14884cea213a3d44c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotateSpeed: 0.5
+  RotateSpeed: 25
 --- !u!1 &5390860146985641902
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +398,7 @@ Transform:
   - {fileID: 5995740723261840149}
   - {fileID: 9098259029455726669}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5917650753155128117
 GameObject:
