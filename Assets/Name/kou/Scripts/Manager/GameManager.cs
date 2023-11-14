@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             resultData[i].UpdateScore(0);
             resultData[i].ResetFallNum();
         }
-        SceneManager.LoadScene("Test_Main_Copy");
+        SceneManager.LoadScene("Test_Main");
     }
 
     public void LoadToSoloMain()

@@ -14,11 +14,15 @@ public class MoveObject : MonoBehaviour
     private bool isUp;
     private float time;
 
+    private Vector3 startPos, endPos;
+
     // Start is called before the first frame update
     void Start()
     {
         isUp = true;
         time = startUpTime;
+        startPos = transform.position + movePosition[0];
+        endPos = transform.position + movePosition[1];
     }
 
     // Update is called once per frame
@@ -32,11 +36,13 @@ public class MoveObject : MonoBehaviour
         if (isUp) { time += Time.deltaTime * speed; }
         else { time -= Time.deltaTime * speed; }
 
-        float pos;
+        Vector3 pos;
 
-        pos = BackInOut(time, totalTime, movePosition[0].y, movePosition[1].y, boundLength);
+        pos.x = BackInOut(time, totalTime, startPos.x, endPos.x, boundLength);
+        pos.y = BackInOut(time, totalTime, startPos.y, endPos.y, boundLength);
+        pos.z = BackInOut(time, totalTime, startPos.z, endPos.z, boundLength);
 
-        transform.localPosition = new Vector3(transform.localPosition.x, pos, transform.localPosition.z);
+        transform.localPosition = pos;
 
     }
 

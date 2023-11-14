@@ -8,12 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Name/kou/Scene/Test_Lobby.unity
     guid: b1d311535e7cfba4c9a8db407b375581
-  - enabled: 0
+  - enabled: 1
     path: Assets/Name/kou/Scene/Test_Main.unity
     guid: 2624be30912ced947b24f437853a9a41
-  - enabled: 1
-    path: Assets/Name/siozaki/scene/Test_Main_copy.unity
-    guid: 5e8ed37f3567952478d5871055fee9f6
   - enabled: 1
     path: Assets/Name/kou/Scene/Test_Result.unity
     guid: 5e41c586029020e4c8c651a91aeb81d0

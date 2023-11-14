@@ -13,7 +13,8 @@ public class CreateRangeRandomPosition : MonoBehaviour
     [SerializeField]
     [Tooltip("生成する範囲B")]
     private Transform rangeB;
-
+    [SerializeField]
+    float Interval;
     // 経過時間
     private float time;
 
@@ -24,7 +25,7 @@ public class CreateRangeRandomPosition : MonoBehaviour
         time = time + Time.deltaTime;
 
         // 約2秒置きにランダムに生成されるようにする。
-        if (time > 2.0f)
+        if (time > Interval)
         {
             // rangeAとrangeBのx座標の範囲内でランダムな数値を作成
             float x = Random.Range(rangeA.position.x, rangeB.position.x);
