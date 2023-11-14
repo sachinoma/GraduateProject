@@ -30,7 +30,12 @@ public class Foot : MonoBehaviour
             
             if(other.CompareTag("MoveMapObject"))
             {
-                AttachGround(other.gameObject);
+                Vector3 hitPos = other.ClosestPoint(transform.position);
+                Vector3 forceDir = transform.position - hitPos;
+                forceDir.Normalize();
+                Debug.Log(forceDir);
+
+                if(forceDir.y > 0.0f) AttachGround(other);
             }
         }
     }
@@ -49,7 +54,7 @@ public class Foot : MonoBehaviour
         }
     }
 
-    private void AttachGround(GameObject target)
+    private void AttachGround(Collider target)
     {
         attachParent.transform.SetParent(target.transform);
     }
