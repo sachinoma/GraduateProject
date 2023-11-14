@@ -10,6 +10,6 @@ public class RotationWall : MonoBehaviour
     void Update()
     {
         //オブジェクトを回転
-        transform.Rotate(new Vector3(0, 0, RotateSpeed));
+        transform.Rotate(new Vector3(0, 0, RotateSpeed * Time.deltaTime));
     }
 }
