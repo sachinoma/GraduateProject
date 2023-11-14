@@ -417,6 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGround: 0
+  attachParent: {fileID: 901565738639258432}
 --- !u!54 &3137777669676089972
 Rigidbody:
   m_ObjectHideFlags: 0
