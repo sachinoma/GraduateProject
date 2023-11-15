@@ -16,7 +16,7 @@ public class ItemManager : MonoBehaviour
         ParticleObject = _gameObject;
     }
 
-    public bool DetectPlayer(GameObject _target)
+    public bool DetectPlayer(Collider _target)
     {
         return _target.CompareTag(PlayerTag);
     }
@@ -34,8 +34,8 @@ public class ItemManager : MonoBehaviour
         
     }
 
-    public void CallDestroy()
+    public void CallDestroy(GameObject _gameObject)
     {
-        Destroy(gameObject);
+        Destroy(_gameObject);
     }
 }
