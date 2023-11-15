@@ -6,14 +6,12 @@ public class Item : MonoBehaviour
 {
     //アイテムマネージャー
     ItemManager manager;
-    [SerializeField] GameObject particleObject;
-
     [SerializeField] ItemState itemState;
 
     // Start is called before the first frame update
     void Start()
     {
-        manager = new ItemManager(GetComponent<AudioSource>(), particleObject);
+        manager = GetComponentInParent<ItemManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +24,7 @@ public class Item : MonoBehaviour
 
             manager.CallPlaySound();
             manager.CallCreateParticle();
-            manager.CallDestroy(this.gameObject);
+            manager.CallDestroy();
         }
     }
 }
