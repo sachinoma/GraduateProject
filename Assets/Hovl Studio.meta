@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Name/siozaki/Prefab/main/dis_floor.prefab.meta
+guid: f3bd88c6ac7fadf469bbc1e49e2a0302
+PrefabImporter:
+========
 guid: 0b31d124a34f94241b3b5fbaa8745367
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> main:Assets/Hovl Studio.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
