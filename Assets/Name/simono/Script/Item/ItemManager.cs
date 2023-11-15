@@ -7,30 +7,29 @@ public class ItemManager : MonoBehaviour
 {
     const string PlayerTag = "Player";
 
-    public GameObject ParticleObject { get; set; }
-    public AudioSource AudioManager { get; set; }
+    [SerializeField] GameObject destroyParticle;
+    private AudioSource audioSource;
 
-    public ItemManager(AudioSource _source = null, GameObject _gameObject = null)
+    private void Awake()
     {
-        AudioManager = _source;
-        ParticleObject = _gameObject;
+        audioSource = GetComponent<AudioSource>();
     }
 
-    public bool DetectPlayer(GameObject _target)
+    public bool DetectPlayer(Collider _target)
     {
         return _target.CompareTag(PlayerTag);
     }
 
     public void CallCreateParticle()
     {
-        if(ParticleObject != null)
-            Instantiate(ParticleObject, transform);
+        if(destroyParticle != null)
+            Instantiate(destroyParticle, transform);
     }
 
     public void CallPlaySound()
     {
-        if (AudioManager != null)
-            AudioManager.PlayOneShot(AudioManager.clip);
+        if (audioSource != null && audioSource.clip != null)
+            audioSource.PlayOneShot(audioSource.clip);
         
     }
 
