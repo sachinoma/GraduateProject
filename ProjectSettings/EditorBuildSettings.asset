@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Name/kou/Scene/Test_SoloResult.unity
     guid: 29c94bf943d389d4b9cb3461640ae37c
+  - enabled: 1
+    path: Assets/Name/siozaki/scene/athletic.unity
+    guid: 78433a141519e5742949d9f28c450e23
   m_configObjects: {}
