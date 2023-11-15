@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedUpItem : MonoBehaviour
+public class Item : MonoBehaviour
 {
     //アイテムマネージャー
     ItemManager manager;
     [SerializeField] GameObject particleObject;
+
+    [SerializeField] ItemState itemState;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,7 @@ public class SpeedUpItem : MonoBehaviour
         {
             var receiver = collision.gameObject.GetComponentInChildren<GameMessageReceiver>();
 
-            receiver.GetItem(ItemState.SpeedUp);
+            receiver.GetItem(itemState);
 
             manager.CallPlaySound();
             manager.CallCreateParticle();
@@ -31,6 +33,9 @@ public class SpeedUpItem : MonoBehaviour
 
 public enum ItemState
 {
-    SpeedUp,
-    Stun,
+    SpeedUp,    //スピードアップ
+    HighJump,   //ハイジャンプ
+    Blowing,    //周囲を吹き飛ばし
+    Stun,       //全体スタン
+    Random      //ランダム
 }
