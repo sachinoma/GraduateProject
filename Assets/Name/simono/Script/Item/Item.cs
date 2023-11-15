@@ -16,17 +16,17 @@ public class Item : MonoBehaviour
         manager = new ItemManager(GetComponent<AudioSource>(), particleObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(manager.DetectPlayer(collision.gameObject))
+        if(manager.DetectPlayer(other))
         {
-            var receiver = collision.gameObject.GetComponentInChildren<GameMessageReceiver>();
+            var receiver = other.gameObject.GetComponentInChildren<GameMessageReceiver>();
 
             receiver.GetItem(itemState);
 
             manager.CallPlaySound();
             manager.CallCreateParticle();
-            manager.CallDestroy();
+            manager.CallDestroy(this.gameObject);
         }
     }
 }
