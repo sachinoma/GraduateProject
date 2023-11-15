@@ -15,6 +15,9 @@ public class MainPlayerManager : MonoBehaviour
     [SerializeField]
     private PlayerConfiguration[] playerConfigs;
 
+    [SerializeField]
+    private GameMessageReceiver[] playerReceiver;
+
     //画面分割の設定
     [SerializeField]
     private Rect[][] cameraRect = new Rect[4][]
@@ -32,6 +35,8 @@ public class MainPlayerManager : MonoBehaviour
     {
         //playerConfigsを基にプレイヤーを配置
         playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+        playerReceiver = new GameMessageReceiver[playerConfigs.Length];
+
         for (int i = 0; i < playerConfigs.Length; i++)
         {
             Debug.Log(i);
@@ -41,9 +46,28 @@ public class MainPlayerManager : MonoBehaviour
             player.GetComponent<PlayerCameraLayerUpdater>().SetPlayerNum(i);
             player.transform.Find("Camera").gameObject.GetComponent<Camera>().rect = cameraRect[playerConfigs.Length - 1][i];
             //player.transform.Find("Avatar").gameObject.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
-            player.transform.Find("Avatar").gameObject.GetComponent<InputReceiver>().SetTargetNum(i);            
+            player.transform.Find("Avatar").gameObject.GetComponent<InputReceiver>().SetTargetNum(i);
+            playerReceiver[i] = player.GetComponentInChildren<GameMessageReceiver>();
         }
     }
+
+    public GameMessageReceiver[] GetOtherReceiver(int num)
+    {
+        GameMessageReceiver[] receiver = new GameMessageReceiver[playerConfigs.Length - 1];
+
+        int receiverNum = 0;
+        for(int i = 0; i < playerConfigs.Length; i++)
+        {
+            if (i == num)
+            {
+                continue;
+            }
+            receiver[receiverNum] = playerReceiver[i];
+            receiverNum++;
+        }
+        return receiver;
+    }
+
 
     //public void SpawnPlayer(int playerNum)
     //{
