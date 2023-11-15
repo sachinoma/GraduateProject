@@ -60,6 +60,13 @@ public class Mover : MonoBehaviour
     [SerializeField]
     private GameObject[] ItemEffects;
 
+    [SerializeField]
+    private float upSpeed = 30.0f;
+    [SerializeField]
+    private float slowSpeed = 11.0f;
+    [SerializeField]
+    private float stunSpeed = 7.0f;
+
 
     private void Awake()
     {
@@ -153,15 +160,32 @@ public class Mover : MonoBehaviour
         playerStatus.ChangeOutfit(newOutfitNum);
     }
 
-    
+
 
     #region Item
-    public void Stun()
+    public void SpeedUp()
     {
+        CancelInvoke();
+        GameObject effect = (GameObject)Instantiate(ItemEffects[0], this.transform.position, Quaternion.identity);
+        effect.transform.parent = this.transform;
+        playerSpeed = upSpeed;
+        Invoke(nameof(RecoverSpeed), 6.0f);
+    }
+    public void Slow()
+    {
+        CancelInvoke();
         GameObject effect = (GameObject)Instantiate(ItemEffects[1], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
-        playerSpeed = 11;
-        Invoke(nameof(RecoverSpeed), 4.5f);
+        playerSpeed = slowSpeed;
+        Invoke(nameof(RecoverSpeed), 6.0f);
+    }
+    public void Stun()
+    {
+        CancelInvoke();
+        GameObject effect = (GameObject)Instantiate(ItemEffects[2], this.transform.position, Quaternion.identity);
+        effect.transform.parent = this.transform;
+        playerSpeed = stunSpeed;
+        Invoke(nameof(RecoverSpeed), 3.5f);
     }
 
     private void RecoverSpeed()
