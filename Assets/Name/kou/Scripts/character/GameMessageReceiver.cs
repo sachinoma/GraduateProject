@@ -27,6 +27,7 @@ public class GameMessageReceiver : MonoBehaviour
 
     public void GetItem(ItemState _state)
     {
-        if(_state == ItemState.SpeedUp) { }
+        if (_state == ItemState.SpeedUp) { }
+        else if (_state == ItemState.Stun) { mover.Stun(); }
     }
 }

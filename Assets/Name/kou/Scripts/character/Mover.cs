@@ -50,11 +50,15 @@ public class Mover : MonoBehaviour
     
     [SerializeField]
     private float playerSpeed = 2.0f; //加速度
+    private float playerSpeedSaved;
 
     private Vector3 moveDirection = Vector2.zero; //移動方向
     private Vector2 inputVector = Vector2.zero; //入力方向
 
     AudioSource audioSource;
+
+    [SerializeField]
+    private GameObject[] ItemEffects;
 
 
     private void Awake()
@@ -68,7 +72,8 @@ public class Mover : MonoBehaviour
         rb.useGravity = false; //最初にrigidBodyの重力を使わなくする
         audioSource = GetComponent<AudioSource>();
         state = State.Idle;
-        if(isLobby)
+        playerSpeedSaved = playerSpeed;
+        if (isLobby)
         {
             playerCamera = Camera.main;
         }
@@ -124,11 +129,6 @@ public class Mover : MonoBehaviour
         animator.SetBool("isAttack", false);
     }
 
-    private void ResetTime(int num)
-    {
-       
-    }
-
     void Update()
     {
         DecideState();        
@@ -141,6 +141,42 @@ public class Mover : MonoBehaviour
         isGround = CheckIsGround();
         PlayState();
     }
+
+    public void BounceAction(Vector3 forceVec, float force)
+    {
+        rb.AddForce(forceVec * force, ForceMode.Impulse);
+    }
+
+    public void ChangeOutfit()
+    {
+        int newOutfitNum = playerStatus.GetOutfitNum() + 1;
+        if (newOutfitNum >= playerStatus.GetOutfitMax())
+        {
+            newOutfitNum = 0;
+        }
+        PlayerConfigurationManager.Instance.SetPlayerPrefab(playerStatus.GetPlayerNum(), newOutfitNum);
+        playerStatus.ChangeOutfit(newOutfitNum);
+    }
+
+    public void MoveClear()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    public void Stun()
+    {
+        GameObject effect = (GameObject)Instantiate(ItemEffects[1], this.transform.position, Quaternion.identity);
+        effect.transform.parent = this.transform;
+        playerSpeed = 5;
+    }
+
+    private void RecoverSpeed()
+    {
+        playerSpeed = playerSpeedSaved;
+    }
+
+
 
     private void SetLocalGravity()
     {
@@ -195,21 +231,7 @@ public class Mover : MonoBehaviour
         rb.AddForce(moveForward.normalized * playerSpeed , ForceMode.Acceleration);            // 力を加える(RigidBodyにDragが設定したから、ずっと加速の状態にはならない)        
     }
 
-    public void BounceAction(Vector3 forceVec, float force)
-    {
-        rb.AddForce(forceVec * force, ForceMode.Impulse);
-    }
-
-    public void ChangeOutfit()
-    {
-        int newOutfitNum = playerStatus.GetOutfitNum() + 1;
-        if(newOutfitNum >= playerStatus.GetOutfitMax())
-        {
-            newOutfitNum = 0;
-        }
-        PlayerConfigurationManager.Instance.SetPlayerPrefab(playerStatus.GetPlayerNum(), newOutfitNum);
-        playerStatus.ChangeOutfit(newOutfitNum);
-    }
+    
 
 
     private void ChangeIsJump()
@@ -223,11 +245,7 @@ public class Mover : MonoBehaviour
         }
     }
 
-    public void MoveClear()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-    }
+    
 
 
     private void DecideState()
