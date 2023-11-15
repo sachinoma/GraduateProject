@@ -51,6 +51,24 @@ public class MainPlayerManager : MonoBehaviour
         }
     }
 
+    public GameMessageReceiver[] GetOtherReceiver(int num)
+    {
+        GameMessageReceiver[] receiver = new GameMessageReceiver[playerConfigs.Length - 1];
+
+        int receiverNum = 0;
+        for(int i = 0; i < playerConfigs.Length; i++)
+        {
+            if (i == num)
+            {
+                continue;
+            }
+            receiver[receiverNum] = playerReceiver[i];
+            receiverNum++;
+        }
+        return receiver;
+    }
+
+
     //public void SpawnPlayer(int playerNum)
     //{
     //    playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();

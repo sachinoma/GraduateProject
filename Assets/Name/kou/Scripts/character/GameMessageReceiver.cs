@@ -10,6 +10,14 @@ public class GameMessageReceiver : MonoBehaviour
     [SerializeField]
     private PlayerStatus status;
 
+    [SerializeField]
+    private GameMessageReceiver[] otherReceiver;
+
+    private void Start()
+    {
+        mover = new Mover();
+    }
+
     public void BounceAction(Vector3 forceVec, float force)
     {
         mover.BounceAction(forceVec, force);
