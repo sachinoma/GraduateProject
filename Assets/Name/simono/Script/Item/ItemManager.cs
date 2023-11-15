@@ -29,7 +29,7 @@ public class ItemManager : MonoBehaviour
 
     public void CallPlaySound()
     {
-        if (AudioManager != null)
+        if (AudioManager != null && AudioManager.clip != null)
             AudioManager.PlayOneShot(AudioManager.clip);
         
     }
