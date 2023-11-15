@@ -142,11 +142,6 @@ public class Mover : MonoBehaviour
         PlayState();
     }
 
-    public void BounceAction(Vector3 forceVec, float force)
-    {
-        rb.AddForce(forceVec * force, ForceMode.Impulse);
-    }
-
     public void ChangeOutfit()
     {
         int newOutfitNum = playerStatus.GetOutfitNum() + 1;
@@ -158,26 +153,24 @@ public class Mover : MonoBehaviour
         playerStatus.ChangeOutfit(newOutfitNum);
     }
 
-    public void MoveClear()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-    }
+    
 
+    #region Item
     public void Stun()
     {
         GameObject effect = (GameObject)Instantiate(ItemEffects[1], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
-        playerSpeed = 5;
+        playerSpeed = 11;
+        Invoke(nameof(RecoverSpeed), 4.5f);
     }
 
     private void RecoverSpeed()
     {
         playerSpeed = playerSpeedSaved;
     }
+    #endregion
 
-
-
+    #region Move
     private void SetLocalGravity()
     {
         rb.AddForce(localGravity, ForceMode.Acceleration);
@@ -231,7 +224,16 @@ public class Mover : MonoBehaviour
         rb.AddForce(moveForward.normalized * playerSpeed , ForceMode.Acceleration);            // óÕÇâ¡Ç¶ÇÈ(RigidBodyÇ…DragÇ™ê›íËÇµÇΩÇ©ÇÁÅAÇ∏Ç¡Ç∆â¡ë¨ÇÃèÛë‘Ç…ÇÕÇ»ÇÁÇ»Ç¢)        
     }
 
-    
+    public void BounceAction(Vector3 forceVec, float force)
+    {
+        rb.AddForce(forceVec * force, ForceMode.Impulse);
+    }
+
+    public void MoveClear()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
 
 
     private void ChangeIsJump()
@@ -244,8 +246,8 @@ public class Mover : MonoBehaviour
             }
         }
     }
+    #endregion
 
-    
 
 
     private void DecideState()
