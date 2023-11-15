@@ -19,7 +19,6 @@ public class Item : MonoBehaviour
         if(manager.DetectPlayer(other))
         {
             var receiver = other.gameObject.GetComponentInChildren<GameMessageReceiver>();
-
             receiver.GetItem(itemState);
 
             manager.CallPlaySound();
@@ -35,5 +34,6 @@ public enum ItemState
     HighJump,   //ハイジャンプ
     Blowing,    //周囲を吹き飛ばし
     Stun,       //全体スタン
-    Random      //ランダム
+    Random,     //ランダム
+    Slow        //全体スロー
 }
