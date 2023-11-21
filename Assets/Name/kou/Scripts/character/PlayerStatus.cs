@@ -50,7 +50,14 @@ public class PlayerStatus : MonoBehaviour
     private void Update()
     {
         nowRank = gameManager.GetRank(playerNum);
-        rankImage.sprite = rankSprite[nowRank];
+        if(nowRank >= 0)
+        {
+            rankImage.sprite = rankSprite[nowRank];
+        }
+        else
+        {
+            Debug.Log("rankはマイナスです！");
+        }
     }
 
     private void FixedUpdate()
