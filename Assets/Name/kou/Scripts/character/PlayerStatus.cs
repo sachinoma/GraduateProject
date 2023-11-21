@@ -2,38 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField]
-    InputReceiver inputReceiver;
+    private GameManager gameManager;
 
-    [SerializeField]
-    private int playerNum;
+    [SerializeField]    InputReceiver inputReceiver;
 
-    [SerializeField]
-    private int outfitNum;
+    [SerializeField]    private int playerNum;
 
-    [SerializeField]
-    private GameObject outfitNow;
-    [SerializeField]
-    private GameObject[] outfit;
+    [SerializeField]    private int outfitNum;
 
-    [SerializeField]
-    private Vector3 savePoint;
+    [SerializeField]    private GameObject outfitNow;
+    [SerializeField]    private GameObject[] outfit;
 
-    [SerializeField]
-    private Mover mover;
+    [SerializeField]    private Vector3 savePoint;
 
-    [SerializeField]
-    private PlayerConfiguration[] playerConfigs;
+    [SerializeField]    private Mover mover;
 
-    [SerializeField]
-    private ResultData[] resultData;
+    [SerializeField]    private PlayerConfiguration[] playerConfigs;
+
+    [SerializeField]    private ResultData[] resultData;
+    [SerializeField]    private int nowRank;
+    [SerializeField]    private Sprite[] rankSprite;
+    [SerializeField]    private Image rankImage;
 
     private void Start()
     {
+        GameObject playerInputManager = GameObject.Find("PlayerInputManager");
+        gameManager = playerInputManager.GetComponent<GameManager>();
+
         Invoke(nameof(StartMethod), 0.05f);
     }
 
@@ -45,6 +45,12 @@ public class PlayerStatus : MonoBehaviour
         ChangeOutfit(GetOutfitNum());
         SetSavePoint(this.transform);
         resultData = GameManager.Instance.GetResultData().ToArray();
+    }
+
+    private void Update()
+    {
+        nowRank = gameManager.GetRank(playerNum);
+        rankImage.sprite = rankSprite[nowRank];
     }
 
     private void FixedUpdate()
