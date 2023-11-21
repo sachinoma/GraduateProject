@@ -10,7 +10,7 @@ public class RotationObject : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if(isWorldScale) transform.Rotate(rotation, Space.World);
-        else transform.Rotate(rotation);
+        if(isWorldScale) transform.Rotate(rotation * Time.deltaTime, Space.World);
+        else transform.Rotate(rotation * Time.deltaTime);
     }
 }

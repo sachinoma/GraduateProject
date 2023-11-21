@@ -2172,6 +2172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8150910667923896217, guid: c3b294e1faf42dc4a902b2ffbffd3fa8,
         type: 3}
+      propertyPath: rotation.y
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8150910667923896217, guid: c3b294e1faf42dc4a902b2ffbffd3fa8,
+        type: 3}
       propertyPath: isWorldScale
       value: 0
       objectReference: {fileID: 0}
