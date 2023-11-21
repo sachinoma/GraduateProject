@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(Collision))]
+public class ItemModel : MonoBehaviour
+{
+    [SerializeField] GameObject destroyParticle;
+    private Renderer[] renderlist;
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        renderlist =  transform.GetComponentsInChildren<Renderer>();
+    }
+
+    public bool DetectPlayer(Collider _target)
+    {
+        return _target.CompareTag(Tag.PlayerTag);
+    }
+
+    public void CallCreateParticle()
+    {
+        if(destroyParticle != null)
+            Instantiate(destroyParticle, transform);
+    }
+
+    public void CallPlaySound()
+    {
+        if (audioSource != null && audioSource.clip != null)
+            audioSource.PlayOneShot(audioSource.clip);
+        
+    }
+
+    public void CallDestroy()
+    {
+        Destroy(gameObject);
+    }
+
+    public void CallRespawn()
+    {
+        ItemManager.Instance.Respawn(this.gameObject);
+    }
+}

@@ -21,6 +21,9 @@ public class Mover : MonoBehaviour
     Camera playerCamera;
 
     [SerializeField]
+    GameObject cameraMain;
+
+    [SerializeField]
     private bool isLobby;
 
     [SerializeField]
@@ -82,10 +85,16 @@ public class Mover : MonoBehaviour
         playerSpeedSaved = playerSpeed;
         if (isLobby)
         {
+            cameraMain.SetActive(false);
             playerCamera = Camera.main;
         }
     }
        
+
+    public void SetIsLobby(bool flag)
+    {
+        isLobby = flag;
+    }
 
     public void SetInputVector(Vector2 direction)
     {
@@ -186,6 +195,14 @@ public class Mover : MonoBehaviour
         effect.transform.parent = this.transform;
         playerSpeed = stunSpeed;
         Invoke(nameof(RecoverSpeed), 3.5f);
+    }
+    public void Blowing()
+    {
+        CancelInvoke();
+        GameObject effect = (GameObject)Instantiate(ItemEffects[3], this.transform.position + new Vector3(0,1,0), Quaternion.identity);
+        effect.transform.parent = this.transform;
+        playerSpeed = 20;
+        Invoke(nameof(RecoverSpeed), 6.0f);
     }
 
     private void RecoverSpeed()

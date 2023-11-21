@@ -5,35 +5,32 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     //アイテムマネージャー
-    ItemManager manager;
+    ItemModel item;
     [SerializeField] ItemState itemState;
 
     // Start is called before the first frame update
     void Start()
     {
-        manager = GetComponentInParent<ItemManager>();
+        item = GetComponentInParent<ItemModel>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(manager.DetectPlayer(other))
+        if(item.DetectPlayer(other))
         {
             var receiver = other.gameObject.GetComponentInChildren<GameMessageReceiver>();
             receiver.GetItem(itemState);
 
-            manager.CallPlaySound();
-            manager.CallCreateParticle();
-            manager.CallDestroy();
+            item.CallPlaySound();
+            item.CallCreateParticle();
+            item.CallRespawn();
         }
+    }
+
+    public ItemState GetState()
+    {
+        return itemState;
     }
 }
 
-public enum ItemState
-{
-    SpeedUp,    //スピードアップ
-    HighJump,   //ハイジャンプ
-    Blowing,    //周囲を吹き飛ばし
-    Stun,       //全体スタン
-    Random,     //ランダム
-    Slow        //全体スロー
-}
+
