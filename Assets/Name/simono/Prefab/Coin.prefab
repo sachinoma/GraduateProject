@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 582010821937490535}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &577236741839455305
 PrefabInstance:
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ab8bf207f7ece45a1e91f79afbfdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 2, z: 0}
+  rotation: {x: 0, y: 120, z: 0}
   isWorldScale: 1
 --- !u!4 &582010821937490535 stripped
 Transform:

@@ -6,13 +6,13 @@ using UnityEngine;
 public class ItemModel : MonoBehaviour
 {
     [SerializeField] GameObject destroyParticle;
-    private Renderer[] renderlist;
+    [SerializeField] private bool isRandom = true;
+    public bool IsRandom { get { return isRandom; } set { isRandom = value; } }
     private AudioSource audioSource;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        renderlist =  transform.GetComponentsInChildren<Renderer>();
     }
 
     public bool DetectPlayer(Collider _target)

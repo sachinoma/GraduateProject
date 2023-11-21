@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ab8bf207f7ece45a1e91f79afbfdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0.5, z: 0}
+  rotation: {x: 0, y: 45, z: 0}
   isWorldScale: 1
 --- !u!1 &505884846207726753
 GameObject:
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ab8bf207f7ece45a1e91f79afbfdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation: {x: 0, y: 0, z: 10}
+  rotation: {x: 0, y: 0, z: 540}
   isWorldScale: 0
 --- !u!1 &7100079398950041943
 GameObject:

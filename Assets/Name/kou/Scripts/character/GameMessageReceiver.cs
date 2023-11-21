@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameMessageReceiver : MonoBehaviour
@@ -70,6 +69,12 @@ public class GameMessageReceiver : MonoBehaviour
         else if (_state == ItemState.Blowing)
         {
             mover.Blowing();
+        }
+        else if(_state == ItemState.Random)
+        {
+            //ランダムアイテムを除いた中からランダムで取得
+            ItemState state = (ItemState)Enum.ToObject(typeof(ItemState), UnityEngine.Random.Range(0, ((int)ItemState.Random) - 1));
+            GetItem(state);
         }
     }
 
