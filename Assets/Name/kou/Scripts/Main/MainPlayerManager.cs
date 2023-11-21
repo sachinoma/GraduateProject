@@ -45,7 +45,10 @@ public class MainPlayerManager : MonoBehaviour
             //‰æ–Ê•ªŠ„
             player.GetComponent<PlayerCameraLayerUpdater>().SetPlayerNum(i);
             player.GetComponentInChildren<Camera>().rect = cameraRect[playerConfigs.Length - 1][i];
-            //player.transform.Find("Avatar").gameObject.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
+
+            //CullingMask‚ð‘S•”‚É
+            //player.GetComponentInChildren<Camera>().cullingMask = -1;
+
             player.transform.Find("Avatar").gameObject.GetComponent<InputReceiver>().SetTargetNum(i);
             playerReceiver[i] = player.GetComponentInChildren<GameMessageReceiver>();
         }
