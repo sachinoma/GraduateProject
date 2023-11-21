@@ -187,6 +187,14 @@ public class Mover : MonoBehaviour
         playerSpeed = stunSpeed;
         Invoke(nameof(RecoverSpeed), 3.5f);
     }
+    public void Blowing()
+    {
+        CancelInvoke();
+        GameObject effect = (GameObject)Instantiate(ItemEffects[3], this.transform.position + new Vector3(0,1,0), Quaternion.identity);
+        effect.transform.parent = this.transform;
+        playerSpeed = 20;
+        Invoke(nameof(RecoverSpeed), 6.0f);
+    }
 
     private void RecoverSpeed()
     {

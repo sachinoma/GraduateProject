@@ -23,7 +23,7 @@ public class GameMessageReceiver : MonoBehaviour
 
     private void GetOtherReceiver()
     {
-        otherReceiver = playerManager.GetOtherReceiver(status.GetPlayerNum());
+        if(playerManager != null) { otherReceiver = playerManager.GetOtherReceiver(status.GetPlayerNum()); }
     }
 
     public void BounceAction(Vector3 forceVec, float force)
@@ -66,6 +66,10 @@ public class GameMessageReceiver : MonoBehaviour
                     item.Stun();
                 }
             }     
+        }
+        else if (_state == ItemState.Blowing)
+        {
+            mover.Blowing();
         }
     }
 
