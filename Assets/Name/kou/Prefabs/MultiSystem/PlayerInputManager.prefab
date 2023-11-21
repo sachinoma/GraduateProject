@@ -121,9 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06b4c12dd283e9458fe07e9baa21435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowMenber: 0
-  scoreTime:
-  - 0
-  - 0
-  - 0
-  - 0
+  allMenber: 0
+  rank: 00000000000000000000000000000000

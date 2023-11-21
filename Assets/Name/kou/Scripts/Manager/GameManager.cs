@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int allMenber = 0;
 
+    [SerializeField]
+    private int[] rank;
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -41,6 +44,34 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetRank(int[] data)
+    {
+        if(rank.Length != data.Length)
+        {
+            rank = data;
+        }
+        else
+        {
+            for(int i = 0; i < rank.Length; ++i)
+            {
+                rank[i] = data[i];
+            }
+        }
+    }
+
+    public int GetRank(int playerNum) 
+    {
+        for(int i = 0; i < rank.Length; ++i)
+        {
+            if (rank[i] == playerNum)
+            {
+                return i;
+            }
+        }
+        //—áŠO
+        return -1;
     }
 
     public int GetAllMenber()
