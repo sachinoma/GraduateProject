@@ -5,14 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Collision))]
 public class ItemManager : MonoBehaviour
 {
-    const string PlayerTag = "Player";
+    static string PlayerTag = "Player";
 
+    [SerializeField] float respawnTime = 5f;
     [SerializeField] GameObject destroyParticle;
+    private Renderer render;
     private AudioSource audioSource;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        render = gameObject.GetComponent<Renderer>();
     }
 
     public bool DetectPlayer(Collider _target)
@@ -36,5 +39,19 @@ public class ItemManager : MonoBehaviour
     public void CallDestroy()
     {
         Destroy(gameObject);
+    }
+
+    public void CallRespawn()
+    {
+        StartCoroutine(Respawn(respawnTime, gameObject));
+    }
+
+    private IEnumerator Respawn(float _time, GameObject gameObject)
+    {
+        render.enabled = false;
+
+        yield return new WaitForSecondsRealtime(_time);
+
+        render.enabled = true;
     }
 }

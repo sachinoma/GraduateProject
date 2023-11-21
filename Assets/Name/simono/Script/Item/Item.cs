@@ -23,7 +23,7 @@ public class Item : MonoBehaviour
 
             manager.CallPlaySound();
             manager.CallCreateParticle();
-            manager.CallDestroy();
+            manager.CallRespawn();
         }
     }
 }
