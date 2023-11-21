@@ -21,6 +21,9 @@ public class Mover : MonoBehaviour
     Camera playerCamera;
 
     [SerializeField]
+    GameObject cameraMain;
+
+    [SerializeField]
     private bool isLobby;
 
     [SerializeField]
@@ -82,10 +85,16 @@ public class Mover : MonoBehaviour
         playerSpeedSaved = playerSpeed;
         if (isLobby)
         {
+            cameraMain.SetActive(false);
             playerCamera = Camera.main;
         }
     }
        
+
+    public void SetIsLobby(bool flag)
+    {
+        isLobby = flag;
+    }
 
     public void SetInputVector(Vector2 direction)
     {
