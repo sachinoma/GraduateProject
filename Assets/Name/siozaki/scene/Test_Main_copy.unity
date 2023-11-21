@@ -707,8 +707,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4497920039563810544, guid: aa48fbfb2060e0c4caa7cec1f2bc714e,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497920039563810544, guid: aa48fbfb2060e0c4caa7cec1f2bc714e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497920039563810544, guid: aa48fbfb2060e0c4caa7cec1f2bc714e,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.3
+      value: -20.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497920039563810544, guid: aa48fbfb2060e0c4caa7cec1f2bc714e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 14.3
       objectReference: {fileID: 0}
     - target: {fileID: 4497920039563810544, guid: aa48fbfb2060e0c4caa7cec1f2bc714e,
         type: 3}
@@ -1569,6 +1584,7 @@ MonoBehaviour:
   - {fileID: 1471939089}
   playerPrefab:
   - {fileID: 2254587649467678209, guid: f24b5b8df6b91cd4281d3fa1ae5bbfed, type: 3}
+  playerReceiver: []
 --- !u!1 &1056664950
 GameObject:
   m_ObjectHideFlags: 0
