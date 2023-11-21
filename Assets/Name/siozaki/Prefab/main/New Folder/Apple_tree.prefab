@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 8637062473414029572}
   - component: {fileID: 6538529974526029583}
   - component: {fileID: 2073271504013475619}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Apple_tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ Transform:
   - {fileID: 7253965660776761402}
   - {fileID: 4669489260472865464}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &8637062473414029572
 MeshFilter:
