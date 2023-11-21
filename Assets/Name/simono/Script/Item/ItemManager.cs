@@ -9,13 +9,13 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] float respawnTime = 5f;
     [SerializeField] GameObject destroyParticle;
-    private Renderer render;
+    private Renderer[] renderlist;
     private AudioSource audioSource;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        render = gameObject.GetComponent<Renderer>();
+        renderlist =  transform.GetComponentsInChildren<Renderer>();
     }
 
     public bool DetectPlayer(Collider _target)
@@ -48,10 +48,12 @@ public class ItemManager : MonoBehaviour
 
     private IEnumerator Respawn(float _time, GameObject gameObject)
     {
-        render.enabled = false;
+        foreach(var render in renderlist)
+            render.enabled = false;
 
         yield return new WaitForSecondsRealtime(_time);
 
-        render.enabled = true;
+        foreach (var render in renderlist)
+            render.enabled = true;
     }
 }
