@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43edd60b2922ec44380e5d9f2b13271c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemState: 2
+  itemState: 1
 --- !u!82 &5181050263984875581
 AudioSource:
   m_ObjectHideFlags: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyParticle: {fileID: 0}
+  isRandom: 1
 --- !u!82 &3637184125110101904
 AudioSource:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class ItemManager : MonoBehaviour
         Vector3 respawnPos = _target.transform.position;
 
         //モデルを取得
-        var model = _target.GetComponentInChildren<ItemModel>();
+        var model = _target.GetComponent<ItemModel>();
 
         //リスポーンするアイテムの番号取得（存在しなければNull）
         int itemNum = GetListNum(_target, ItemPrefab);
@@ -46,6 +46,9 @@ public class ItemManager : MonoBehaviour
         //アイテムの削除
         Destroy(_target);
 
+        //Destroyは即時実行ではなく、1F後になることもある。そのため判定の重複を無くすために判定を消す
+        _target.GetComponentInChildren<Collider>().enabled = false;
+
         //リスポーンコルーチン
         StartCoroutine(RespawnItem(respawnTime, respawnPos, model.IsRandom, itemNum));
     }
@@ -53,10 +56,13 @@ public class ItemManager : MonoBehaviour
     IEnumerator RespawnItem(float _time, Vector3 _pos, bool _isRandom, int _num)
     {
         //指定時間分待つ
-        yield return new WaitForSecondsRealtime(_time);
+        yield return new WaitForSeconds(_time);
 
         //ランダムで再生成
-        var item = Instantiate(ItemPrefab[_isRandom ? Random.Range(0, ItemPrefab.Count) : _num], _pos, Quaternion.identity);
+        int randValue = Random.Range(0, ItemPrefab.Count);
+        int prefabCount = _isRandom ? randValue : _num;
+
+        var item = Instantiate(ItemPrefab[prefabCount], _pos, Quaternion.identity);
         item.GetComponentInChildren<ItemModel>().IsRandom = _isRandom;
     }
 }
@@ -64,7 +70,6 @@ public class ItemManager : MonoBehaviour
 public enum ItemState
 {
     SpeedUp = 0,    //スピードアップ
-    HighJump,   //ハイジャンプ
     Blowing,    //周囲を吹き飛ばし
     Stun,       //全体スタン
     Slow,       //全体スロー

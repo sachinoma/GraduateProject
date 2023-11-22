@@ -73,7 +73,9 @@ public class GameMessageReceiver : MonoBehaviour
         else if(_state == ItemState.Random)
         {
             //ランダムアイテムを除いた中からランダムで取得
-            ItemState state = (ItemState)Enum.ToObject(typeof(ItemState), UnityEngine.Random.Range(0, ((int)ItemState.Random) - 1));
+            int randValue = UnityEngine.Random.Range(0, ((int)ItemState.Random) - 1);
+            ItemState state = (ItemState)Enum.ToObject(typeof(ItemState), randValue);
+            Debug.Log(randValue.ToString());
             GetItem(state);
         }
     }

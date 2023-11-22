@@ -33,11 +33,6 @@ public class ItemModel : MonoBehaviour
         
     }
 
-    public void CallDestroy()
-    {
-        Destroy(gameObject);
-    }
-
     public void CallRespawn()
     {
         ItemManager.Instance.Respawn(this.gameObject);

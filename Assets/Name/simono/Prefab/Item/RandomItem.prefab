@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyParticle: {fileID: 0}
+  isRandom: 1
 --- !u!82 &5251764533355138407
 AudioSource:
   m_ObjectHideFlags: 0
