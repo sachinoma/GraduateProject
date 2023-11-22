@@ -26,7 +26,6 @@ public class Item : MonoBehaviour
 
             item.CallPlaySound();
             item.CallCreateParticle();
-            trigger.enabled = false;
             item.CallRespawn();
         }
     }

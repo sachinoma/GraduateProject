@@ -46,6 +46,9 @@ public class ItemManager : MonoBehaviour
         //アイテムの削除
         Destroy(_target);
 
+        //Destroyは即時実行ではなく、1F後になることもある。そのため判定の重複を無くすために判定を消す
+        _target.GetComponent<Collider>().enabled = false;
+
         //リスポーンコルーチン
         StartCoroutine(RespawnItem(respawnTime, respawnPos, model.IsRandom, itemNum));
     }
