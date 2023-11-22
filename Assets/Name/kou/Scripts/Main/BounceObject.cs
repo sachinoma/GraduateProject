@@ -6,6 +6,13 @@ public class BounceObject : MonoBehaviour
 {
     [SerializeField]
     private float power;
+    private GameObject MyPlayer;
+
+    private void Awake()
+    {
+        if(GetComponent<Collider>().isTrigger)
+            MyPlayer = transform.parent.gameObject;
+    }
 
     void OnCollisionEnter(Collision other)
     {
@@ -29,6 +36,22 @@ public class BounceObject : MonoBehaviour
 
                 other.gameObject.GetComponent<ResultCharacter>().BounceAction(forceDir, power);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && other.gameObject != MyPlayer)
+        {
+            if (other.gameObject.GetComponent<GameMessageReceiver>() != null)
+            {
+                Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
+                Vector3 forceDir = other.gameObject.transform.position - hitPos;
+                forceDir.y += 1.0f;
+                forceDir = forceDir.normalized;
+
+                other.gameObject.GetComponent<GameMessageReceiver>().BounceAction(forceDir, power);
+            } 
         }
     }
 }
