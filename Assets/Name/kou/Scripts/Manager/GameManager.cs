@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int[] rank;
+    private bool[] rankLock;
 
     public static GameManager Instance { get; private set; }
 
@@ -46,7 +49,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void SetRank(int[] data)
+    public void SetRankAll(int[] data)
     {
         if(rank.Length != data.Length)
         {
@@ -58,6 +61,31 @@ public class GameManager : MonoBehaviour
             {
                 rank[i] = data[i];
             }
+        }
+    }
+
+    public void SetRankOne(int playerNum , int rankNum)
+    {
+        rank[rankNum] = playerNum;
+        rankLock[playerNum] = true;
+    }
+
+    public int[] GetRankAll()
+    {
+        return rank;
+    }
+
+    public bool[] GetRankLockAll()
+    {
+        return rankLock;
+    }
+
+    private void ResetRank()
+    {
+        for(int i = 0; i < rank.Length; ++i)
+        {
+            rank[i] = 0;
+            rankLock[i] = false;
         }
     }
 
@@ -74,6 +102,12 @@ public class GameManager : MonoBehaviour
         return -1;
     }
 
+    public void PrepareRank()
+    {
+        System.Array.Resize(ref rank, allMenber);
+        System.Array.Resize(ref rankLock, allMenber);       
+    }
+
     public int GetAllMenber()
     {
         return allMenber;
@@ -82,6 +116,7 @@ public class GameManager : MonoBehaviour
     public void UpdateAllMenber(int num) 
     {
         allMenber = num;
+        PrepareRank();
     }
 
     public void AddResultData(int num)
@@ -94,7 +129,7 @@ public class GameManager : MonoBehaviour
     {
         playerConfigurationManager.SetPlayerInputManager(true);
         playerConfigurationManager.SetPlayerInputManagerJoinSetting(true);
-        for(int i = 0; i < resultData.Count; i++)
+        for (int i = 0; i < resultData.Count; i++)
         {
             Debug.Log(resultData[i].GetScoreTime().ToString());
             Debug.Log(resultData[i].GetFallNum().ToString());
@@ -105,6 +140,7 @@ public class GameManager : MonoBehaviour
     public void LoadToMain()
     {
         playerConfigurationManager.SetPlayerInputManager(false);
+        ResetRank();
         for (int i = 0; i < resultData.Count; i++)
         {
             resultData[i].UpdateScore(0);

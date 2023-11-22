@@ -8,6 +8,8 @@ public class Goal : MonoBehaviour
     private GameManager gameManager;
     private float time;
 
+    private int rankNow = 0;
+
     [SerializeField]
     private ResultData[] resultData;
 
@@ -37,6 +39,8 @@ public class Goal : MonoBehaviour
             if(resultData[playerNum].CheckScoreIsZero())
             {
                 resultData[playerNum].UpdateScore(time);
+                gameManager.SetRankOne(playerNum, rankNow);
+                rankNow++;
 
                 if (CheckCanLoad(allNum))
                 {
