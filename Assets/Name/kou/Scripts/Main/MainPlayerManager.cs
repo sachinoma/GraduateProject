@@ -6,7 +6,10 @@ using UnityEngine.InputSystem.XR;
 
 public class MainPlayerManager : MonoBehaviour
 {
+    //シングルトン取得
     private GameManager gameManager;
+    [SerializeField]
+    private ResultData[] resultData;
 
     //プレイヤーのスポーン地点
     [SerializeField]
@@ -14,6 +17,8 @@ public class MainPlayerManager : MonoBehaviour
     //プレイヤーPrefab
     [SerializeField]
     private GameObject[] playerPrefab;
+
+    private int playerNum;
 
     [SerializeField]
     private PlayerConfiguration[] playerConfigs;
@@ -30,7 +35,10 @@ public class MainPlayerManager : MonoBehaviour
     private float[] distance;
     //現在の順位
     [SerializeField]
-    private int[] rank;
+    private int[] rankTmp;
+    private int[] rankBefore;
+    private int[] rankOriData;
+    private bool[] rankLock;
 
     [SerializeField]
     private GameObject[] uiCanvasByPlayerNum;
@@ -52,70 +60,117 @@ public class MainPlayerManager : MonoBehaviour
     {
         GameObject playerInputManager = GameObject.Find("PlayerInputManager");
         gameManager = playerInputManager.GetComponent<GameManager>();
+        resultData = GameManager.Instance.GetResultData().ToArray();
 
         //playerConfigsを基にプレイヤーを配置
         playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
-        playerAvatar = new Transform[playerConfigs.Length];
-        distance = new float[playerConfigs.Length];
-        rank = new int[playerConfigs.Length];
-        playerReceiver = new GameMessageReceiver[playerConfigs.Length];
+        playerNum = playerConfigs.Length;
+
+        playerAvatar = new Transform[playerNum];
+        distance = new float[playerNum];
+        rankTmp = new int[playerNum];
+        rankBefore = new int[playerNum];
+        rankOriData = new int[playerNum];
+        rankLock = new bool[playerNum];
+        playerReceiver = new GameMessageReceiver[playerNum];
 
         int rankNum = 0;
-        for (int i = 0; i < playerConfigs.Length; i++)
+        for (int i = 0; i < playerNum; i++)
         {
             Debug.Log(i);
             var player = Instantiate(playerPrefab[0], playerSpawns[i].position, playerSpawns[i].rotation);
                 
             //画面分割
             player.GetComponent<PlayerCameraLayerUpdater>().SetPlayerNum(i);
-            player.GetComponentInChildren<Camera>().rect = cameraRect[playerConfigs.Length - 1][i];
+            player.GetComponentInChildren<Camera>().rect = cameraRect[playerNum - 1][i];
 
             player.transform.Find("Avatar").gameObject.GetComponent<InputReceiver>().SetTargetNum(i);
             playerReceiver[i] = player.GetComponentInChildren<GameMessageReceiver>();
             //プレイヤーのavatar（現在位置取得用））
             playerAvatar[i] = player.transform.Find("Avatar");
-            //rankの初期化
-            rank[i] = rankNum;
+            //rankTmpの初期化
+            rankTmp[i] = rankNum;
+            rankBefore[i] = 0;
             rankNum++;
         }
         //プレイヤー人数に対応するuiを表示
-        uiCanvasByPlayerNum[playerConfigs.Length - 1].SetActive(true);
+        uiCanvasByPlayerNum[playerNum - 1].SetActive(true);
     }
 
     private void Update()
     {
         CheckNowRank();
-        gameManager.SetRank(rank);
+        if(IsRankDifferent())
+        {
+            gameManager.SetRankAll(rankTmp);
+        }
+    }
+
+    private bool IsRankDifferent()
+    {
+        for(int i = 0; i < rankTmp.Length; i++)
+        {
+            if (rankTmp[i] != rankBefore[i])  {return true;}
+        }
+        return false;
     }
 
     private void CheckNowRank()
     {
-        for(int i = 0;i < playerConfigs.Length;i++) 
-        {
-            distance[i] = Vector3.Distance(goal.position, playerAvatar[i].position);
-        }
+        GetOriginalRank();
+        CheckByDistance();
+    }
 
+    public void GetOriginalRank()
+    {
+        rankOriData = gameManager.GetRankAll();
+        rankLock = gameManager.GetRankLockAll();
+    }
+
+
+    public void CheckByDistance()
+    {
+        int lockNum = 0;
+        rankTmp = rankOriData;
+
+        for (int i = 0; i < playerNum; ++i)
+        {
+            if (rankLock[i] == true)
+            {
+                //ゴールした人を排除するために大きい値にします。
+                distance[i] = 10000000;
+                lockNum++;
+            }
+            else
+            {
+                distance[i] = Vector3.Distance(goal.position, playerAvatar[i].position);
+            }
+        }
+        //距離をソートかけます
         Array.Sort(distance);
 
-        for (int i = 0; i < playerConfigs.Length; ++i)
+        
+
+        //ソートした距離によりランク決めます
+        for (int i = 0; i < playerNum; ++i)
         {
-            for (int j = 0; j < playerConfigs.Length; ++j)
+            for (int j = 0; j < playerNum; ++j)
             {
                 if (Vector3.Distance(goal.position, playerAvatar[j].position) == distance[i])
                 {
-                    rank[i] = j;
+                    rankTmp[i + lockNum] = j;
+                    //gameManager.SetRankOne(i + lockNum,j);
                 }
             }
         }
-        
     }
 
     public GameMessageReceiver[] GetOtherReceiver(int num)
     {
-        GameMessageReceiver[] receiver = new GameMessageReceiver[playerConfigs.Length - 1];
+        GameMessageReceiver[] receiver = new GameMessageReceiver[playerNum - 1];
 
         int receiverNum = 0;
-        for(int i = 0; i < playerConfigs.Length; i++)
+        for(int i = 0; i < playerNum; i++)
         {
             if (i == num)
             {
