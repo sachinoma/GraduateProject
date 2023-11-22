@@ -26,6 +26,9 @@ public class PlayerStatus : MonoBehaviour
 
     [SerializeField]    private ResultData[] resultData;
     [SerializeField]    private int nowRank;
+    [SerializeField]    private bool isGoal = false;
+    [SerializeField]    private Animator uiAnimator;
+
     [SerializeField]    private Sprite[] rankSprite;
     [SerializeField]    private Image rankImage;
 
@@ -50,7 +53,15 @@ public class PlayerStatus : MonoBehaviour
     private void Update()
     {
         nowRank = gameManager.GetRank(playerNum);
-        if(nowRank >= 0)
+        if(!isGoal)
+        {
+            isGoal = gameManager.GetRankLock(playerNum);
+            if(isGoal)
+            {
+                uiAnimator.SetBool("isGoal", true);
+            }
+        }
+        if (nowRank >= 0)
         {
             rankImage.sprite = rankSprite[nowRank];
         }

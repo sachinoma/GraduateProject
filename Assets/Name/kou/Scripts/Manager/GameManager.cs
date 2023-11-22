@@ -79,6 +79,10 @@ public class GameManager : MonoBehaviour
     {
         return rankLock;
     }
+    public bool GetRankLock(int playerNum)
+    {
+        return rankLock[playerNum];
+    }
 
     private void ResetRank()
     {
