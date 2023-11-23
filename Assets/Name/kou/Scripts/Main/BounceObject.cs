@@ -39,11 +39,27 @@ public class BounceObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player" && other.gameObject != MyPlayer)
+    //    {
+    //        if (other.gameObject.GetComponent<GameMessageReceiver>() != null)
+    //        {
+    //            Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
+    //            Vector3 forceDir = other.gameObject.transform.position - hitPos;
+    //            forceDir.y += 1.0f;
+    //            forceDir = forceDir.normalized;
+
+    //            other.gameObject.GetComponent<GameMessageReceiver>().BounceAction(forceDir, power);
+    //        } 
+    //    }
+    //}
+
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && other.gameObject != MyPlayer)
+        if(other.gameObject.tag == "Player" && other.gameObject != MyPlayer)
         {
-            if (other.gameObject.GetComponent<GameMessageReceiver>() != null)
+            if(other.gameObject.GetComponent<GameMessageReceiver>() != null)
             {
                 Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
                 Vector3 forceDir = other.gameObject.transform.position - hitPos;
@@ -51,7 +67,7 @@ public class BounceObject : MonoBehaviour
                 forceDir = forceDir.normalized;
 
                 other.gameObject.GetComponent<GameMessageReceiver>().BounceAction(forceDir, power);
-            } 
+            }
         }
     }
 }

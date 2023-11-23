@@ -64,6 +64,9 @@ public class Mover : MonoBehaviour
     private GameObject[] ItemEffects;
 
     [SerializeField]
+    private GameObject blowingCol;
+
+    [SerializeField]
     private float upSpeed = 30.0f;
     [SerializeField]
     private float slowSpeed = 11.0f;
@@ -81,6 +84,7 @@ public class Mover : MonoBehaviour
     {
         rb.useGravity = false; //ç≈èâÇ…rigidBodyÇÃèdóÕÇégÇÌÇ»Ç≠Ç∑ÇÈ
         audioSource = GetComponent<AudioSource>();
+        SetBlowingColFalse();
         state = State.Idle;
         playerSpeedSaved = playerSpeed;
         if (isLobby)
@@ -174,7 +178,7 @@ public class Mover : MonoBehaviour
     #region Item
     public void SpeedUp()
     {
-        CancelInvoke();
+        CancelInvoke(nameof(RecoverSpeed));
         GameObject effect = (GameObject)Instantiate(ItemEffects[0], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
         playerSpeed = upSpeed;
@@ -182,7 +186,7 @@ public class Mover : MonoBehaviour
     }
     public void Slow()
     {
-        CancelInvoke();
+        CancelInvoke(nameof(RecoverSpeed));
         GameObject effect = (GameObject)Instantiate(ItemEffects[1], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
         playerSpeed = slowSpeed;
@@ -190,7 +194,7 @@ public class Mover : MonoBehaviour
     }
     public void Stun()
     {
-        CancelInvoke();
+        CancelInvoke(nameof(RecoverSpeed));
         GameObject effect = (GameObject)Instantiate(ItemEffects[2], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
         playerSpeed = stunSpeed;
@@ -198,11 +202,18 @@ public class Mover : MonoBehaviour
     }
     public void Blowing()
     {
-        CancelInvoke();
+        CancelInvoke(nameof(RecoverSpeed));
         GameObject effect = (GameObject)Instantiate(ItemEffects[3], this.transform.position + new Vector3(0,1,0), Quaternion.identity);
         effect.transform.parent = this.transform;
         playerSpeed = 20;
+        blowingCol.SetActive(true);
         Invoke(nameof(RecoverSpeed), 6.0f);
+        Invoke(nameof(SetBlowingColFalse), 6.0f);
+    }
+
+    private void SetBlowingColFalse()
+    {
+        blowingCol.SetActive(false);
     }
 
     private void RecoverSpeed()
