@@ -27,6 +27,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]    private ResultData[] resultData;
     [SerializeField]    private int nowRank;
     [SerializeField]    private bool isGoal = false;
+    [SerializeField]    private bool isSolo = false;
     [SerializeField]    private Animator uiAnimator;
 
     [SerializeField]    private Sprite[] rankSprite;
@@ -55,10 +56,13 @@ public class PlayerStatus : MonoBehaviour
         nowRank = gameManager.GetRank(playerNum);
         if(!isGoal)
         {
-            isGoal = gameManager.GetRankLock(playerNum);
-            if(isGoal)
+            if (!isSolo)
             {
-                uiAnimator.SetBool("isGoal", true);
+                isGoal = gameManager.GetRankLock(playerNum);
+                if (isGoal)
+                {
+                    uiAnimator.SetBool("isGoal", true);
+                }
             }
         }
         if (nowRank >= 0)
@@ -122,5 +126,10 @@ public class PlayerStatus : MonoBehaviour
     public void SetSavePoint(Transform gameObject)
     {
         savePoint = gameObject.position;
+    }
+
+    public void SetIsSolo(bool flag)
+    {
+        isSolo = flag;
     }
 }
