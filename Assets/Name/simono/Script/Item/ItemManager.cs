@@ -72,6 +72,7 @@ public enum ItemState
     Blowing,    //周囲を吹き飛ばし
     Stun,       //全体スタン
     Slow,       //全体スロー
+    HighJump,   //ハイジャンプ
     //ランダムは必ず最後にする
     Random      //ランダム
 }

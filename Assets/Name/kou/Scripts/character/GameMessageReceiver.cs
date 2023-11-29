@@ -42,7 +42,7 @@ public class GameMessageReceiver : MonoBehaviour
 
     public void GetItem(ItemState _state)
     {
-        if (_state == ItemState.SpeedUp) 
+        if (_state == ItemState.SpeedUp)
         {
             mover.SpeedUp();
         }
@@ -56,21 +56,25 @@ public class GameMessageReceiver : MonoBehaviour
                 }
             }
         }
-        else if (_state == ItemState.Stun) 
-        { 
-            if(otherReceiver.Length != 0)
+        else if (_state == ItemState.Stun)
+        {
+            if (otherReceiver.Length != 0)
             {
-                foreach(var item in otherReceiver)
+                foreach (var item in otherReceiver)
                 {
                     item.Stun();
                 }
-            }     
+            }
         }
         else if (_state == ItemState.Blowing)
         {
             mover.Blowing();
         }
-        else if(_state == ItemState.Random)
+        else if (_state == ItemState.HighJump)
+        {
+            mover.HighJump();
+        }
+        else if (_state == ItemState.Random)
         {
             //ランダムアイテムを除いた中からランダムで取得
             int randValue = UnityEngine.Random.Range(0, ((int)ItemState.Random) - 1);
