@@ -67,11 +67,15 @@ public class Mover : MonoBehaviour
     private GameObject blowingCol;
 
     [SerializeField]
-    private float upSpeed = 30.0f;
+    private float upSpeed = 15.0f;
     [SerializeField]
-    private float slowSpeed = 11.0f;
+    private float slowSpeed = 6.0f;
     [SerializeField]
-    private float stunSpeed = 7.0f;
+    private float stunSpeed = 10.0f;
+    [SerializeField]
+    private float blowingSpeed = 4.0f;
+    [SerializeField]
+    private bool[] itemState;
 
 
     private void Awake()
@@ -178,36 +182,56 @@ public class Mover : MonoBehaviour
     #region Item
     public void SpeedUp()
     {
-        CancelInvoke(nameof(RecoverSpeed));
+        if(itemState[0] == true)
+        {
+            RecoverSpeedUp();
+            CancelInvoke(nameof(RecoverSpeedUp));
+        }
+        itemState[0] = true;
         GameObject effect = (GameObject)Instantiate(ItemEffects[0], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
-        playerSpeed = upSpeed;
-        Invoke(nameof(RecoverSpeed), 6.0f);
+        playerSpeed += upSpeed;
+        Invoke(nameof(RecoverSpeedUp), 6.0f);
     }
     public void Slow()
     {
-        CancelInvoke(nameof(RecoverSpeed));
+        if (itemState[1] == true)
+        {
+            RecoverSlow();
+            CancelInvoke(nameof(RecoverSlow));
+        }        
+        itemState[1] = true;       
         GameObject effect = (GameObject)Instantiate(ItemEffects[1], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
-        playerSpeed = slowSpeed;
-        Invoke(nameof(RecoverSpeed), 6.0f);
+        playerSpeed -= slowSpeed;
+        Invoke(nameof(RecoverSlow), 6.0f);
     }
     public void Stun()
     {
-        CancelInvoke(nameof(RecoverSpeed));
+        if (itemState[2] == true)
+        {
+            RecoverStun();
+            CancelInvoke(nameof(RecoverStun));
+        }       
+        itemState[2] = true;       
         GameObject effect = (GameObject)Instantiate(ItemEffects[2], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
-        playerSpeed = stunSpeed;
-        Invoke(nameof(RecoverSpeed), 3.5f);
+        playerSpeed -= stunSpeed;
+        Invoke(nameof(RecoverStun), 3.5f);
     }
     public void Blowing()
     {
-        CancelInvoke(nameof(RecoverSpeed));
+        if (itemState[3] == true)
+        {
+            RecoverBlowing();
+            CancelInvoke(nameof(RecoverBlowing));
+        }       
+        itemState[3] = true;        
         GameObject effect = (GameObject)Instantiate(ItemEffects[3], this.transform.position + new Vector3(0,1,0), Quaternion.identity);
         effect.transform.parent = this.transform;
-        playerSpeed = 20;
+        playerSpeed += blowingSpeed;
         blowingCol.SetActive(true);
-        Invoke(nameof(RecoverSpeed), 6.0f);
+        Invoke(nameof(RecoverBlowing), 6.0f);
         Invoke(nameof(SetBlowingColFalse), 6.0f);
     }
 
@@ -218,7 +242,29 @@ public class Mover : MonoBehaviour
 
     private void RecoverSpeed()
     {
-        playerSpeed = playerSpeedSaved;
+        playerSpeed = playerSpeedSaved;      
+    }
+
+    private void RecoverSpeedUp()
+    {
+        playerSpeed -= upSpeed;
+        itemState[0] = false;
+    }
+
+    private void RecoverSlow()
+    {
+        playerSpeed += slowSpeed;
+        itemState[1] = false;
+    }
+    private void RecoverStun()
+    {
+        playerSpeed += stunSpeed;
+        itemState[2] = false;
+    }
+    private void RecoverBlowing()
+    {
+        playerSpeed -= blowingSpeed;
+        itemState[3] = false;
     }
     #endregion
 
