@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Name/ishizuka/Title.unity
+    guid: 87bdfca17f0f86d4898939c2789dd8ba
+  - enabled: 1
     path: Assets/Name/kou/Scene/Test_Lobby.unity
     guid: b1d311535e7cfba4c9a8db407b375581
   - enabled: 1
@@ -14,9 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Name/kou/Scene/Test_Result.unity
     guid: 5e41c586029020e4c8c651a91aeb81d0
-  - enabled: 1
-    path: Assets/Name/ishizuka/Title.unity
-    guid: 87bdfca17f0f86d4898939c2789dd8ba
   - enabled: 1
     path: Assets/Name/simono/Scene/OnePlayerGame.unity
     guid: 48fa3a6f2b9f4e8448acaf636a93f0e4
