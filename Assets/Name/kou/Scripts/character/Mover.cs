@@ -47,6 +47,7 @@ public class Mover : MonoBehaviour
     private bool isJump = false; //ジャンプフラグ
     [SerializeField]
     float jumpScale = 3.0f;     //ジャンプ力
+    private float jumpScaleSaved;
 
     private bool isMove = false; //移動入力フラグ
 
@@ -75,6 +76,8 @@ public class Mover : MonoBehaviour
     [SerializeField]
     private float blowingSpeed = 4.0f;
     [SerializeField]
+    private float highJumpScale = 30.0f;
+    [SerializeField]
     private bool[] itemState;
 
 
@@ -91,6 +94,7 @@ public class Mover : MonoBehaviour
         SetBlowingColFalse();
         state = State.Idle;
         playerSpeedSaved = playerSpeed;
+        jumpScaleSaved = jumpScale;
         if (isLobby)
         {
             cameraMain.SetActive(false);
@@ -234,6 +238,20 @@ public class Mover : MonoBehaviour
         Invoke(nameof(RecoverBlowing), 6.0f);
         Invoke(nameof(SetBlowingColFalse), 6.0f);
     }
+    public void HighJump()
+    {
+        if (itemState[4] == true)
+        {
+            RecoverJump();
+            CancelInvoke(nameof(RecoverJump));
+        }
+        itemState[4] = true;
+        GameObject effect = (GameObject)Instantiate(ItemEffects[2], this.transform.position, Quaternion.identity);
+        effect.transform.parent = this.transform;
+        jumpScale = highJumpScale;
+        Invoke(nameof(RecoverJump), 3.5f);
+    }
+
 
     private void SetBlowingColFalse()
     {
@@ -243,6 +261,11 @@ public class Mover : MonoBehaviour
     private void RecoverSpeed()
     {
         playerSpeed = playerSpeedSaved;      
+    }
+
+    private void RecoverJump()
+    {
+        jumpScale = jumpScaleSaved;
     }
 
     private void RecoverSpeedUp()
