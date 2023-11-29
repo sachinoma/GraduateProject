@@ -8,6 +8,11 @@ public class BounceObject : MonoBehaviour
     private float power;
     private GameObject MyPlayer;
 
+    [SerializeField]
+    private bool isAnimator = false;
+    [SerializeField]
+    Animator animator;
+
     private void Awake()
     {
         if(GetComponent<Collider>().isTrigger)
@@ -19,7 +24,11 @@ public class BounceObject : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             if(other.gameObject.GetComponent<GameMessageReceiver>() != null)
-            {           
+            {   
+                if(isAnimator)
+                {
+                    animator.SetTrigger("Bounce");
+                }
                 Vector3 hitPos = other.contacts[0].point;
                 Vector3 forceDir = other.gameObject.transform.position - hitPos;
                 forceDir.y += 1.0f;
