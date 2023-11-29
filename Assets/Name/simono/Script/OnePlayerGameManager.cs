@@ -40,6 +40,7 @@ public class OnePlayerGameManager : MonoBehaviour
         
         var player = Instantiate(playerPrefab[0], playerSpawns[0].position, playerSpawns[0].rotation);
         player.transform.Find("Avatar").gameObject.GetComponent<InputReceiver>().SetTargetNum(0);
+        player.transform.Find("Avatar").GetComponent<PlayerStatus>().SetIsSolo(true);
         GameStart();
         //ŠJŽnUI‚Ì•\Ž¦
     }
