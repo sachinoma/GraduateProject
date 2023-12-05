@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<<< HEAD:Assets/Name/siozaki/Prefab/main/New Folder/Ring.prefab.meta
 guid: 4c0f7bd851cc63d4590f96a0433f3181
 PrefabImporter:
@@ -7,6 +8,11 @@ guid: d6f577790eed75e4caa9a9c5e0759433
 folderAsset: yes
 DefaultImporter:
 >>>>>>>> main:Assets/Name/simono/Script/FallGame.meta
+=======
+guid: d6f577790eed75e4caa9a9c5e0759433
+folderAsset: yes
+DefaultImporter:
+>>>>>>> main
   externalObjects: {}
   userData: 
   assetBundleName: 
