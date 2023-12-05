@@ -389,7 +389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2662199798895345883}
   m_Layer: 0
-  m_Name: Cross_Pillar
+  m_Name: Cross_Pillar 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
