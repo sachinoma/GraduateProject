@@ -6,19 +6,13 @@ using UnityEngine;
 public class FallPlatfrom : MonoBehaviour
 {
     [SerializeField] float destroyTime = 1f;
-    Animator animator;
-    bool isReady = false;
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
+    [SerializeField] Animator animator;
+    const string PlayerTag = "Player";
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player" && !isReady)
+        if(collision.gameObject.tag == PlayerTag)
         {
-            isReady = true;
             animator.SetTrigger("isReady");
             StartCoroutine(CallDestroy(destroyTime));
         }
@@ -27,7 +21,7 @@ public class FallPlatfrom : MonoBehaviour
     IEnumerator CallDestroy(float _time)
     {
         yield return new WaitForSeconds(_time);
-
-        Destroy(gameObject);
+        
+        Destroy(transform.parent.gameObject);
     }
 }
