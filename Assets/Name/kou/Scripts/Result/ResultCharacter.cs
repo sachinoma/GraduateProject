@@ -25,10 +25,6 @@ public class ResultCharacter : MonoBehaviour
     {
         SetSavePoint(this.transform);
         rb = this.GetComponent<Rigidbody>();  // rigidbody‚ðŽæ“¾
-        //for(int i = 0; i < outfitPrefabs.Length; ++i)
-        //{
-        //    outfitPrefabs[i].SetActive(false);
-        //}
     }
 
 

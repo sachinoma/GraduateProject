@@ -80,6 +80,12 @@ public class Mover : MonoBehaviour
     [SerializeField]
     private bool[] itemState;
 
+    //ÉTÉEÉìÉh
+    [SerializeField]
+    private SoundEffect soundEffect;
+    [SerializeField]
+    private AudioClip jumpClip;
+
 
     private void Awake()
     {
@@ -146,6 +152,7 @@ public class Mover : MonoBehaviour
             if(!isJump)
             {
                 isJump = true;
+                PlaySound(jumpClip);
                 Vector3 force = new Vector3(0.0f, jumpScale, 0.0f);  // óÕÇê›íË
                 rb.AddForce(force, ForceMode.Impulse);
             }
@@ -181,7 +188,10 @@ public class Mover : MonoBehaviour
         playerStatus.ChangeOutfit(newOutfitNum);
     }
 
-
+    private void PlaySound(AudioClip clipName)
+    {
+        soundEffect.PlaySoundEffectClip(clipName);
+    }
 
     #region Item
     public void SpeedUp()
