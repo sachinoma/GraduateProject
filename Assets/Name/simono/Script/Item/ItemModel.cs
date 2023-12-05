@@ -22,8 +22,8 @@ public class ItemModel : MonoBehaviour
 
     public void CallCreateParticle()
     {
-        if(destroyParticle != null)
-            Instantiate(destroyParticle, transform);
+        if (destroyParticle != null)
+            Instantiate(destroyParticle, this.transform.position, Quaternion.identity);
     }
 
     public void CallPlaySound()

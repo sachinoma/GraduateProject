@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ChangeOutfitObject : MonoBehaviour
 {
+    [SerializeField]
+    private SoundEffect soundEffect;
+    [SerializeField]
+    private AudioClip clip;
 
     void OnTriggerEnter(Collider other)
     {
@@ -12,6 +16,7 @@ public class ChangeOutfitObject : MonoBehaviour
             if(other.gameObject.GetComponent<GameMessageReceiver>() != null)
             {
                 other.gameObject.GetComponent<GameMessageReceiver>().ChangeOutfit();
+                soundEffect.PlaySoundEffectClip(clip);
             }
         }
     }
