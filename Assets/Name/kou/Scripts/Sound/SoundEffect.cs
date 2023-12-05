@@ -6,13 +6,6 @@ public class SoundEffect : MonoBehaviour
 {
     [SerializeField]
     AudioSource m_AudioSource;
-    [SerializeField]
-    AudioClip m_Clip;
-
-    public void PlaySoundEffect()
-    {
-        m_AudioSource.PlayOneShot(m_Clip);
-    }
 
     public void PlaySoundEffectClip(AudioClip audioClip)
     {

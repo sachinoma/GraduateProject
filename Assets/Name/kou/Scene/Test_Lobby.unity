@@ -2806,7 +2806,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 1365545591}
-  m_Clip: {fileID: 0}
 --- !u!1001 &1391573888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4475,6 +4474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SaveCube_Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418483939406890711, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5064501148439240077, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
         type: 3}

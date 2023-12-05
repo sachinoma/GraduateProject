@@ -21,6 +21,11 @@ public class ResultCharacter : MonoBehaviour
     [SerializeField]
     private GameObject[] outfitPrefabs;
 
+    [SerializeField]
+    private SoundEffect soundEffect;
+    [SerializeField]
+    private AudioClip[] knockbackClip;
+
     void Start()
     {
         SetSavePoint(this.transform);
@@ -52,6 +57,7 @@ public class ResultCharacter : MonoBehaviour
         if(rb != null)
         {
             rb.AddForce(forceVec * force, ForceMode.Impulse);
+            soundEffect.PlaySoundEffectClip(knockbackClip[Random.Range(0, knockbackClip.Length)]);
         }  
     }
     public void ChangeOutfit()

@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 6960831348638900043}
+  clip: {fileID: 8300000, guid: 15675cb7583717b4fbdb63cdc7dfeb05, type: 3}
 --- !u!114 &6960831348638900043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 4332133996783363045}
-  m_Clip: {fileID: 8300000, guid: 15675cb7583717b4fbdb63cdc7dfeb05, type: 3}
 --- !u!82 &4332133996783363045
 AudioSource:
   m_ObjectHideFlags: 0
