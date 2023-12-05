@@ -378,6 +378,8 @@ GameObject:
   - component: {fileID: 1590933864799661612}
   - component: {fileID: 8082729343892090696}
   - component: {fileID: 5772749741822550612}
+  - component: {fileID: 942954084237804239}
+  - component: {fileID: 5692225605468419737}
   m_Layer: 0
   m_Name: Under_hasira
   m_TagString: Untagged
@@ -501,6 +503,119 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 13
+  isAnimator: 0
+  animator: {fileID: 0}
+  soundEffect: {fileID: 5692225605468419737}
+  clip: {fileID: 8300000, guid: 4c1b61aacaa3dfe4fafc40dc7d74987f, type: 3}
+--- !u!82 &942954084237804239
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828643078794924853}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5692225605468419737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828643078794924853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d4bb33d04c51646b8c4dc6b8ec8aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioSource: {fileID: 942954084237804239}
 --- !u!1 &1883237234438936310
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +988,7 @@ Transform:
   - {fileID: 8441995476138442765}
   - {fileID: 6843822451083752536}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &3234009529813468218
 MeshFilter:
@@ -938,6 +1053,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 12
+  isAnimator: 0
+  animator: {fileID: 0}
+  soundEffect: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!64 &8796347067203416287
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1893,6 +2012,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 13
+  isAnimator: 0
+  animator: {fileID: 0}
+  soundEffect: {fileID: 5692225605468419737}
+  clip: {fileID: 8300000, guid: 4c1b61aacaa3dfe4fafc40dc7d74987f, type: 3}
 --- !u!1 &7094677703266306294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,6 +2483,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 13
+  isAnimator: 0
+  animator: {fileID: 0}
+  soundEffect: {fileID: 5692225605468419737}
+  clip: {fileID: 8300000, guid: 4c1b61aacaa3dfe4fafc40dc7d74987f, type: 3}
 --- !u!1 &7928921243230765458
 GameObject:
   m_ObjectHideFlags: 0

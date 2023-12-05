@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
+    [SerializeField]
+    private SoundEffect soundEffect;
+    [SerializeField]
+    private AudioClip clip;
+
     private GameManager gameManager;
     private float time;
 
@@ -38,6 +43,7 @@ public class Goal : MonoBehaviour
                         
             if(resultData[playerNum].CheckScoreIsZero())
             {
+                soundEffect.PlaySoundEffectClip(clip);
                 resultData[playerNum].UpdateScore(time);
                 gameManager.SetRankOne(playerNum, rankNow);
                 rankNow++;

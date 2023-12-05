@@ -21,14 +21,15 @@ public class ResultCharacter : MonoBehaviour
     [SerializeField]
     private GameObject[] outfitPrefabs;
 
+    [SerializeField]
+    private SoundEffect soundEffect;
+    [SerializeField]
+    private AudioClip[] knockbackClip;
+
     void Start()
     {
         SetSavePoint(this.transform);
         rb = this.GetComponent<Rigidbody>();  // rigidbody‚ðŽæ“¾
-        //for(int i = 0; i < outfitPrefabs.Length; ++i)
-        //{
-        //    outfitPrefabs[i].SetActive(false);
-        //}
     }
 
 
@@ -56,6 +57,7 @@ public class ResultCharacter : MonoBehaviour
         if(rb != null)
         {
             rb.AddForce(forceVec * force, ForceMode.Impulse);
+            soundEffect.PlaySoundEffectClip(knockbackClip[Random.Range(0, knockbackClip.Length)]);
         }  
     }
     public void ChangeOutfit()
