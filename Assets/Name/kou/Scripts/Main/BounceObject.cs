@@ -13,6 +13,11 @@ public class BounceObject : MonoBehaviour
     [SerializeField]
     Animator animator;
 
+    [SerializeField]
+    SoundEffect soundEffect;
+    [SerializeField]
+    AudioClip clip;
+
     private void Awake()
     {
         if(GetComponent<Collider>().isTrigger)
@@ -28,6 +33,10 @@ public class BounceObject : MonoBehaviour
                 if(isAnimator)
                 {
                     animator.SetTrigger("Bounce");
+                }
+                if(clip != null)
+                {
+                    soundEffect.PlaySoundEffectClip(clip);
                 }
                 Vector3 hitPos = other.contacts[0].point;
                 Vector3 forceDir = other.gameObject.transform.position - hitPos;
@@ -54,6 +63,10 @@ public class BounceObject : MonoBehaviour
         {
             if(other.gameObject.GetComponent<GameMessageReceiver>() != null)
             {
+                if (clip != null)
+                {
+                    soundEffect.PlaySoundEffectClip(clip);
+                }
                 Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
                 Vector3 forceDir = other.gameObject.transform.position - hitPos;
                 forceDir.y += 1.0f;
