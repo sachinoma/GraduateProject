@@ -85,6 +85,8 @@ public class Mover : MonoBehaviour
     private SoundEffect soundEffect;
     [SerializeField]
     private AudioClip jumpClip;
+    [SerializeField]
+    private AudioClip[] slashClip;
 
 
     private void Awake()
@@ -239,6 +241,7 @@ public class Mover : MonoBehaviour
         {
             RecoverBlowing();
             CancelInvoke(nameof(RecoverBlowing));
+            CancelInvoke(nameof(PlayBlowingSound));
         }       
         itemState[3] = true;        
         GameObject effect = (GameObject)Instantiate(ItemEffects[3], this.transform.position + new Vector3(0,1,0), Quaternion.identity);
@@ -247,7 +250,14 @@ public class Mover : MonoBehaviour
         blowingCol.SetActive(true);
         Invoke(nameof(RecoverBlowing), 6.0f);
         Invoke(nameof(SetBlowingColFalse), 6.0f);
+        InvokeRepeating(nameof(PlayBlowingSound), 0.0f, 0.15f);
     }
+
+    private void PlayBlowingSound()
+    {
+        PlaySound(slashClip[Random.Range(0,slashClip.Length)]);
+    }
+
     public void HighJump()
     {
         if (itemState[4] == true)
@@ -296,6 +306,7 @@ public class Mover : MonoBehaviour
     }
     private void RecoverBlowing()
     {
+        CancelInvoke(nameof(PlayBlowingSound));
         playerSpeed -= blowingSpeed;
         itemState[3] = false;
     }
