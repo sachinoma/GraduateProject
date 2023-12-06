@@ -1,45 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class RingManager : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("生成するGameObject")]
-    private GameObject createPrefab;
-    [SerializeField]
-    [Tooltip("生成する範囲A")]
-    private Transform rangeA;
-    [SerializeField]
-    [Tooltip("生成する範囲B")]
-    private Transform rangeB;
-    [SerializeField]
-    float Interval;
-    // 経過時間
-    private float time;
+    [SerializeField] GameObject RingPrefab;
+    [SerializeField] List<GameObject> RingPos;
 
+    GameObject[] tagObjects;
+
+   
     // Update is called once per frame
     void Update()
     {
-        // 前フレームからの時間を加算していく
-        time = time + Time.deltaTime;
-
-        // 約2秒置きにランダムに生成されるようにする。
-        if (time > Interval)
+        //tag取得
+        tagObjects = GameObject.FindGameObjectsWithTag("Ring");
+        //RingPrefabを5個生成
+        if (tagObjects.Length < 5)
         {
-            // rangeAとrangeBのx座標の範囲内でランダムな数値を作成
-            float x = Random.Range(rangeA.position.x, rangeB.position.x);
-            // rangeAとrangeBのy座標の範囲内でランダムな数値を作成
-            float y = Random.Range(rangeA.position.y, rangeB.position.y);
-            // rangeAとrangeBのz座標の範囲内でランダムな数値を作成
-            float z = Random.Range(rangeA.position.z, rangeB.position.z);
-
-            // GameObjectを上記で決まったランダムな場所に生成
-            Instantiate(createPrefab, new Vector3(x, y, z), createPrefab.transform.rotation);
-
-            // 経過時間リセット
-            time = 0f;
+            //Pos座標取得
+            Vector3 createPos = RingPos[Random.Range(0, 4)].transform.position;
+            //生成
+            Instantiate(RingPrefab, createPos, RingPrefab.transform.rotation);
         }
+        
     }
 }
 
