@@ -150,8 +150,8 @@ public class GameManager : MonoBehaviour
             resultData[i].UpdateScore(0);
             resultData[i].ResetFallNum();
         }
-        SceneManager.LoadScene("athletic");
-        //SceneManager.LoadScene("stage2");
+        //SceneManager.LoadScene("athletic");
+        SceneManager.LoadScene("stage2");
     }
 
     public void LoadToSoloMain()
