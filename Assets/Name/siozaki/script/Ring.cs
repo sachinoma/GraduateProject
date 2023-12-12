@@ -9,6 +9,8 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(BoxCollider))]
 public class Ring : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject RingEffect;
     Animator animator;
     
     private void Start()
@@ -18,9 +20,23 @@ public class Ring : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (this.CompareTag("Ring"))
         {
-            animator.SetTrigger("RotatorTrigger");
+            if (other.CompareTag("Player"))
+            {
+                animator.SetTrigger("RotatorTrigger");
+                Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
+                Instantiate(RingEffect, hitPos, Quaternion.identity);
+            }
+        }
+        else if (this.CompareTag("GoldRing"))
+        {
+            if (other.CompareTag("Player"))
+            {
+                animator.SetTrigger("RotatorTrigger");
+                Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
+                Instantiate(RingEffect, hitPos, Quaternion.identity);
+            }
         }
     }
 }

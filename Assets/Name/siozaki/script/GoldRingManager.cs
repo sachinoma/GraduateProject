@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static Unity.Burst.Intrinsics.X86.Avx;
 
-public class RingManager : MonoBehaviour
+public class GoldRingManager : MonoBehaviour
 {
     [SerializeField] GameObject RingPrefab;
     [SerializeField] List<GameObject> RingPos;
@@ -16,7 +16,7 @@ public class RingManager : MonoBehaviour
     void Update()
     {
         //tagæ“¾
-        tagObjects = GameObject.FindGameObjectsWithTag("Ring");
+        tagObjects = GameObject.FindGameObjectsWithTag("GoldRing");
         //RingPrefab‚ğw’è”¶¬
         if (tagObjects.Length < Ring_nop)
         {
