@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -19,8 +20,16 @@ public class GameManager : MonoBehaviour
     private int[] rank;
     private bool[] rankLock;
 
+    private Mode mode { get; set; }
     public static GameManager Instance { get; private set; }
 
+    public enum Mode
+    {
+        None,
+        Main,
+        Ring,
+        Survive
+    }
     private void Awake()
     {
         resultData = new List<ResultData>();
@@ -42,6 +51,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerConfigurationManager = this.GetComponent<PlayerConfigurationManager>();
+        mode = Mode.None;
     }
 
     void Update()
@@ -180,6 +190,17 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
         SceneManager.LoadScene("Title");
     }
+
+    public Mode GetMode()
+    {
+        return mode;
+    }
+
+    public void SetMode(Mode modeTmp)
+    {
+        mode = modeTmp;
+    }
+
 }
 
 public class ResultData
@@ -191,15 +212,17 @@ public class ResultData
         fallNum = 0;
 
         ringNum = 0;
-
+        survivorTime = 0;
     }
+
+
 
     public int playerNum { get; set; }
     public float scoreTime { get; set; }
     public int fallNum { get; set; }
-
     public int ringNum { get; set; }
     public float survivorTime { get; set; }
+
 
     public int GetPlayerNum()
     {
@@ -235,5 +258,35 @@ public class ResultData
     public void ResetFallNum()
     {
         fallNum = 0;
+    }
+
+    public int GetRingNum()
+    {
+        return ringNum;
+    }
+
+    public void AddRingNum(int num)
+    {
+        ringNum += num;
+    }
+
+    public void ResetRingNum()
+    {
+        ringNum = 0;
+    }
+
+    public float GetSurvivorTime()
+    {
+        return survivorTime;
+    }
+
+    public void ResetSurvivorTime()
+    {
+        survivorTime = 0;
+    }
+
+    public void SetSurvivorTime(float num)
+    {
+        survivorTime = num;
     }
 }
