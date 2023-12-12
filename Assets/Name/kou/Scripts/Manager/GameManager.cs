@@ -189,11 +189,17 @@ public class ResultData
         playerNum = num;
         scoreTime = 0;
         fallNum = 0;
+
+        ringNum = 0;
+
     }
 
     public int playerNum { get; set; }
     public float scoreTime { get; set; }
     public int fallNum { get; set; }
+
+    public int ringNum { get; set; }
+    public float survivorTime { get; set; }
 
     public int GetPlayerNum()
     {
