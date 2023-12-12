@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,8 +21,12 @@ public class MultiResultManager : MonoBehaviour
     private int maxMenber = 4;
 
     [SerializeField] Text[] rankPlayerText;
+    [SerializeField] Image[] rankPlayerIcon;
     [SerializeField] Text[] rankTimeText;
     [SerializeField] Text[] rankFallText;
+
+    [SerializeField] Sprite[] playerSprite;
+
     [SerializeField] GameObject UiMain;
 
     [SerializeField] Animator winAnimator;
@@ -73,17 +78,29 @@ public class MultiResultManager : MonoBehaviour
 
         for (int i = 0; i < allMenber; ++i)
         {
-            rankPlayerText[i].text = "Player" + resultData[rank[i]].GetPlayerNum().ToString();
-            rankTimeText[i].text = resultData[rank[i]].GetScoreTime().ToString();
+            //rankPlayerText[i].text = "Player" + resultData[rank[i]].GetPlayerNum().ToString();
+            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            rankTimeText[i].text = timeProcess(i);
             rankFallText[i].text = resultData[rank[i]].GetFallNum().ToString();
         }
 
         for(int i = allMenber; i < maxMenber; ++i)
         {
-            rankPlayerText[i].text = "";
+            //rankPlayerText[i].text = "";
+            rankPlayerIcon[i].gameObject.SetActive(false);
             rankTimeText[i].text = "";
             rankFallText[i].text = "";
         }
+    }
+
+    private String timeProcess(int num)
+    {
+        int timeInt = (int)resultData[rank[num]].GetScoreTime();
+        int minute = timeInt/ 60;
+        int second = timeInt - minute;
+        float decimalPoint = resultData[rank[num]].GetScoreTime() - timeInt;
+
+        return minute + ":" + second + "." + decimalPoint.ToString("f2");
     }
 
     public void IntroFinish()
