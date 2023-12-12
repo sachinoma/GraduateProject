@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 public class MultiResultManager : MonoBehaviour
@@ -19,6 +17,9 @@ public class MultiResultManager : MonoBehaviour
     [SerializeField]
     private float[] time;
 
+    [SerializeField]
+    private int[] ring;
+
     private int allMenber;
     private int maxMenber = 4;
 
@@ -27,7 +28,7 @@ public class MultiResultManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] secText;
     [SerializeField] TextMeshProUGUI[] digText;
     [SerializeField] GameObject[] minsecUI;
-    [SerializeField] TextMeshProUGUI[] fallText;
+    [SerializeField] TextMeshProUGUI[] numText;
 
     [SerializeField] Sprite[] playerSprite;
 
@@ -47,55 +48,27 @@ public class MultiResultManager : MonoBehaviour
         resultData = GameManager.Instance.GetResultData().ToArray();
         pillar.enabled = false;
         UiMain.SetActive(false);
-        RankProcess();
+        switch (gameManager.GetMode())
+        {
+            case GameManager.Mode.Main:
+                RankProcessMain();
+                break;
+            case GameManager.Mode.Ring:
+                RankProcessRing();
+                break;
+            case GameManager.Mode.Survive:
+                break;
+            default:
+                Assert.IsTrue(false, "modeÇÕNoneÇ…Ç»Ç¡ÇƒÇ‹Ç∑ÅI");
+                break;
+        }
+        
         SpawnWinner();
     }
 
     void Update()
     {
         
-    }
-
-    private void RankProcess()
-    {
-        allMenber = gameManager.GetAllMenber();
-        rank = new int[allMenber];
-        time = new float[allMenber];
-
-        for (int i = 0; i < allMenber; ++i) 
-        {
-            time[i] = resultData[i].scoreTime;
-        }
-
-        Array.Sort(time);
-
-        for (int i = 0; i < allMenber; ++i)
-        {
-            for(int j = 0; j < allMenber; ++j)
-            {
-                if (resultData[j].scoreTime == time[i])
-                {
-                    rank[i] = j;
-                }
-            }
-        }
-
-        for (int i = 0; i < allMenber; ++i)
-        {
-            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
-            timeProcess(i);
-            fallProcess(i);           
-        }
-
-        for(int i = allMenber; i < maxMenber; ++i)
-        {
-            rankPlayerIcon[i].gameObject.SetActive(false);
-            minText[i].SetText("");
-            secText[i].SetText("");
-            digText[i].SetText("");
-            fallText[i].SetText("");
-            minsecUI[i].SetActive(false);          
-        }
     }
 
     private void timeProcess(int num)
@@ -110,10 +83,103 @@ public class MultiResultManager : MonoBehaviour
         digText[num].SetText(ConvFoolCoolFont(decimalPoint.ToString().Substring(2, 2)));
     }
 
+    private void RankProcessMain()
+    {
+        allMenber = gameManager.GetAllMenber();
+        rank = new int[allMenber];
+        time = new float[allMenber];
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            time[i] = resultData[i].scoreTime;
+        }
+
+        Array.Sort(time);
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            for (int j = 0; j < allMenber; ++j)
+            {
+                if (resultData[j].scoreTime == time[i])
+                {
+                    rank[i] = j;
+                }
+            }
+        }
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            timeProcess(i);
+            fallProcess(i);
+        }
+
+        for (int i = allMenber; i < maxMenber; ++i)
+        {
+            rankPlayerIcon[i].gameObject.SetActive(false);
+            minText[i].SetText("");
+            secText[i].SetText("");
+            digText[i].SetText("");
+            numText[i].SetText("");
+            minsecUI[i].SetActive(false);
+        }
+    }
+
     private void fallProcess(int num)
     {
-        fallText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetFallNum().ToString()));
+        numText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetFallNum().ToString()));
     }
+
+    private void RankProcessRing()
+    {
+        allMenber = gameManager.GetAllMenber();
+        rank = new int[allMenber];
+        ring = new int[allMenber];
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            ring[i] = resultData[i].GetRingNum();
+        }
+
+        Array.Sort(ring);
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            for (int j = 0; j < allMenber; ++j)
+            {
+                if (resultData[j].GetRingNum() == ring[i])
+                {
+                    rank[i] = j;
+                }
+            }
+        }
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            ringProcess(i);
+            minText[i].SetText("");
+            secText[i].SetText("");
+            digText[i].SetText("");
+            minsecUI[i].SetActive(false);
+        }
+
+        for (int i = allMenber; i < maxMenber; ++i)
+        {
+            rankPlayerIcon[i].gameObject.SetActive(false);
+            minText[i].SetText("");
+            secText[i].SetText("");
+            digText[i].SetText("");
+            numText[i].SetText("");
+            minsecUI[i].SetActive(false);
+        }
+    }
+
+    private void ringProcess(int num)
+    {
+        numText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetRingNum().ToString()));
+    }
+
 
     public static string ConvFoolCoolFont(string str)
     {
