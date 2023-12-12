@@ -8,7 +8,10 @@ public class ItemManager : MonoBehaviour
     public static ItemManager Instance { get { return instance; } }
     [SerializeField] float respawnTime = 5f;
     [SerializeField] List<GameObject> ItemPrefab;
-        
+    [SerializeField] bool isRandomPlace = false;
+    [SerializeField] ItemRespawnRandomPlace respawnPlace;
+    
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -30,17 +33,33 @@ public class ItemManager : MonoBehaviour
         return -1;
     }
 
+    //アイテムの再生成
     public void Respawn(GameObject _target)
     {
+        Vector3 respawnPos;
+
         //場所保管
-        Vector3 respawnPos = _target.transform.position;
+        if (isRandomPlace)
+        {
+            BoxCollider col = respawnPlace.GetRespawnPlace(_target);
+            Vector3 pos = RandomBounds.GetRandomPointInBounds(col);
+            //取得した座標は高さがランダムなので、固定する
+            pos.y = (int)(pos.y / 10f);
+            pos.y = pos.y * 10 + 1f;
+
+            respawnPos = pos;
+        }
+        else
+        {
+            respawnPos = _target.transform.position;
+        }
 
         //モデルを取得
         var model = _target.GetComponent<ItemModel>();
 
         //リスポーンするアイテムの番号取得（存在しなければNull）
         int itemNum = GetListNum(_target, ItemPrefab);
-        if(itemNum < 0) { return; }
+        if (itemNum < 0) { return; }
 
         //アイテムの削除
         Destroy(_target);
@@ -50,6 +69,7 @@ public class ItemManager : MonoBehaviour
 
         //リスポーンコルーチン
         StartCoroutine(RespawnItem(respawnTime, respawnPos, model.IsRandom, itemNum));
+
     }
 
     IEnumerator RespawnItem(float _time, Vector3 _pos, bool _isRandom, int _num)
