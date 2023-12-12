@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,9 +22,15 @@ public class MultiResultManager : MonoBehaviour
     private int allMenber;
     private int maxMenber = 4;
 
-    [SerializeField] Text[] rankPlayerText;
-    [SerializeField] Text[] rankTimeText;
-    [SerializeField] Text[] rankFallText;
+    [SerializeField] Image[] rankPlayerIcon;
+    [SerializeField] TextMeshProUGUI[] minText;
+    [SerializeField] TextMeshProUGUI[] secText;
+    [SerializeField] TextMeshProUGUI[] digText;
+    [SerializeField] GameObject[] minsecUI;
+    [SerializeField] TextMeshProUGUI[] fallText;
+
+    [SerializeField] Sprite[] playerSprite;
+
     [SerializeField] GameObject UiMain;
 
     [SerializeField] Animator winAnimator;
@@ -73,17 +82,74 @@ public class MultiResultManager : MonoBehaviour
 
         for (int i = 0; i < allMenber; ++i)
         {
-            rankPlayerText[i].text = "Player" + resultData[rank[i]].GetPlayerNum().ToString();
-            rankTimeText[i].text = resultData[rank[i]].GetScoreTime().ToString();
-            rankFallText[i].text = resultData[rank[i]].GetFallNum().ToString();
+            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            timeProcess(i);
+            fallProcess(i);           
         }
 
         for(int i = allMenber; i < maxMenber; ++i)
         {
-            rankPlayerText[i].text = "";
-            rankTimeText[i].text = "";
-            rankFallText[i].text = "";
+            rankPlayerIcon[i].gameObject.SetActive(false);
+            minText[i].SetText("");
+            secText[i].SetText("");
+            digText[i].SetText("");
+            fallText[i].SetText("");
+            minsecUI[i].SetActive(false);          
         }
+    }
+
+    private void timeProcess(int num)
+    {
+        int timeInt = (int)resultData[rank[num]].GetScoreTime();
+        int minute = timeInt/ 60;
+        int second = timeInt - minute;
+        float decimalPoint = resultData[rank[num]].GetScoreTime() - timeInt;
+
+        minText[num].SetText(ConvFoolCoolFont(minute.ToString().PadLeft(2, '0')));
+        secText[num].SetText(ConvFoolCoolFont(second.ToString().PadLeft(2, '0')));
+        digText[num].SetText(ConvFoolCoolFont(decimalPoint.ToString().Substring(2, 2)));
+    }
+
+    private void fallProcess(int num)
+    {
+        fallText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetFallNum().ToString()));
+    }
+
+    public static string ConvFoolCoolFont(string str)
+    {
+        string rtnStr = "";
+        if (str == null)
+            return rtnStr;
+        for (int i = 0; i < str.Length; i++)
+        {
+            string convStr;
+            switch (str[i])
+            {
+                case 's':
+                    convStr = "10";
+                    break;
+                case 'e':
+                    convStr = "11";
+                    break;
+                case 'c':
+                    convStr = "12";
+                    break;
+                case 'm':
+                    convStr = "13";
+                    break;
+                case 'i':
+                    convStr = "14";
+                    break;
+                case 'n':
+                    convStr = "15";
+                    break;
+                default:
+                    convStr = str[i].ToString();
+                    break;
+            }
+            rtnStr += "<sprite=" + convStr + ">";
+        }
+        return rtnStr;
     }
 
     public void IntroFinish()

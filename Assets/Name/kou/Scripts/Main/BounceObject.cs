@@ -18,10 +18,25 @@ public class BounceObject : MonoBehaviour
     [SerializeField]
     AudioClip clip;
 
+    [SerializeField]
+    private float timer = 0.0f;
+    [SerializeField]
+    private float timerLimit = 0.3f;
+
     private void Awake()
     {
         if(GetComponent<Collider>().isTrigger)
             MyPlayer = transform.parent.gameObject;
+
+        timer = timerLimit;
+    }
+
+    private void Update()
+    {
+        if(timer < timerLimit)
+        {
+            timer += Time.deltaTime;
+        }
     }
 
     void OnCollisionEnter(Collision other)
@@ -52,7 +67,7 @@ public class BounceObject : MonoBehaviour
                 forceDir.y += 1.0f;
                 forceDir = forceDir.normalized;
 
-                other.gameObject.GetComponent<ResultCharacter>().BounceAction(forceDir, power);
+                other.gameObject.GetComponent<ResultCharacter>().BounceAction(forceDir, power , hitPos);
             }
         }
     }
@@ -65,7 +80,11 @@ public class BounceObject : MonoBehaviour
             {
                 if (clip != null)
                 {
-                    soundEffect.PlaySoundEffectClip(clip);
+                    if (timer >= timerLimit)
+                    {
+                        timer = 0.0f;
+                        soundEffect.PlaySoundEffectClip(clip);
+                    }
                 }
                 Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
                 Vector3 forceDir = other.gameObject.transform.position - hitPos;
