@@ -26,6 +26,9 @@ public class ResultCharacter : MonoBehaviour
     [SerializeField]
     private AudioClip[] knockbackClip;
 
+    [SerializeField]
+    private GameObject[] knockbackParticle;
+
     void Start()
     {
         SetSavePoint(this.transform);
@@ -52,12 +55,13 @@ public class ResultCharacter : MonoBehaviour
         savePoint = gameObject.position;
     }
 
-    public void BounceAction(Vector3 forceVec, float force)
+    public void BounceAction(Vector3 forceVec, float force , Vector3 hitpos)
     {
         if(rb != null)
         {
             rb.AddForce(forceVec * force, ForceMode.Impulse);
             soundEffect.PlaySoundEffectClip(knockbackClip[Random.Range(0, knockbackClip.Length)]);
+            Instantiate(knockbackParticle[Random.Range(0,knockbackParticle.Length)], hitpos, Quaternion.identity);
         }  
     }
     public void ChangeOutfit()
