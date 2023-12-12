@@ -9,6 +9,15 @@ public class FallPlatfrom : MonoBehaviour
     [SerializeField] Animator animator;
     const string PlayerTag = "Player";
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag(PlayerTag))
+        {
+            animator.SetTrigger("isReady");
+            StartCoroutine(CallDestroy(destroyTime));
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == PlayerTag)
