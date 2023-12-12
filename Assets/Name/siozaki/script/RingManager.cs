@@ -6,11 +6,12 @@ using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class RingManager : MonoBehaviour
 {
-    [SerializeField] GameObject RingPrefab;
+    [SerializeField] List<GameObject> RingPrefab;
     [SerializeField] List<GameObject> RingPos;
     [SerializeField] int Ring_nop;//Number of piece:個数
     GameObject[] tagObjects;
-
+    //ランダム
+    List<int> random_num = new List<int>() { 1, 0, 0, 0, 0, 0};
 
     // Update is called once per frame
     void Update()
@@ -28,14 +29,17 @@ public class RingManager : MonoBehaviour
     {
         //リストをコピー
         List<GameObject> ringPos = new List<GameObject>(_rings);
-
+        int random_ring = random_num[Random.Range(0, random_num.Count)];
         while (true)
         {
             //Pos座標取得
             GameObject ringParent = ringPos[Random.Range(0, ringPos.Count)];
             Vector3 createPos = ringParent.transform.position;
+            Quaternion createRot = ringParent.transform.rotation;
+
+            
             //生成
-            var ring = Instantiate(RingPrefab, createPos, Quaternion.identity, ringParent.transform);
+            var ring = Instantiate(RingPrefab[random_ring], createPos, createRot, ringParent.transform);
 
             //子の数が多い場合、リングが複数存在することになるため、消す
             if (ringParent.transform.childCount > 2)
@@ -45,6 +49,7 @@ public class RingManager : MonoBehaviour
             }
             else
             {
+                Debug.Log(random_ring);
                 break;
             }
         }
