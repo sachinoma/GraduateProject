@@ -67,7 +67,7 @@ public class BounceObject : MonoBehaviour
                 forceDir.y += 1.0f;
                 forceDir = forceDir.normalized;
 
-                other.gameObject.GetComponent<ResultCharacter>().BounceAction(forceDir, power);
+                other.gameObject.GetComponent<ResultCharacter>().BounceAction(forceDir, power , hitPos);
             }
         }
     }
