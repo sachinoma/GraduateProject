@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rank: 
   time: []
+  ring: 
   rankPlayerIcon:
   - {fileID: 832207661765251057}
   - {fileID: 1559626430}
@@ -197,7 +198,7 @@ MonoBehaviour:
   - {fileID: 1828008288}
   - {fileID: 521909480}
   - {fileID: 1997626732}
-  fallText:
+  numText:
   - {fileID: 1368430384}
   - {fileID: 899848081}
   - {fileID: 1306420762}
