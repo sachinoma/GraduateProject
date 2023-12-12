@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Name/siozaki/scene/stage2.unity
     guid: 829c3500bd7adac439a753ec4d8b0a26
+  - enabled: 1
+    path: Assets/Name/simono/Scene/FallGame.unity
+    guid: 2e6ba97ba89e90f42a2bf6dbe1dbe48e
   m_configObjects: {}
