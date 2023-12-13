@@ -35,9 +35,6 @@ public class Ring : MonoBehaviour
                 int playerNum = playerStatus.GetPlayerNum();
                 resultData[playerNum].AddRingNum(1);
 
-                //TMP ƒV[ƒ“‘JˆÚ‚Ì‘O‚Éˆê‰ñ‚¾‚¯‚Å‚¢‚¢
-                gameManager.SetMode(GameManager.Mode.Ring);
-
                 animator.SetTrigger("RotatorTrigger");
                 Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
                 Instantiate(RingEffect, hitPos, Quaternion.identity);
