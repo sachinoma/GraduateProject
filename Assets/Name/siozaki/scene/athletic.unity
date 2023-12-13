@@ -3568,6 +3568,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   soundEffect: {fileID: 0}
   clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!1 &245616676
 GameObject:
   m_ObjectHideFlags: 0
@@ -7127,6 +7129,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   soundEffect: {fileID: 0}
   clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!23 &744701060
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10143,6 +10147,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   soundEffect: {fileID: 0}
   clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!23 &1044881147
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11797,6 +11803,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   soundEffect: {fileID: 0}
   clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!23 &1198965547
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11876,6 +11884,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   soundEffect: {fileID: 0}
   clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!1 &1224915114
 GameObject:
   m_ObjectHideFlags: 0
@@ -14614,6 +14624,11 @@ PrefabInstance:
       propertyPath: savePos
       value: 
       objectReference: {fileID: 1986314859}
+    - target: {fileID: 2988795074687302362, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
+        type: 3}
+      propertyPath: mainPlayerManager
+      value: 
+      objectReference: {fileID: 1038160167}
     - target: {fileID: 3418483939406890711, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
         type: 3}
       propertyPath: m_Name
@@ -15014,6 +15029,11 @@ PrefabInstance:
       propertyPath: savePos
       value: 
       objectReference: {fileID: 744811272}
+    - target: {fileID: 2988795074687302362, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
+        type: 3}
+      propertyPath: mainPlayerManager
+      value: 
+      objectReference: {fileID: 1038160167}
     - target: {fileID: 3418483939406890711, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
         type: 3}
       propertyPath: m_Name
@@ -17049,6 +17069,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   soundEffect: {fileID: 0}
   clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!23 &1692425774
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17713,6 +17735,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   soundEffect: {fileID: 0}
   clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!23 &1758388815
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18977,6 +19001,11 @@ PrefabInstance:
       propertyPath: savePos
       value: 
       objectReference: {fileID: 744811271}
+    - target: {fileID: 2988795074687302362, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
+        type: 3}
+      propertyPath: mainPlayerManager
+      value: 
+      objectReference: {fileID: 1038160167}
     - target: {fileID: 3418483939406890711, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
         type: 3}
       propertyPath: m_Name
@@ -21121,6 +21150,8 @@ MonoBehaviour:
   - {fileID: 8410284339722781, guid: 85ef5c98b8678f74cb46ccf465df2557, type: 3}
   - {fileID: 3477359199556002941, guid: 6a603a5aaee93ca419d0761fe0e3595f, type: 3}
   - {fileID: 8410284339722781, guid: 287cd0adf75d1b74b94e7035a51f0556, type: 3}
+  isRandomPlace: 0
+  respawnPlace: {fileID: 0}
 --- !u!4 &2121593994
 Transform:
   m_ObjectHideFlags: 0
@@ -22394,6 +22425,11 @@ PrefabInstance:
       propertyPath: savePos
       value: 
       objectReference: {fileID: 984009834}
+    - target: {fileID: 2988795074687302362, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
+        type: 3}
+      propertyPath: mainPlayerManager
+      value: 
+      objectReference: {fileID: 1038160167}
     - target: {fileID: 3418483939406890711, guid: 2da8a2b7a1d956a48a57bc6a451e90b1,
         type: 3}
       propertyPath: m_Name
