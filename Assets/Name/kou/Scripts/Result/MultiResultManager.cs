@@ -209,6 +209,12 @@ public class MultiResultManager : MonoBehaviour
                 case 'n':
                     convStr = "15";
                     break;
+                case '.':
+                    convStr = "16";
+                    break;
+                case ' ':
+                    rtnStr += "<space=0.4em>";
+                    continue;
                 default:
                     convStr = str[i].ToString();
                     break;
