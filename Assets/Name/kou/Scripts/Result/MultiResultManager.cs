@@ -11,6 +11,12 @@ public class MultiResultManager : MonoBehaviour
     
     [SerializeField]
     private ResultData[] resultData;
+    [SerializeField]
+    private GameObject nameObj;
+    [SerializeField]
+    private GameObject timeObj;
+    [SerializeField]
+    private GameObject numObj;
 
     [SerializeField]
     private int[] rank;
@@ -57,6 +63,7 @@ public class MultiResultManager : MonoBehaviour
                 RankProcessRing();
                 break;
             case GameManager.Mode.Survive:
+                RankProcessFallGame();
                 break;
             default:
                 Assert.IsTrue(false, "modeÇÕNoneÇ…Ç»Ç¡ÇƒÇ‹Ç∑ÅI");
@@ -111,7 +118,7 @@ public class MultiResultManager : MonoBehaviour
         {
             rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
             timeProcess(i);
-            fallProcess(i);
+            fallNumProcess(i);
         }
 
         for (int i = allMenber; i < maxMenber; ++i)
@@ -125,9 +132,66 @@ public class MultiResultManager : MonoBehaviour
         }
     }
 
-    private void fallProcess(int num)
+    private void fallNumProcess(int num)
     {
         numText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetFallNum().ToString()));
+    }
+
+    private void RankProcessFallGame()
+    {
+        allMenber = gameManager.GetAllMenber();
+        rank = new int[allMenber];
+        time = new float[allMenber];
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            time[i] = resultData[i].GetSurvivorTime();
+        }
+
+        Array.Sort(time);
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            for (int j = 0; j < allMenber; ++j)
+            {
+                if (resultData[j].GetSurvivorTime() == time[i])
+                {
+                    rank[allMenber - 1 - i] = j;
+                }
+            }
+        }
+
+        for (int i = 0; i < allMenber; ++i)
+        {
+            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            surviveTimeProcess(i);
+        }
+
+        for (int i = allMenber; i < maxMenber; ++i)
+        {
+            rankPlayerIcon[i].gameObject.SetActive(false);
+            minText[i].SetText("");
+            secText[i].SetText("");
+            digText[i].SetText("");
+            minsecUI[i].SetActive(false);
+        }
+        //íËêîÇï\é¶Ç∑ÇÈUIÇÕÇ»Ç¢
+        numObj.SetActive(false);
+        //UIÇÃà íuí≤êÆ
+        nameObj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-190,380, 0);
+        timeObj.GetComponent<RectTransform>().anchoredPosition = new Vector3(140, 380, 0);
+    }
+
+    private void surviveTimeProcess(int num)
+    {
+        int timeInt = (int)resultData[rank[num]].GetSurvivorTime();
+        int minute = timeInt / 60;
+        int second = timeInt - minute;
+        float decimalPoint = resultData[rank[num]].GetSurvivorTime() - timeInt;
+
+        minText[num].SetText(ConvFoolCoolFont(minute.ToString().PadLeft(2, '0')));
+        secText[num].SetText(ConvFoolCoolFont(second.ToString().PadLeft(2, '0')));
+        digText[num].SetText(ConvFoolCoolFont(decimalPoint.ToString().Substring(2, 2)));
     }
 
     private void RankProcessRing()
