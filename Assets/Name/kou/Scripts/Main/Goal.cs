@@ -50,6 +50,7 @@ public class Goal : MonoBehaviour
 
                 if (CheckCanLoad(allNum))
                 {
+                    gameManager.SetMode(GameManager.Mode.Main);
                     LoadToResult();
                 }
             }

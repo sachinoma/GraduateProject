@@ -182,6 +182,11 @@ public class MainPlayerManager : MonoBehaviour
         return receiver;
     }
 
+    public GameMessageReceiver[] GetAllReceiver()
+    {
+        return playerReceiver;
+    }
+
 
     //public void SpawnPlayer(int playerNum)
     //{
