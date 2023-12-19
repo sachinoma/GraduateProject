@@ -351,6 +351,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5592944405397700631, guid: 15913e29c71e05d48a402a0a1e1380e0,
         type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 56bb2fc16eab5d04b8ce2e53eab11320, type: 3}
+    - target: {fileID: 5592944405397700631, guid: 15913e29c71e05d48a402a0a1e1380e0,
+        type: 3}
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}
