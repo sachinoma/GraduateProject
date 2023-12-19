@@ -105,6 +105,10 @@ MonoBehaviour:
   power: 12
   isAnimator: 1
   animator: {fileID: 5199468386015920299}
+  soundEffect: {fileID: 232145679096757452}
+  clip: {fileID: 0}
+  timer: 0
+  timerLimit: 0.3
 --- !u!64 &5865823788554019087
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -161,7 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 2784872957599108525}
-  m_Clip: {fileID: 8300000, guid: 4c1b61aacaa3dfe4fafc40dc7d74987f, type: 3}
 --- !u!82 &2784872957599108525
 AudioSource:
   m_ObjectHideFlags: 0
