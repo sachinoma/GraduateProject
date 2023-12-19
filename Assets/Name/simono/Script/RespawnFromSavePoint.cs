@@ -14,6 +14,7 @@ public class RespawnFromSavePoint : MonoBehaviour
             PlayerStatus status;
             if (status = other.GetComponent<PlayerStatus>())
             {
+                status.PlusFallNum();
                 status.ReSpawn();
             }
         }

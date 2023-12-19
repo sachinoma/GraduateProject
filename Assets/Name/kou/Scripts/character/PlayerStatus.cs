@@ -79,9 +79,14 @@ public class PlayerStatus : MonoBehaviour
     {
         if (transform.position.y < -10.0f)
         {
-            resultData[playerNum].PlusFallNum();
+            PlusFallNum();
             ReSpawn();
         }
+    }
+
+    public void PlusFallNum()
+    {
+        resultData[playerNum].PlusFallNum();
     }
 
     public int GetPlayerNum()

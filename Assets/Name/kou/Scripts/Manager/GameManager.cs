@@ -181,8 +181,6 @@ public class GameManager : MonoBehaviour
         }
 
         gameSceneCollect[currentStage]();
-        //SceneManager.LoadScene("athletic");
-        //SceneManager.LoadScene("stage2");
     }
 
     public void LoadToSoloMain()

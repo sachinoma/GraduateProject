@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 4799427957903364301}
   - component: {fileID: 7029703637339608143}
   m_Layer: 5
-  m_Name: Num_fall
+  m_Name: Num_FreeToUse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
