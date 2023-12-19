@@ -28,7 +28,6 @@ public class Ready : MonoBehaviour
     [SerializeField]
     private float readyTime = 0;
 
-
     private void Start()
     {
         playerConfigurationManager = GameObject.Find("PlayerInputManager").GetComponent<PlayerConfigurationManager>();
@@ -106,6 +105,7 @@ public class Ready : MonoBehaviour
 
     private void StartGame()
     {
+        
         gameManager.LoadToMain();
     }
 

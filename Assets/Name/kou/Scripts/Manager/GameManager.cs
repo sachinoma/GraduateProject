@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     private int[] rank;
     private bool[] rankLock;
 
+    private System.Action[] gameSceneCollect = new System.Action[3];
+
+    int currentStage;
+
     private Mode mode { get; set; }
     public static GameManager Instance { get; private set; }
 
@@ -41,6 +45,11 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        //ƒƒCƒ“ƒQ[ƒ€‚Ì—pˆÓ
+        gameSceneCollect[0] = () => SceneManager.LoadScene("athletic");
+        gameSceneCollect[1] = () => SceneManager.LoadScene("FallGame");
+        gameSceneCollect[2] = () => SceneManager.LoadScene("stage2");
     }
     public List<ResultData> GetResultData()
     {
@@ -151,6 +160,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Test_Lobby");
     }
 
+
     public void LoadToMain()
     {
         playerConfigurationManager.SetPlayerInputManager(false);
@@ -159,9 +169,20 @@ public class GameManager : MonoBehaviour
         {
             resultData[i].UpdateScore(0);
             resultData[i].ResetFallNum();
+            resultData[i].ResetSurvivorTime();
+            resultData[i].ResetRingNum();
         }
+
+        GameObject obj = GameObject.Find("StageSelectButton");
+        if (obj)
+        {
+            StageSelectButton button = obj.GetComponent<StageSelectButton>();
+            currentStage = button.StageCount;
+        }
+
+        gameSceneCollect[currentStage]();
         //SceneManager.LoadScene("athletic");
-        SceneManager.LoadScene("stage2");
+        //SceneManager.LoadScene("stage2");
     }
 
     public void LoadToSoloMain()
