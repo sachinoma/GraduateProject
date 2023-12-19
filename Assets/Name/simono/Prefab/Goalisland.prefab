@@ -2569,7 +2569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7318334081500979178}
   m_Layer: 0
-  m_Name: Goal
+  m_Name: Goalisland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
