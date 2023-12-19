@@ -83,7 +83,7 @@ public class MultiResultManager : MonoBehaviour
     {
         int timeInt = (int)resultData[rank[num]].GetScoreTime();
         int minute = timeInt/ 60;
-        int second = timeInt - minute;
+        int second = timeInt% 60;
         float decimalPoint = resultData[rank[num]].GetScoreTime() - timeInt;
 
         minText[num].SetText(ConvFoolCoolFont(minute.ToString().PadLeft(2, '0')));
@@ -135,6 +135,7 @@ public class MultiResultManager : MonoBehaviour
 
     private void fallNumProcess(int num)
     {
+        Debug.Log("óéÇøÇΩâÒêîÅF" + resultData[rank[num]].GetFallNum());
         numText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetFallNum().ToString()));
     }
 
@@ -187,7 +188,7 @@ public class MultiResultManager : MonoBehaviour
     {
         int timeInt = (int)resultData[rank[num]].GetSurvivorTime();
         int minute = timeInt / 60;
-        int second = timeInt - minute;
+        int second = timeInt % 60;
         float decimalPoint = resultData[rank[num]].GetSurvivorTime() - timeInt;
 
         minText[num].SetText(ConvFoolCoolFont(minute.ToString().PadLeft(2, '0')));
