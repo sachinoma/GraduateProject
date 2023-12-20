@@ -12,16 +12,16 @@ public class Ring : MonoBehaviour
     [SerializeField]
     private GameObject RingEffect;
     Animator animator;
-
-    private GameManager gameManager;
+    [SerializeField]
+    private AudioClip clip;
+    [SerializeField]
+    private SoundEffect soundEffect;
     [SerializeField]
     private ResultData[] resultData;
-
+   
     private void Start()
     {
         animator = GetComponent<Animator>();
-        GameObject playerInputManager = GameObject.Find("PlayerInputManager");
-        gameManager = playerInputManager.GetComponent<GameManager>();
         resultData = GameManager.Instance.GetResultData().ToArray();
     }
    
@@ -34,7 +34,7 @@ public class Ring : MonoBehaviour
                 PlayerStatus playerStatus = other.gameObject.GetComponent<PlayerStatus>();
                 int playerNum = playerStatus.GetPlayerNum();
                 resultData[playerNum].AddRingNum(1);
-
+                soundEffect.PlaySoundEffectClip(clip);
                 animator.SetTrigger("RotatorTrigger");
                 Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
                 Instantiate(RingEffect, hitPos, Quaternion.identity);
@@ -47,7 +47,7 @@ public class Ring : MonoBehaviour
                 PlayerStatus playerStatus = other.gameObject.GetComponent<PlayerStatus>();
                 int playerNum = playerStatus.GetPlayerNum();
                 resultData[playerNum].AddRingNum(3);
-
+                soundEffect.PlaySoundEffectClip(clip);
                 animator.SetTrigger("RotatorTrigger");
                 Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
                 Instantiate(RingEffect, hitPos, Quaternion.identity);

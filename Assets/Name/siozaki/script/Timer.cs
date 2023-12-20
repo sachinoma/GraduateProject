@@ -15,8 +15,8 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private ResultData[] resultData;
     private void Start()
-    { 
-        
+    {
+        gameManager = GameManager.Instance;
     }
     void Update()
     {
@@ -32,6 +32,7 @@ public class Timer : MonoBehaviour
     }
     private void LoadToResult()
     {
+        Debug.Log("èIóπ");
         gameManager.LoadToResult();
     }
 
