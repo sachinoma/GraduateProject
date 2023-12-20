@@ -215,7 +215,7 @@ public class MultiResultManager : MonoBehaviour
             {
                 if (resultData[j].GetRingNum() == ring[i])
                 {
-                    rank[i] = j;
+                    rank[allMenber - 1 - i] = j;
                 }
             }
         }
