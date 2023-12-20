@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -92,8 +93,10 @@ public class MultiResultManager : MonoBehaviour
     private void RankProcessMain()
     {
         allMenber = gameManager.GetAllMenber();
-        rank = new int[allMenber];
+        rank = Enumerable.Repeat<int>(-1, allMenber).ToArray();
+
         time = new float[allMenber];
+
 
         for (int i = 0; i < allMenber; ++i)
         {
@@ -108,7 +111,10 @@ public class MultiResultManager : MonoBehaviour
             {
                 if (resultData[j].scoreTime == time[i])
                 {
-                    rank[i] = j;
+                    if(rank[i] == -1)
+                    {
+                        rank[i] = j;
+                    }                  
                 }
             }
         }
