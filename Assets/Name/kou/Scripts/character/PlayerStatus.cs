@@ -28,6 +28,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]    private int nowRank;
     [SerializeField]    private bool isGoal = false;
     [SerializeField]    private bool isSolo = false;
+    [SerializeField]    private GameObject uiGameObject;
     [SerializeField]    private Animator uiAnimator;
 
     [SerializeField]    private Sprite[] rankSprite;
