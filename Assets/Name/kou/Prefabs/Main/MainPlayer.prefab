@@ -1638,6 +1638,7 @@ MonoBehaviour:
   nowRank: 0
   isGoal: 0
   isSolo: 0
+  uiGameObject: {fileID: 1946548114524260695}
   uiAnimator: {fileID: 2851939689867499680}
   rankSprite:
   - {fileID: -1419128338, guid: 4e7cbba0551c3884492f126c1a96c9cf, type: 3}
