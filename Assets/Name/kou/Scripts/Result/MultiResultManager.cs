@@ -30,6 +30,9 @@ public class MultiResultManager : MonoBehaviour
     private int allMenber;
     private int maxMenber = 4;
 
+
+    [SerializeField] Image numTitle;
+    [SerializeField] Sprite ringSprite;
     [SerializeField] Image[] rankPlayerIcon;
     [SerializeField] TextMeshProUGUI[] minText;
     [SerializeField] TextMeshProUGUI[] secText;
@@ -72,11 +75,6 @@ public class MultiResultManager : MonoBehaviour
         }
         
         SpawnWinner();
-    }
-
-    void Update()
-    {
-        
     }
 
     private void timeProcess(int num)
@@ -177,7 +175,7 @@ public class MultiResultManager : MonoBehaviour
             digText[i].SetText("");
             minsecUI[i].SetActive(false);
         }
-        //定数を表示するUIはない
+        //定数を表示するUIは必要ない
         numObj.SetActive(false);
         //UIの位置調整
         nameObj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-190,380, 0);
@@ -239,6 +237,13 @@ public class MultiResultManager : MonoBehaviour
             numText[i].SetText("");
             minsecUI[i].SetActive(false);
         }
+        //時間を表示するUIは必要ない
+        timeObj.SetActive(false);
+        //項目名をRingに
+        numTitle.sprite = ringSprite;
+        //UIの位置調整
+        nameObj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-190, 380, 0);
+        numObj.GetComponent<RectTransform>().anchoredPosition = new Vector3(140, 380, 0);
     }
 
     private void ringProcess(int num)
