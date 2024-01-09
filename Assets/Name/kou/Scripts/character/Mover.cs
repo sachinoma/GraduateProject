@@ -5,6 +5,107 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.Windows;
 using Unity.VisualScripting;
+using UnityEngine.SocialPlatforms;
+
+public interface IState
+{
+    public void OnMove(InputAction.CallbackContext context);
+    public void OnJump(InputAction.CallbackContext context, Rigidbody rb);
+    public void SetAnimator();
+    public Rigidbody Rb { get; set; }
+}
+
+public class Idle : IState
+{
+    public void OnMove(InputAction.CallbackContext context)
+    {
+
+    }
+    public void OnJump(InputAction.CallbackContext context , Rigidbody rb)
+    {
+        if (context.action == null)
+            return;
+
+        if (!context.action.triggered)
+            return;
+
+        PlaySound(jumpClip);
+        Vector3 force = new Vector3(0.0f, jumpScale, 0.0f);  // 力を設定
+        rb.AddForce(force, ForceMode.Impulse);
+    }
+    public void SetAnimator()
+    {
+
+    }
+
+    Idle()
+    {
+         
+    }
+
+    private Vector2 inputVector = Vector2.zero; //入力方向
+}
+public class Run : IState
+{
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        inputVector = context.ReadValue<Vector2>();
+        //もし移動ベクトルが0の場合戻す（入力していない）
+        if (inputVector == Vector2.zero)
+        {
+
+            return;
+        }
+    }
+    public void OnJump(InputAction.CallbackContext context, Rigidbody rb)
+    {
+        if (context.action == null)
+            return;
+
+        if (!context.action.triggered)
+            return;
+
+        PlaySound(jumpClip);
+        Vector3 force = new Vector3(0.0f, jumpScale, 0.0f);  // 力を設定
+        rb.AddForce(force, ForceMode.Impulse);
+    }
+    public void SetAnimator()
+    {
+
+    }
+
+    private Vector2 inputVector = Vector2.zero; //入力方向
+}
+public class Drop : IState
+{
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        inputVector = context.ReadValue<Vector2>();
+        //もし移動ベクトルが0の場合戻す（入力していない）
+        if (inputVector == Vector2.zero)
+        {
+
+            return;
+        }
+    }
+    public void OnJump(InputAction.CallbackContext context, Rigidbody rb)
+    {
+
+    }
+    public void SetAnimator()
+    {
+
+    }
+
+    Drop()
+    {
+        PlaySound(jumpClip);
+        Vector3 force = new Vector3(0.0f, jumpScale, 0.0f);  // 力を設定
+        rb.AddForce(force, ForceMode.Impulse);
+    }
+
+    private Vector2 inputVector = Vector2.zero; //入力方向
+}
 
 public class Mover : MonoBehaviour
 {
@@ -112,11 +213,6 @@ public class Mover : MonoBehaviour
     public void SetIsLobby(bool flag)
     {
         isLobby = flag;
-    }
-
-    public void SetInputVector(Vector2 direction)
-    {
-        inputVector = direction;
     }
 
     //入力を感知してからの移動処理
