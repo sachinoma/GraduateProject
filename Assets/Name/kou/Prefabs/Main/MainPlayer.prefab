@@ -1698,8 +1698,8 @@ MonoBehaviour:
   - {fileID: 7155335147208632822, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
   blowingCol: {fileID: 5676719381728443681}
   upSpeed: 13
-  slowSpeed: 6
-  stunSpeed: 15
+  slowSpeed: 5
+  stunSpeed: 12
   blowingSpeed: 4
   highJumpScale: 30
   itemState: 0000000000
