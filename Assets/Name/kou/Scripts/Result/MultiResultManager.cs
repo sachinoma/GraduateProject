@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,10 +24,10 @@ public class MultiResultManager : MonoBehaviour
     [SerializeField]
     private int[] rank;
     [SerializeField]
-    private float[] time;
+    private List<float> time;
 
     [SerializeField]
-    private int[] ring;
+    private List<int> ring;
 
     private int allMenber;
     private int maxMenber = 4;
@@ -92,23 +94,27 @@ public class MultiResultManager : MonoBehaviour
     private void RankProcessMain()
     {
         allMenber = gameManager.GetAllMenber();
-        rank = new int[allMenber];
-        time = new float[allMenber];
+        rank = Enumerable.Repeat<int>(-1, allMenber).ToArray();
+        time = new List<float>();
+
 
         for (int i = 0; i < allMenber; ++i)
         {
-            time[i] = resultData[i].scoreTime;
+            time.Add(resultData[i].scoreTime);
         }
+        time.Sort();
 
-        Array.Sort(time);
-
-        for (int i = 0; i < allMenber; ++i)
+        for (int i = 0; i < time.Count; ++i)
         {
             for (int j = 0; j < allMenber; ++j)
             {
                 if (resultData[j].scoreTime == time[i])
                 {
-                    rank[i] = j;
+                    if (rank[j] == -1)
+                    {
+                        rank[j] = i;
+                        break;
+                    }
                 }
             }
         }
@@ -140,23 +146,28 @@ public class MultiResultManager : MonoBehaviour
     private void RankProcessFallGame()
     {
         allMenber = gameManager.GetAllMenber();
-        rank = new int[allMenber];
-        time = new float[allMenber];
+        rank = Enumerable.Repeat<int>(-1, allMenber).ToArray();
+        time = new List<float>();
 
         for (int i = 0; i < allMenber; ++i)
         {
-            time[i] = resultData[i].GetSurvivorTime();
+            time.Add(resultData[i].GetSurvivorTime());
         }
 
-        Array.Sort(time);
+        time.Sort();
+        time.Reverse();
 
-        for (int i = 0; i < allMenber; ++i)
+        for (int i = 0; i < time.Count; ++i)
         {
             for (int j = 0; j < allMenber; ++j)
             {
                 if (resultData[j].GetSurvivorTime() == time[i])
                 {
-                    rank[allMenber - 1 - i] = j;
+                    if (rank[j] == -1)
+                    {
+                        rank[j] = i;
+                        break;
+                    }
                 }
             }
         }
@@ -197,23 +208,28 @@ public class MultiResultManager : MonoBehaviour
     private void RankProcessRing()
     {
         allMenber = gameManager.GetAllMenber();
-        rank = new int[allMenber];
-        ring = new int[allMenber];
+        rank = Enumerable.Repeat<int>(-1, allMenber).ToArray();
+        ring = new List<int>();
 
         for (int i = 0; i < allMenber; ++i)
         {
-            ring[i] = resultData[i].GetRingNum();
+            ring.Add(resultData[i].GetRingNum());
         }
 
-        Array.Sort(ring);
+        ring.Sort();
+        ring.Reverse();
 
-        for (int i = 0; i < allMenber; ++i)
+        for (int i = 0; i < ring.Count; ++i)
         {
             for (int j = 0; j < allMenber; ++j)
             {
                 if (resultData[j].GetRingNum() == ring[i])
                 {
-                    rank[allMenber - 1 - i] = j;
+                    if (rank[j] == -1)
+                    {
+                        rank[j] = i;
+                        break;
+                    }
                 }
             }
         }
