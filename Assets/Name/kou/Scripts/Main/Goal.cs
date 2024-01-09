@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,8 @@ public class Goal : MonoBehaviour
     [SerializeField]
     private ResultData[] resultData;
 
+    private bool isGoalProcessCalled = false;
+
     private bool[] clearFlag = {false, false, false, false};
 
     private void Start()
@@ -44,7 +47,7 @@ public class Goal : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //�ڐG�����I�u�W�F�N�g�̃^�O��"Player"�̂Ƃ�
+        
         if (other.CompareTag("Player"))
         {
             PlayerStatus playerStatus = other.gameObject.GetComponent<PlayerStatus>();
@@ -57,13 +60,22 @@ public class Goal : MonoBehaviour
                 {
                     soundEffect.PlaySoundEffectClip(clip);
                     resultData[playerNum].UpdateScore(time);
-                    gameManager.SetRankOne(playerNum, rankNow);  //���ʕ\���̂��߂̃����N
+                    gameManager.SetRankOne(playerNum, rankNow);  
                     rankNow++;
 
                     if (CheckCanLoad(allNum))
                     {
-                        gameManager.SetMode(GameManager.Mode.Main);
-                        LoadToResult();
+                        if(!isGoalProcessCalled)
+                        {
+                            isGoalProcessCalled = true;
+                            // コルーチンの起動
+                            StartCoroutine(DelayCoroutine(1, () =>
+                            {
+                                // 1秒後にここの処理が実行される
+                                gameManager.SetMode(GameManager.Mode.Main);
+                                LoadToResult();
+                            }));
+                        }
                     }
                 }
                 else if(type == GoalType.FallGame)
@@ -75,8 +87,17 @@ public class Goal : MonoBehaviour
 
                     if (CheckCanLoad(allNum))
                     {
-                        gameManager.SetMode(GameManager.Mode.Survive);
-                        LoadToResult();
+                        if (!isGoalProcessCalled)
+                        {
+                            isGoalProcessCalled = true;
+                            // コルーチンの起動
+                            StartCoroutine(DelayCoroutine(1, () =>
+                            {
+                                // 1秒後にここの処理が実行される
+                                gameManager.SetMode(GameManager.Mode.Survive);
+                                LoadToResult();
+                            }));
+                        }
                     }
                 }
                
@@ -109,6 +130,13 @@ public class Goal : MonoBehaviour
     private void LoadToResult()
     {
         gameManager.LoadToResult();
+    }
+
+    // 一定時間後に処理を呼び出すコルーチン
+    private IEnumerator DelayCoroutine(float seconds, Action action)
+    {
+        yield return new WaitForSeconds(seconds);
+        action?.Invoke();
     }
 
 }
