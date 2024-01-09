@@ -23,21 +23,32 @@ public class Foot : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //接触したオブジェクトのタグが"MapObject"のとき
-        if (other.CompareTag("MapObject") || other.CompareTag("MoveMapObject"))
+        if(other != null)
         {
-            SetIsGround(true);
-            
-            if(other.CompareTag("MoveMapObject"))
+            //接触したオブジェクトのタグが"MapObject"のとき
+            if (other.CompareTag("MapObject") || other.CompareTag("MoveMapObject"))
             {
-                Vector3 hitPos = other.ClosestPoint(transform.position);
-                Vector3 forceDir = transform.position - hitPos;
-                forceDir.Normalize();
-                Debug.Log(forceDir);
+                SetIsGround(true);
 
-                if(forceDir.y > 0.0f) AttachGround(other);
+                if (other.CompareTag("MoveMapObject"))
+                {
+                    Vector3 hitPos = other.ClosestPoint(transform.position);
+                    Vector3 forceDir = transform.position - hitPos;
+                    forceDir.Normalize();
+                    Debug.Log(forceDir);
+
+                    if (forceDir.y > 0.0f) AttachGround(other);
+                }
             }
         }
+        else
+        {
+            if(GetIsGround())
+            {
+                SetIsGround(false);
+            }
+        }
+       
     }
 
     void OnTriggerExit(Collider other)
