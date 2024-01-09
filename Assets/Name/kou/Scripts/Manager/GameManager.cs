@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private bool[] rankLock;
 
     private System.Action[] gameSceneCollect = new System.Action[3];
+    private System.Action[] gameMode = new System.Action[4];
 
     int currentStage;
 
@@ -50,6 +51,11 @@ public class GameManager : MonoBehaviour
         gameSceneCollect[0] = () => SceneManager.LoadScene("athletic");
         gameSceneCollect[1] = () => SceneManager.LoadScene("FallGame");
         gameSceneCollect[2] = () => SceneManager.LoadScene("stage2");
+
+        gameMode[0] = () => SetMode(Mode.Main);
+        gameMode[1] = () => SetMode(Mode.Survive);
+        gameMode[2] = () => SetMode(Mode.Ring);
+        gameMode[3] = () => SetMode(Mode.None);
     }
     public List<ResultData> GetResultData()
     {
@@ -180,9 +186,8 @@ public class GameManager : MonoBehaviour
             currentStage = button.StageCount;
         }
 
+        gameMode[currentStage]();
         gameSceneCollect[currentStage]();
-        //SceneManager.LoadScene("athletic");
-        //SceneManager.LoadScene("stage2");
     }
 
     public void LoadToSoloMain()
@@ -193,6 +198,7 @@ public class GameManager : MonoBehaviour
             resultData[i].UpdateScore(0);
             resultData[i].ResetFallNum();
         }
+        gameMode[3]();
         SceneManager.LoadScene("OnePlayerGame");
     }
 

@@ -3,8 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+
 public class Goal : MonoBehaviour
 {
+    public enum GoalType
+    {
+        Athletic,
+        FallGame,
+    }
+    [SerializeField]
+    private GoalType type;
+
     [SerializeField]
     private SoundEffect soundEffect;
     [SerializeField]
@@ -43,16 +53,33 @@ public class Goal : MonoBehaviour
                         
             if(resultData[playerNum].CheckScoreIsZero())
             {
-                soundEffect.PlaySoundEffectClip(clip);
-                resultData[playerNum].UpdateScore(time);
-                gameManager.SetRankOne(playerNum, rankNow);
-                rankNow++;
-
-                if (CheckCanLoad(allNum))
+                if(type == GoalType.Athletic)
                 {
-                    gameManager.SetMode(GameManager.Mode.Main);
-                    LoadToResult();
+                    soundEffect.PlaySoundEffectClip(clip);
+                    resultData[playerNum].UpdateScore(time);
+                    gameManager.SetRankOne(playerNum, rankNow);  //èáà ï\é¶ÇÃÇΩÇﬂÇÃÉâÉìÉN
+                    rankNow++;
+
+                    if (CheckCanLoad(allNum))
+                    {
+                        gameManager.SetMode(GameManager.Mode.Main);
+                        LoadToResult();
+                    }
                 }
+                else if(type == GoalType.FallGame)
+                {
+                    soundEffect.PlaySoundEffectClip(clip);
+                    resultData[playerNum].SetSurvivorTime(time);
+
+                    other.gameObject.SetActive(false);
+
+                    if (CheckCanLoad(allNum))
+                    {
+                        gameManager.SetMode(GameManager.Mode.Survive);
+                        LoadToResult();
+                    }
+                }
+               
             }
         }
     }
@@ -61,7 +88,14 @@ public class Goal : MonoBehaviour
     {
         for (int i = 0; i < allNum; ++i)
         {
-            if (resultData[i].GetScoreTime() == 0) { return false; }
+            if (type == GoalType.Athletic)
+            {
+                if (resultData[i].GetScoreTime() == 0) { return false; }
+            }
+            else if (type == GoalType.FallGame)
+            {
+                if (resultData[i].GetSurvivorTime() == 0) { return false; }
+            }
         }
         return true;
     }

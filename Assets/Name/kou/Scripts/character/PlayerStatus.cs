@@ -28,6 +28,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField]    private int nowRank;
     [SerializeField]    private bool isGoal = false;
     [SerializeField]    private bool isSolo = false;
+    [SerializeField]    private GameObject uiGameObject;
     [SerializeField]    private Animator uiAnimator;
 
     [SerializeField]    private Sprite[] rankSprite;
@@ -37,6 +38,16 @@ public class PlayerStatus : MonoBehaviour
     {
         GameObject playerInputManager = GameObject.Find("PlayerInputManager");
         gameManager = playerInputManager.GetComponent<GameManager>();
+
+        //èáà UIÇÃï\é¶êÿë÷
+        if (gameManager.GetMode() == GameManager.Mode.Main)
+        {
+            uiGameObject.SetActive(true);
+        }
+        else
+        {
+            uiGameObject.SetActive(false);
+        }
 
         Invoke(nameof(StartMethod), 0.05f);
     }
@@ -48,7 +59,7 @@ public class PlayerStatus : MonoBehaviour
         DiableAllOutfit();
         ChangeOutfit(GetOutfitNum());
         SetSavePoint(this.transform);
-        resultData = GameManager.Instance.GetResultData().ToArray();
+        resultData = GameManager.Instance.GetResultData().ToArray();       
     }
 
     private void Update()
@@ -79,9 +90,14 @@ public class PlayerStatus : MonoBehaviour
     {
         if (transform.position.y < -10.0f)
         {
-            resultData[playerNum].PlusFallNum();
+            PlusFallNum();
             ReSpawn();
         }
+    }
+
+    public void PlusFallNum()
+    {
+        resultData[playerNum].PlusFallNum();
     }
 
     public int GetPlayerNum()

@@ -15,14 +15,14 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private ResultData[] resultData;
     private void Start()
-    { 
-        
+    {
+        gameManager = GameManager.Instance;
     }
     void Update()
     {
         time -= Time.deltaTime;
         text.text = time.ToString("f1") + "s";
-        timeText.SetText(ConvFoolCoolFont(time.ToString("f1"))+ "s");
+        timeText.SetText(ConvFoolCoolFont(time.ToString("f1").PadLeft(4, '0') + "s"));
         
         if (time < 0)
         {
@@ -32,6 +32,7 @@ public class Timer : MonoBehaviour
     }
     private void LoadToResult()
     {
+        Debug.Log("I—¹");
         gameManager.LoadToResult();
     }
 
@@ -47,6 +48,7 @@ public class Timer : MonoBehaviour
             {
                 case 's':
                     convStr = "10";
+                    rtnStr += "<size=50%>";
                     break;
                 case 'e':
                     convStr = "11";
@@ -63,6 +65,12 @@ public class Timer : MonoBehaviour
                 case 'n':
                     convStr = "15";
                     break;
+                case '.':
+                    convStr = "16";
+                    break;
+                case ' ':
+                    rtnStr += "<space=0.4em>";
+                    continue;
                 default:
                     convStr = str[i].ToString();
                     break;
