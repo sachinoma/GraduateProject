@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,12 @@ public class Timer : MonoBehaviour
 
     [SerializeField]
     private ResultData[] resultData;
+
+    private bool isGoalProcessCalled = false;
+
+    [SerializeField]
+    private Animator animator;
+
     private void Start()
     {
         gameManager = GameManager.Instance;
@@ -21,14 +28,27 @@ public class Timer : MonoBehaviour
     void Update()
     {
         time -= Time.deltaTime;
-        text.text = time.ToString("f1") + "s";
-        timeText.SetText(ConvFoolCoolFont(time.ToString("f1").PadLeft(4, '0') + "s"));
-        
-        if (time < 0)
+
+        if(time >= 0)
         {
-            gameManager.SetMode(GameManager.Mode.Ring);
-            LoadToResult();
+            timeText.SetText(ConvFoolCoolFont(time.ToString("f1").PadLeft(4, '0') + "s"));
         }
+        else
+        {
+            timeText.SetText(ConvFoolCoolFont("00.0s"));
+            if (!isGoalProcessCalled)
+            {
+                isGoalProcessCalled = true;
+                animator.SetBool("Start", true);
+                // コルーチンの起動
+                StartCoroutine(DelayCoroutine(1, () =>
+                {
+                    // 1秒後にここの処理が実行される
+                    gameManager.SetMode(GameManager.Mode.Ring);
+                    LoadToResult();
+                }));
+            }
+        }       
     }
     private void LoadToResult()
     {
@@ -78,5 +98,12 @@ public class Timer : MonoBehaviour
             rtnStr += "<sprite=" + convStr + ">";
         }
         return rtnStr;
+    }
+
+    // 一定時間後に処理を呼び出すコルーチン
+    private IEnumerator DelayCoroutine(float seconds, Action action)
+    {
+        yield return new WaitForSeconds(seconds);
+        action?.Invoke();
     }
 }
