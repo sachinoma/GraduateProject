@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 6668730254837672463}
   - component: {fileID: 3443404760990802125}
   - component: {fileID: 5420436547584749389}
+  - component: {fileID: 2887633573343564824}
   m_Layer: 0
   m_Name: EA03_Town_Ill_Roof_01a_LOD0
   m_TagString: Untagged
@@ -632,6 +633,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2887633573343564824
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573501778326799007}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -200734672686581824, guid: a24843a2bac54d949b6ed63cef4f50ab, type: 3}
 --- !u!1 &584838968561658607
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +1020,7 @@ GameObject:
   - component: {fileID: 1027610196423796757}
   - component: {fileID: 2949510665095703551}
   - component: {fileID: 8231459376632727650}
+  - component: {fileID: 3037248134044074944}
   m_Layer: 0
   m_Name: EA03_Town_Ill_Roof_01b_LOD0
   m_TagString: Untagged
@@ -1069,6 +1093,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3037248134044074944
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364499976668485522}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -281036958803267174, guid: 752cdcbf93262af44a9a365bc1aae4f6, type: 3}
 --- !u!1 &1380148625625980444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,7 +2656,7 @@ GameObject:
   - component: {fileID: 3757882022554302599}
   m_Layer: 0
   m_Name: Collider (7)
-  m_TagString: Untagged
+  m_TagString: MapObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6876,9 +6922,10 @@ GameObject:
   - component: {fileID: 3952879167167131148}
   - component: {fileID: 6559319735507750721}
   - component: {fileID: 3751874650998163641}
+  - component: {fileID: 2912936100865643283}
   m_Layer: 0
   m_Name: EA03_Village_Hut_Ceiling_01e_LOD0
-  m_TagString: Untagged
+  m_TagString: MapObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6948,6 +6995,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2912936100865643283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7826160805089584592}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 19.31582, y: 0.23989025, z: 7.6716514}
+  m_Center: {x: -0.0008087158, y: -0.014073204, z: 0.14055336}
 --- !u!1 &7849949286536194074
 GameObject:
   m_ObjectHideFlags: 0
