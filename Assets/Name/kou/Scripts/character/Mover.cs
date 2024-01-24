@@ -256,7 +256,7 @@ public class Mover : MonoBehaviour
             CancelInvoke(nameof(RecoverJump));
         }
         itemState[4] = true;
-        GameObject effect = (GameObject)Instantiate(ItemEffects[2], this.transform.position, Quaternion.identity);
+        GameObject effect = (GameObject)Instantiate(ItemEffects[5], this.transform.position, Quaternion.identity);
         effect.transform.parent = this.transform;
         jumpScale = highJumpScale;
         Invoke(nameof(RecoverJump), 3.5f);

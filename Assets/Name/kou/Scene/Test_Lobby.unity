@@ -5213,6 +5213,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2349019329161831456, guid: 411a3dce30d7a1c42b426dc241304a85,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349019329161831456, guid: 411a3dce30d7a1c42b426dc241304a85,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349019329161831456, guid: 411a3dce30d7a1c42b426dc241304a85,
+        type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3113325076895303151, guid: 411a3dce30d7a1c42b426dc241304a85,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166918325753326643, guid: 411a3dce30d7a1c42b426dc241304a85,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101945571034251984, guid: 411a3dce30d7a1c42b426dc241304a85,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5223779308121121717, guid: 411a3dce30d7a1c42b426dc241304a85,
         type: 3}
       propertyPath: m_Name
@@ -5226,12 +5256,12 @@ PrefabInstance:
     - target: {fileID: 7817489978464490438, guid: 411a3dce30d7a1c42b426dc241304a85,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.92
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7817489978464490438, guid: 411a3dce30d7a1c42b426dc241304a85,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7817489978464490438, guid: 411a3dce30d7a1c42b426dc241304a85,
         type: 3}
