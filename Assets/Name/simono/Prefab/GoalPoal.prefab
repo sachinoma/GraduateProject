@@ -267,9 +267,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8753078693752803230}
   - component: {fileID: 7497058432955847214}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: col
-  m_TagString: Untagged
+  m_TagString: MapObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba61100da0b4fb479488de96084046f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   soundEffect: {fileID: 1284483503466326991}
   clip: {fileID: 8300000, guid: ef0ef5f687a647a42b907f0c6aa3b04c, type: 3}
 --- !u!114 &1284483503466326991
