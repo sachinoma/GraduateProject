@@ -25,6 +25,8 @@ public class MultiResultManager : MonoBehaviour
     private int[] rank;
     [SerializeField]
     private List<float> time;
+    [SerializeField]
+    private List<float> timeOrigin;
 
     [SerializeField]
     private List<int> ring;
@@ -81,10 +83,11 @@ public class MultiResultManager : MonoBehaviour
 
     private void timeProcess(int num)
     {
-        int timeInt = (int)resultData[rank[num]].GetScoreTime();
+        int rankNow = Array.IndexOf(rank, num);
+        int timeInt = (int)resultData[rankNow].GetScoreTime();
         int minute = timeInt/ 60;
         int second = timeInt% 60;
-        float decimalPoint = resultData[rank[num]].GetScoreTime() - timeInt;
+        float decimalPoint = resultData[rankNow].GetScoreTime() - timeInt;
 
         minText[num].SetText(ConvFoolCoolFont(minute.ToString().PadLeft(2, '0')));
         secText[num].SetText(ConvFoolCoolFont(second.ToString().PadLeft(2, '0')));
@@ -96,11 +99,13 @@ public class MultiResultManager : MonoBehaviour
         allMenber = gameManager.GetAllMenber();
         rank = Enumerable.Repeat<int>(-1, allMenber).ToArray();
         time = new List<float>();
+        timeOrigin = new List<float>();
 
 
         for (int i = 0; i < allMenber; ++i)
         {
             time.Add(resultData[i].scoreTime);
+            timeOrigin.Add(resultData[i].scoreTime);
         }
         time.Sort();
 
@@ -121,7 +126,9 @@ public class MultiResultManager : MonoBehaviour
 
         for (int i = 0; i < allMenber; ++i)
         {
-            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            int rankNow = Array.IndexOf(rank, i);
+            rankPlayerIcon[i].sprite = playerSprite[rankNow];
+            //rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
             timeProcess(i);
             fallNumProcess(i);
         }
@@ -139,8 +146,9 @@ public class MultiResultManager : MonoBehaviour
 
     private void fallNumProcess(int num)
     {
-        Debug.Log("—Ž‚¿‚½‰ñ”F" + resultData[rank[num]].GetFallNum());
-        numText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetFallNum().ToString()));
+        int rankNow = Array.IndexOf(rank, num);
+        Debug.Log("—Ž‚¿‚½‰ñ”F" + resultData[rankNow].GetFallNum());
+        numText[num].SetText(ConvFoolCoolFont(resultData[rankNow].GetFallNum().ToString()));
     }
 
     private void RankProcessFallGame()
@@ -148,10 +156,12 @@ public class MultiResultManager : MonoBehaviour
         allMenber = gameManager.GetAllMenber();
         rank = Enumerable.Repeat<int>(-1, allMenber).ToArray();
         time = new List<float>();
+        timeOrigin = new List<float>();
 
         for (int i = 0; i < allMenber; ++i)
         {
             time.Add(resultData[i].GetSurvivorTime());
+            timeOrigin.Add(resultData[i].GetSurvivorTime());
         }
 
         time.Sort();
@@ -174,7 +184,8 @@ public class MultiResultManager : MonoBehaviour
 
         for (int i = 0; i < allMenber; ++i)
         {
-            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            int rankNow = Array.IndexOf(rank, i);
+            rankPlayerIcon[i].sprite = playerSprite[rankNow];
             surviveTimeProcess(i);
         }
 
@@ -195,10 +206,12 @@ public class MultiResultManager : MonoBehaviour
 
     private void surviveTimeProcess(int num)
     {
-        int timeInt = (int)resultData[rank[num]].GetSurvivorTime();
+        int rankNow = Array.IndexOf(rank, num);
+
+        int timeInt = (int)resultData[rankNow].GetSurvivorTime();
         int minute = timeInt / 60;
         int second = timeInt % 60;
-        float decimalPoint = resultData[rank[num]].GetSurvivorTime() - timeInt;
+        float decimalPoint = resultData[rankNow].GetSurvivorTime() - timeInt;
 
         minText[num].SetText(ConvFoolCoolFont(minute.ToString().PadLeft(2, '0')));
         secText[num].SetText(ConvFoolCoolFont(second.ToString().PadLeft(2, '0')));
@@ -236,7 +249,9 @@ public class MultiResultManager : MonoBehaviour
 
         for (int i = 0; i < allMenber; ++i)
         {
-            rankPlayerIcon[i].sprite = playerSprite[resultData[rank[i]].GetPlayerNum() - 1];
+            int rankNow = Array.IndexOf(rank, i);
+
+            rankPlayerIcon[i].sprite = playerSprite[rankNow];
             ringProcess(i);
             minText[i].SetText("");
             secText[i].SetText("");
@@ -264,7 +279,8 @@ public class MultiResultManager : MonoBehaviour
 
     private void ringProcess(int num)
     {
-        numText[num].SetText(ConvFoolCoolFont(resultData[rank[num]].GetRingNum().ToString()));
+        int rankNow = Array.IndexOf(rank, num);
+        numText[num].SetText(ConvFoolCoolFont(resultData[rankNow].GetRingNum().ToString()));
     }
 
 
@@ -341,9 +357,11 @@ public class MultiResultManager : MonoBehaviour
 
     private void SpawnWinner()
     {
+        int rankNow = Array.IndexOf(rank, 0);
+
         GameObject winner = Instantiate(winnerPrefab, winnerSpawnPos.position, winnerSpawnPos.rotation);
         ResultCharacter resultCharacter = winner.GetComponent<ResultCharacter>();
-        resultCharacter.SetPlayerNum(rank[0]);
+        resultCharacter.SetPlayerNum(rankNow);
         resultCharacter.ChangeOutfit();
         winAnimator = winner.GetComponent<Animator>();
     }
@@ -354,7 +372,10 @@ public class MultiResultManager : MonoBehaviour
         {
             GameObject loser = Instantiate(loserPrefab, loserSpawnPos[i].position, loserSpawnPos[i].rotation);
             ResultCharacter resultCharacter = loser.GetComponent<ResultCharacter>();
-            resultCharacter.SetPlayerNum(rank[i + 1]); //“ñˆÊ‚©‚ç‚È‚Ì‚Å+1
+
+            int rankNow = Array.IndexOf(rank, i + 1);
+            resultCharacter.SetPlayerNum(rankNow);
+
             resultCharacter.ChangeOutfit();
         }        
     }

@@ -133,33 +133,34 @@ public class MainPlayerManager : MonoBehaviour
         int lockNum = 0;
         rankTmp = rankOriData;
 
-        for (int i = 0; i < playerNum; ++i)
+        if(goal != null)
         {
-            if (rankLock[i] == true)
+            for (int i = 0; i < playerNum; ++i)
             {
-                //ゴールした人を排除するために大きい値にします。
-                distance[i] = 10000000;
-                lockNum++;
-            }
-            else
-            {
-                distance[i] = Vector3.Distance(goal.position, playerAvatar[i].position);
-            }
-        }
-        //距離をソートかけます
-        Array.Sort(distance);
-
-        
-
-        //ソートした距離によりランク決めます
-        for (int i = 0; i < playerNum; ++i)
-        {
-            for (int j = 0; j < playerNum; ++j)
-            {
-                if (Vector3.Distance(goal.position, playerAvatar[j].position) == distance[i])
+                if (rankLock[i] == true)
                 {
-                    rankTmp[i + lockNum] = j;
-                    //gameManager.SetRankOne(i + lockNum,j);
+                    //ゴールした人を排除するために大きい値にします。
+                    distance[i] = 10000000;
+                    lockNum++;
+                }
+                else
+                {
+                    distance[i] = Vector3.Distance(goal.position, playerAvatar[i].position);
+                }
+            }
+            //距離をソートかけます
+            Array.Sort(distance);
+
+            //ソートした距離によりランク決めます
+            for (int i = 0; i < playerNum; ++i)
+            {
+                for (int j = 0; j < playerNum; ++j)
+                {
+                    if (Vector3.Distance(goal.position, playerAvatar[j].position) == distance[i])
+                    {
+                        rankTmp[i + lockNum] = j;
+                        //gameManager.SetRankOne(i + lockNum,j);
+                    }
                 }
             }
         }
