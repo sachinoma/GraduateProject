@@ -9,7 +9,7 @@ public class RingManager : MonoBehaviour
     [SerializeField] List<GameObject> RingPrefab;
     [SerializeField] List<GameObject> RingPos;
     [SerializeField] int Ring_nop;//Number of piece:個数
-    GameObject[] tagObjects;
+    GameObject[] Ring_tagObjects, GoldRing_tagObjects;
     //ランダム
     List<int> random_num = new List<int>() { 1, 0, 0, 0, 0};
 
@@ -17,9 +17,10 @@ public class RingManager : MonoBehaviour
     void Update()
     {
         //tag取得
-        tagObjects = GameObject.FindGameObjectsWithTag("Ring");
+        Ring_tagObjects = GameObject.FindGameObjectsWithTag("Ring");
+        GoldRing_tagObjects = GameObject.FindGameObjectsWithTag("GoldRing");
         //RingPrefabを指定数生成
-        if (tagObjects.Length < Ring_nop)
+        if ((Ring_tagObjects.Length + GoldRing_tagObjects.Length) < Ring_nop)
         {
             CreateRing(RingPos, Ring_nop);
         }
@@ -40,7 +41,6 @@ public class RingManager : MonoBehaviour
             
             //生成
             var ring = Instantiate(RingPrefab[random_ring], createPos, createRot, ringParent.transform);
-
             //子の数が多い場合、リングが複数存在することになるため、消す
             if (ringParent.transform.childCount > 1)
             {
