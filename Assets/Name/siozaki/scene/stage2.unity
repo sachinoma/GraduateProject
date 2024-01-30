@@ -1571,7 +1571,7 @@ MonoBehaviour:
   - {fileID: 2043139793}
   - {fileID: 935771390}
   - {fileID: 1214716418}
-  Ring_nop: 3
+  Ring_nop: 5
 --- !u!4 &508814747
 Transform:
   m_ObjectHideFlags: 0
