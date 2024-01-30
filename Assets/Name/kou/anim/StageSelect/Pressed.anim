@@ -164,6 +164,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.016666668
+    functionName: PlaySoundEffectClip
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: f36f11478ee39c94fbf7bb231190ba15,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.28333333
     functionName: ButtonOver
     data: 
